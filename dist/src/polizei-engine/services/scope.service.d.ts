@@ -1,0 +1,46 @@
+import { SecurityScope } from '../models/security.scope';
+import { SecurityUser } from '../models/security.user';
+import { SecurityUserScope } from '../models/security.user.scope';
+import { IAppSettings } from '../interfaces/app-settings.interface';
+import { ISettingsEvent } from '../interfaces/app-settings-event.interface';
+export declare class ScopeService {
+    scopeModel: typeof SecurityScope;
+    userModel: typeof SecurityUser;
+    userScopeModel: typeof SecurityUserScope;
+    private readonly moduleRef;
+    private discoverService;
+    private reflector;
+    private listeners;
+    onModuleInit(): Promise<void>;
+    private discoverHandlers;
+    getScopes(): Promise<SecurityScope[]>;
+    getScopesByParent(id: number): Promise<SecurityScope[]>;
+    getScopesTree(base: number): Promise<SecurityScope[]>;
+    create(data: any): Promise<SecurityScope>;
+    update(data: Record<string, any>): Promise<[affectedCount: number]>;
+    destroy(data: any): Promise<number>;
+    getAllUserScopes(base: number): Promise<SecurityScope[]>;
+    isScopeAuthorize(key: string, app?: string): Promise<SecurityScope>;
+    getScope(id: any): Promise<SecurityScope>;
+    getUsersScope(id: any): Promise<SecurityUser[]>;
+    addUser(data: any): Promise<any>;
+    addUsers(scope: any, usersId: any): Promise<any>;
+    removeUser(data: any): Promise<any>;
+    getScopesEditable(id: number): Promise<SecurityScope[]>;
+    isIn(id: number, requestedScope: number | number[]): Promise<SecurityScope>;
+    getUserScopes(id: number): Promise<SecurityScope[]>;
+    getNegociosScope(): Promise<SecurityScope>;
+    getScopeUserRegister(): Promise<SecurityScope>;
+    getOwner(id: any): Promise<SecurityUser>;
+    getScopesByIds(scopes: number[], options?: any): Promise<SecurityScope[]>;
+    editScope(data: any): Promise<SecurityScope | [affectedCount: number]>;
+    getAppSettings(id: number, app: string): Promise<IAppSettings[]>;
+    setAppSettings(id: number, app: string, settings: any[]): Promise<IAppSettings[]>;
+    onHubTenant(event: ISettingsEvent): Promise<void>;
+    getParent(id: number): Promise<SecurityScope>;
+    getHubSettings(tenant: number): Promise<{
+        id: number;
+        settings: IAppSettings[];
+        app: string;
+    }>;
+}

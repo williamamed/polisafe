@@ -1,0 +1,1 @@
+{"version":3,"file":"error.service.js","sourceRoot":"","sources":["../../../../src/polisafe-iam/services/error.service.ts"],"names":[],"mappings":";;;;;;;;;AAAA,2CAA4C;AAIrC,IAAM,YAAY,GAAlB,MAAM,YAAY;IAErB,cAAc,CAAC,WAAgB;QAC3B,OAAO,IAAI,eAAe,CAAC,WAAkB,CAAC,CAAC,QAAQ,EAAE,CAAA;IAC7D,CAAC;CACJ,CAAA;AALY,oCAAY;uBAAZ,YAAY;IADxB,IAAA,mBAAU,GAAE;GACA,YAAY,CAKxB"}

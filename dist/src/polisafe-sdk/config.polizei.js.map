@@ -1,0 +1,1 @@
+{"version":3,"file":"config.polizei.js","sourceRoot":"","sources":["../../../src/polisafe-sdk/config.polizei.ts"],"names":[],"mappings":";;;AAAa,QAAA,QAAQ,GAAG;IACpB,UAAU,EAAE,YAAY;IACxB,WAAW,EAAE,aAAa;CACpB,CAAC;AAEX,MAAa,aAAa;IAA1B;QA0BI,SAAI,GAA2C,aAAa,CAAA;QAE5D,YAAO,GAAa,KAAK,CAAA;QAMzB,oBAAe,GAAU,IAAI,CAAA;QAM7B,6BAAwB,GAAU,IAAI,CAAA;IAW1C,CAAC;CAAA;AAnDD,sCAmDC"}
