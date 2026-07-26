@@ -61,7 +61,7 @@ let CreatorService = class CreatorService {
         return true;
     }
     async createProject() {
-        if (!(await this.verifyInstalledClient())) {
+        if (await this.verifyInstalledClient()) {
             throw new common_1.ConflictException("El proyecto ya se encuentra creado.");
         }
         let scope = await this.scopeModel.create({
