@@ -22,6 +22,7 @@ export declare class CreatorService implements OnModuleInit {
     setDocument(document: OpenAPIObject): void;
     getDocument(): OpenAPIObject | null;
     onModuleInit(): Promise<void>;
+    verifyInstalledClient(): Promise<boolean>;
     createProject(): Promise<{
         tid: number;
     }>;

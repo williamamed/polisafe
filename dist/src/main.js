@@ -17,6 +17,12 @@ async function bootstrap() {
     app.useStaticAssets((0, path_1.join)(__dirname, '..', '..', 'ui/app'), {
         prefix: '/app/',
     });
+    app.use((req, res, next) => {
+        if (req.path.startsWith('/app') && !req.path.match(/\.(js|css|png|jpg|jpeg|ico|svg|ttf|woff|woff2|eot|json)$/)) {
+            return res.sendFile((0, path_1.join)(__dirname, '..', '..', 'ui', 'app', 'index.html'));
+        }
+        next();
+    });
     app.useGlobalPipes(new common_1.ValidationPipe({
         transform: true,
         disableErrorMessages: false,

@@ -35,15 +35,6 @@ let CreatorService = class CreatorService {
         return this.document;
     }
     async onModuleInit() {
-        if ((0, fs_1.existsSync)((0, path_1.join)(process.cwd(), 'current-installed-client.txt'))) {
-            const [clientId, clientSecretHash, tid] = (0, fs_1.readFileSync)((0, path_1.join)(process.cwd(), 'current-installed-client.txt')).toString().split(':');
-            this.options.client_id = clientId;
-            this.options.client_secret = clientSecretHash;
-            this.syncUiConfig(this.options.client_id, tid);
-        }
-        else {
-            common_1.Logger.warn("The current-installed-client.txt file is missing", "Creator");
-        }
         try {
             await this.createProject();
         }
@@ -51,13 +42,26 @@ let CreatorService = class CreatorService {
             common_1.Logger.error("Error instalando datos por defecto: " + error.message);
         }
     }
-    async createProject() {
+    async verifyInstalledClient() {
         let trace = await this.traceModel.findOne({
             where: {
                 state: 20
             }
         });
         if (trace) {
+            const [clientId, clientSecretHash, tid] = trace.description.split(':');
+            this.options.client_id = clientId;
+            this.options.client_secret = clientSecretHash;
+            this.syncUiConfig(this.options.client_id, tid);
+        }
+        else {
+            common_1.Logger.warn("The current-installed-client is missing...we proceed to install", "Creator");
+            return false;
+        }
+        return true;
+    }
+    async createProject() {
+        if (!(await this.verifyInstalledClient())) {
             throw new common_1.ConflictException("El proyecto ya se encuentra creado.");
         }
         let scope = await this.scopeModel.create({
@@ -155,9 +159,8 @@ let CreatorService = class CreatorService {
         });
         this.options.client_id = client.clientId;
         this.options.client_secret = client.clientSecretHash;
-        (0, fs_1.writeFileSync)((0, path_1.join)(process.cwd(), 'current-installed-client.txt'), `${client.clientId}:${client.clientSecretHash}:${scope.id}`);
         this.syncUiConfig(this.options.client_id, `${scope.id}`);
-        await this.traceService.register(admin.username, scope.id, `Creando el proyecto Polizei`, 20);
+        await this.traceService.register(admin.username, scope.id, `${client.clientId}:${client.clientSecretHash}:${scope.id}`, 20);
         return {
             tid: scope.id
         };
