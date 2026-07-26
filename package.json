@@ -67,7 +67,8 @@
     "rxjs": "^7.8.1",
     "sequelize": "^6.33.0",
     "sequelize-cli": "^6.6.2",
-    "sequelize-typescript": "^2.1.5"
+    "sequelize-typescript": "^2.1.5",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
