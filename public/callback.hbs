@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>callback</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-4">
+    
+    <script>
+        
+
+        // Configuración de Google OAuth (reemplaza con tu Client ID real)
+        const GOOGLE_CLIENT_ID = '817952866142-7etfh1boqrmksh1btcin1vvfl3ffebtv.apps.googleusercontent.com'; // Reemplaza con tu Client ID real
+        
+        // Inicialización cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function () {
+            
+        });
+
+        function generateNonce() {
+            return Math.random().toString(36).substring(2, 15) +
+                Math.random().toString(36).substring(2, 15);
+        }
+
+
+        // ==================== CONFIGURACIÓN DE PROVIDERS ====================
+        const PROVIDERS = {
+            google: {
+                name: 'Google',
+                authUrl: 'https://accounts.google.com/o/oauth2/v2/auth',
+                tokenUrl: 'https://oauth2.googleapis.com/token',
+                clientId: GOOGLE_CLIENT_ID,
+                scope: 'email profile openid',
+                responseType: 'code',
+                getCodeChallengeMethod: 'S256'
+            },
+            linkedin: {
+                name: 'LinkedIn',
+                authUrl: 'https://www.linkedin.com/oauth/v2/authorization',
+                tokenUrl: 'https://www.linkedin.com/oauth/v2/accessToken',
+                clientId: 'TU_LINKEDIN_CLIENT_ID',
+                scope: 'openid email profile',
+                responseType: 'code',
+                getCodeChallengeMethod: 'S256'
+            },
+            github: {
+                name: 'GitHub',
+                authUrl: 'https://github.com/login/oauth/authorize',
+                tokenUrl: 'https://github.com/login/oauth/access_token',
+                clientId: 'TU_GITHUB_CLIENT_ID',
+                scope: 'read:user user:email',
+                responseType: 'code',
+                getCodeChallengeMethod: 'plain' // GitHub no soporta S256
+            },
+            facebook: {
+                name: 'Facebook',
+                authUrl: 'https://www.facebook.com/v18.0/dialog/oauth',
+                tokenUrl: 'https://graph.facebook.com/v18.0/oauth/access_token',
+                clientId: 'TU_FACEBOOK_APP_ID',
+                scope: 'email public_profile',
+                responseType: 'code',
+                getCodeChallengeMethod: 'plain' // Facebook no soporta S256
+            }
+        };
+
+        // ==================== UTILIDADES PKCE ====================
+        // Generador de strings aleatorios seguros
+        function generateRandomString(length = 43) {
+            const array = new Uint8Array(length);
+            crypto.getRandomValues(array);
+            return btoa(String.fromCharCode(...array))
+                .replace(/\+/g, '-')
+                .replace(/\//g, '_')
+                .replace(/=+$/, '')
+                .substring(0, length);
+        }
+
+        // Generador de Code Verifier (PKCE)
+        async function generateCodeVerifier() {
+            return generateRandomString(64);
+        }
+
+        // Generador de Code Challenge (SHA256)
+        async function generateCodeChallenge(codeVerifier, method = 'S256') {
+            if (method === 'plain') {
+                return codeVerifier;
+            }
+
+            // S256 method
+            const encoder = new TextEncoder();
+            const data = encoder.encode(codeVerifier);
+            const digest = await crypto.subtle.digest('SHA-256', data);
+            return btoa(String.fromCharCode(...new Uint8Array(digest)))
+                .replace(/\+/g, '-')
+                .replace(/\//g, '_')
+                .replace(/=+$/, '');
+        }
+
+        // Generador de estado (CSRF protection)
+        function generateState() {
+            return generateRandomString(32);
+        }
+
+        // ==================== FLUJO PRINCIPAL ====================
+       
+        // ==================== MANEJO DEL CALLBACK ====================
+        // Esta función debe ejecutarse en la página callback.html
+        async function handleCallback() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const state = urlParams.get('state');
+            const error = urlParams.get('error');
+            const errorDescription = urlParams.get('error_description');
+
+            // Obtener el proveedor actual
+            const providerName = sessionStorage.getItem('current_provider');
+            const savedState = sessionStorage.getItem(`${providerName}_oauth_state`);
+            const codeVerifier = sessionStorage.getItem(`${providerName}_code_verifier`);
+
+            // Validar estado (CSRF protection)
+            if (!state || state !== savedState) {
+                console.error('Estado inválido - posible ataque CSRF');
+                //showError('Error de seguridad: estado inválido');
+                return;
+            }
+
+            // Verificar errores
+            if (error) {
+                console.error('Error OAuth:', error, errorDescription);
+                //showError(`Error de autenticación: ${errorDescription || error}`);
+                return;
+            }
+
+            if (!code) {
+                console.error('No se recibió código de autorización');
+                //showError('No se recibió código de autorización');
+                return;
+            }
+
+            // Intercambiar código por tokens
+            try {
+                const tokens = await exchangeCodeForTokens(providerName, code, codeVerifier);
+
+                
+
+                // Limpiar datos temporales
+                sessionStorage.removeItem(`${providerName}_oauth_state`);
+                sessionStorage.removeItem(`${providerName}_code_verifier`);
+                sessionStorage.removeItem('current_provider');
+
+                // Obtener perfil del usuario
+                const userProfile = await getUserProfile(providerName, tokens.access_token);
+
+                console.log({ provider: providerName, user: userProfile, tokens })
+
+                // Redirigir a la aplicación principal
+                // window.location.href = '/';
+
+            } catch (error) {
+                console.error('Error intercambiando código por tokens:', error);
+                //showError('Error al completar la autenticación');
+            }
+        }
+
+        // ==================== INTERCAMBIO DE TOKENS ====================
+        async function exchangeCodeForTokens(providerName, code, codeVerifier) {
+            const provider = PROVIDERS[providerName];
+
+            const params = new URLSearchParams({
+                client_id: provider.clientId,
+                code: code,
+                redirect_uri: `http://localhost:3000/api/v4/security/polisafe/oauth/callback`,
+                grant_type: 'authorization_code'
+            });
+
+            // Agregar code_verifier según el provider
+            if (provider.getCodeChallengeMethod === 'S256' || provider.getCodeChallengeMethod === 'plain') {
+                params.append('code_verifier', codeVerifier);
+            }
+
+            // GitHub requiere formato específico
+            if (providerName === 'github') {
+                params.append('client_secret', 'TU_GITHUB_CLIENT_SECRET'); // Necesario para GitHub
+            }
+
+            const response = await fetch(provider.tokenUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'
+                },
+                body: params.toString()
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Token exchange failed: ${response.status} - ${errorText}`);
+            }
+
+            const tokens = await response.json();
+
+            // Validar respuesta
+            if (tokens.error) {
+                throw new Error(tokens.error_description || tokens.error);
+            }
+
+            return tokens;
+        }
+
+        // ==================== OBTENER PERFIL DEL USUARIO ====================
+        async function getUserProfile(providerName, accessToken) {
+            const endpoints = {
+                google: 'https://www.googleapis.com/oauth2/v3/userinfo',
+                linkedin: 'https://api.linkedin.com/v2/userinfo',
+                github: 'https://api.github.com/user',
+                facebook: 'https://graph.facebook.com/v18.0/me?fields=id,name,email'
+            };
+
+            const response = await fetch(endpoints[providerName], {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to get user profile: ${response.status}`);
+            }
+
+            const profile = await response.json();
+
+            // Normalizar perfil a formato estándar
+            return normalizeUserProfile(providerName, profile);
+        }
+
+        // Normalizar perfiles de diferentes providers
+        function normalizeUserProfile(provider, rawProfile) {
+            const normalized = {
+                provider: provider,
+                id: rawProfile.sub || rawProfile.id,
+                email: rawProfile.email,
+                name: rawProfile.name,
+                firstName: rawProfile.given_name,
+                lastName: rawProfile.family_name,
+                picture: rawProfile.picture || rawProfile.avatar_url,
+                raw: rawProfile
+            };
+
+            // Ajustes específicos por provider
+            switch (provider) {
+                case 'google':
+                    normalized.emailVerified = rawProfile.email_verified;
+                    break;
+                case 'github':
+                    normalized.name = rawProfile.name || rawProfile.login;
+                    normalized.picture = rawProfile.avatar_url;
+                    break;
+                case 'facebook':
+                    normalized.name = rawProfile.name;
+                    break;
+                case 'linkedin':
+                    normalized.name = rawProfile.name;
+                    break;
+            }
+
+            return normalized;
+        }
+
+        // ==================== RENOVACIÓN DE TOKENS ====================
+        async function refreshAccessToken(providerName) {
+            const provider = PROVIDERS[providerName];
+            const refreshToken = sessionStorage.getItem(`${providerName}_refresh_token`);
+
+            if (!refreshToken) {
+                throw new Error('No refresh token available');
+            }
+
+            const params = new URLSearchParams({
+                client_id: provider.clientId,
+                refresh_token: refreshToken,
+                grant_type: 'refresh_token'
+            });
+
+            // Algunos providers requieren client_secret
+            if (providerName === 'github') {
+                params.append('client_secret', 'TU_GITHUB_CLIENT_SECRET');
+            }
+
+            const response = await fetch(provider.tokenUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'
+                },
+                body: params.toString()
+            });
+
+            const tokens = await response.json();
+
+            if (tokens.access_token) {
+                sessionStorage.setItem(`${providerName}_access_token`, tokens.access_token);
+                if (tokens.refresh_token) {
+                    sessionStorage.setItem(`${providerName}_refresh_token`, tokens.refresh_token);
+                }
+                return tokens.access_token;
+            }
+
+            throw new Error('Token refresh failed');
+        }
+
+        // ==================== UTILIDADES ADICIONALES ====================
+        function showError(message) {
+            console.error(message);
+            // Puedes personalizar cómo mostrar el error
+            const errorDiv = document.getElementById('oauth-error');
+            if (errorDiv) {
+                errorDiv.textContent = message;
+                errorDiv.style.display = 'block';
+            }
+        }
+
+        handleCallback()
+    </script>
+
+</body>
+
+</html>

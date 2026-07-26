@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Silent Renew Callback</title>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/oidc-client-ts@latest/dist/browser/oidc-client-ts.js"></script>
+    <script>
+        new oidc.UserManager().signinSilentCallback().catch(error => {
+            console.error('Silent renew error:', error);
+        });
+    </script>
+</body>
+</html>

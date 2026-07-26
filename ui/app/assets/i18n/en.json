@@ -1,0 +1,107 @@
+{
+    "title":"Hola",
+    "hi":"Ahhhh",
+    "panel":{
+        "user":{
+            "titulo":"Panel",
+            "examen":"Take exam",
+            "hey":"Hey!",
+            "info":"Start with an exam and learn with us",
+            "puntuacion":"Score evolution",
+            "rango":"Range...",
+            "semana":"Week",
+            "mes":"Month",
+            "infopanel":"User information",
+            "certificaciones":"Available Certifications"
+        },
+        "admin":{
+            "info":"Create certifications and exams to your clients",
+            "action":"",
+            "activos":"Active",
+            "examenes":"Completed Exams",
+            "infopanel":"Business Panel",
+            "certificados":"Certificates",
+            "estados":"User States",
+            "dia":"Day",
+            "semana":"Week",
+            "mes":"Month",
+            "agrupar":"Group..."
+        }
+    },
+    "tema":{
+        "titulo":"Topic",
+        "form":{
+            "titulo":"Title",
+            "descripcion":"Description"
+        },
+        "bienvenido":"Welcome to ProDrive Mentor Courses"
+    },
+
+    "examen":{
+        "titulo":"Exams",
+        "form":{
+            "titulo":"Title",
+            "descripcion":"Description",
+            "publico":"Public",
+            "windowtitle":"Exam"
+        },
+        "bienvenido":"Select an exam to start",
+        "completado":"Completed exams"
+    },
+
+    "pregunta":{
+        "titulo":"Questions",
+        "form":{
+            "titulo":"Question",
+            "encabezado":"Entitle"
+        }
+    },
+
+    "certificacion":{
+        "titulo":"Certifications",
+        "form":{
+            "titulo":"Certification",
+            "nombre":"Name",
+            "canthoras":"Hours quantity",
+            "imagen":"Image",
+            "upload":"Upload images"
+        }
+    },
+    "titulacion":{
+        "titulo":"Certifications",
+        "exportar":"Export",
+        "puntos":"points",
+        "empresa":"Company"
+    },
+
+    "accion":{
+        "aceptar":"Accept",
+        "adicionar":"Add",
+        "salvar":"Save",
+        "cancelar":"Cancel",
+        "editar":"Edit",
+        "eliminar":"Delete",
+        "preguntaEliminar":"Are you shure you want to delete this element?",
+        "confirmacion":"Confirmation",
+        "titulo":"Actions",
+        "atras": "Back",
+        "adelante": "Next",
+        "abrir":"Open",
+        "continuar":"Continue",
+        "iniciar":"Start",
+        "terminado":"Finished",
+        "de":"of"
+    },
+    "menu":{
+        "topics":"Topics",
+        "mentor":"Mentor",
+        "certificate":"Certification",
+        "clients":"Clients",
+        "course":"Course",
+        "exams":"Exams",
+        "graduation":"Entitle",
+        "home":"Home",
+        "darkmode":"Dark Mode",
+        "lightmode":"Light Mode"
+    }
+}

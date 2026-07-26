@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Registrarse — Example OAuth</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center">
+  <main class="w-full max-w-md p-6 bg-white rounded-2xl shadow-md">
+    <header class="text-center mb-6">
+      <div class="flex items-center justify-center mb-4">
+        <div class="rounded-full bg-gradient-to-r from-green-500 to-blue-400 p-2">
+          <svg class="w-10 h-10 text-white" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 4a12 12 0 110 24 12 12 0 010-24zm0 28c9.941 0 18 4.477 18 10v2H6v-2c0-5.523 8.059-10 18-10z" fill="white"/>
+          </svg>
+        </div>
+      </div>
+      <h1 class="text-2xl font-semibold">Crear cuenta</h1>
+      <p class="text-sm text-gray-500 mt-1">Regístrate para continuar</p>
+    </header>
+
+    <form id="registerForm" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Nombre completo</label>
+        <input id="name" name="name" type="text" required
+               class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 p-2" placeholder="Tu nombre">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Correo electrónico</label>
+        <input id="email" name="email" type="email" required
+               class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 p-2" placeholder="tu@ejemplo.com">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Contraseña</label>
+        <input id="password" name="password" type="password" required
+               class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 p-2" placeholder="••••••••">
+      </div>
+
+      <button type="submit" class="w-full py-2 rounded-md bg-green-600 text-white font-medium hover:bg-green-700">
+        Registrarse
+      </button>
+
+      <div class="text-center text-sm text-gray-500">
+        <p>¿Ya tienes cuenta? <a href="login.html" class="text-blue-600 hover:underline">Inicia sesión</a></p>
+      </div>
+
+      <div id="error" class="hidden text-red-600 text-sm mt-2"></div>
+    </form>
+  </main>
+
+  <script>
+    const form = document.getElementById('registerForm');
+    const errorEl = document.getElementById('error');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.classList.add('hidden');
+
+      const payload = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+      };
+
+      try {
+        const res = await fetch('/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          errorEl.textContent = data?.error || 'Error en registro';
+          errorEl.classList.remove('hidden');
+          return;
+        }
+
+        // Backend debería enviar el usuario a OTP
+        location.href = 'otp.html?email=' + encodeURIComponent(payload.email);
+      } catch (err) {
+        console.error(err);
+        errorEl.textContent = 'No se pudo conectar con el servidor';
+        errorEl.classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+</html>

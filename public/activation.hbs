@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="activation_loading_title">Activación de cuenta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+        * {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .login-container {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            padding: 48px 40px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 36px;
+        }
+
+        .icon-circle.success {
+            background-color: #d1fae5;
+            color: #059669;
+        }
+
+        .icon-circle.error {
+            background-color: #fde8e8;
+            color: #dc2626;
+        }
+
+        .icon-circle.loading {
+            background-color: #dbeafe;
+            color: #3b82f6;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .btn-primary {
+            background-color: #c8b273;
+            color: white;
+            transition: all 0.3s ease;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #b89d5e;
+            box-shadow: 0 2px 8px rgba(200, 178, 115, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #6b7280;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid #d1d5db;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f3f4f6;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .message-container {
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .message-container.show {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 16px;
+        }
+
+        .form-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Dark Theme */
+        body.dark-theme {
+            background-color: #0a0f1c !important;
+        }
+
+        body.dark-theme .login-container {
+            background-color: #111827 !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        body.dark-theme h1,
+        body.dark-theme h2,
+        body.dark-theme p,
+        body.dark-theme span:not(.password-toggle i) {
+            color: #f1f5f9 !important;
+        }
+
+        body.dark-theme .text-gray-600,
+        body.dark-theme .text-gray-500 {
+            color: #cbd5e6 !important;
+        }
+
+        body.dark-theme .icon-circle.success {
+            background-color: rgba(16, 185, 129, 0.2) !important;
+        }
+
+        body.dark-theme .icon-circle.error {
+            background-color: rgba(220, 38, 38, 0.2) !important;
+        }
+
+        body.dark-theme .icon-circle.loading {
+            background-color: rgba(59, 130, 246, 0.2) !important;
+        }
+
+        body.dark-theme .btn-primary {
+            background-color: #3b82f6 !important;
+        }
+
+        body.dark-theme .btn-primary:hover {
+            background-color: #2563eb !important;
+        }
+
+        body.dark-theme .btn-secondary {
+            border-color: #374151 !important;
+            color: #cbd5e6 !important;
+        }
+
+        body.dark-theme .btn-secondary:hover {
+            background-color: #1f2937 !important;
+        }
+
+        body.dark-theme .message-container.bg-green-50 {
+            background-color: rgba(34, 197, 94, 0.15) !important;
+        }
+
+        body.dark-theme .message-container.bg-red-50 {
+            background-color: rgba(239, 68, 68, 0.15) !important;
+        }
+
+        body.dark-theme .message-container.bg-yellow-50 {
+            background-color: rgba(234, 179, 8, 0.15) !important;
+        }
+
+        body.dark-theme .message-container.bg-blue-50 {
+            background-color: rgba(59, 130, 246, 0.15) !important;
+        }
+
+        body.dark-theme .message-container .text-green-800 {
+            color: #4ade80 !important;
+        }
+
+        body.dark-theme .message-container .text-red-800 {
+            color: #f87171 !important;
+        }
+
+        body.dark-theme .message-container .text-yellow-800 {
+            color: #facc15 !important;
+        }
+
+        body.dark-theme .message-container .text-blue-800 {
+            color: #60a5fa !important;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="login-container">
+
+        <!-- Mensajes de estado -->
+        <div id="messageContainer" class="message-container rounded-lg p-4 mb-4 hidden">
+            <div id="messageContent" class="flex items-center">
+                <i id="messageIcon" class="mr-2"></i>
+                <span id="messageText" class="pl-2"></span>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- ESTADO: VERIFICANDO -->
+        <!-- ============================================ -->
+        <div id="stateLoading" class="form-section active">
+            <div class="icon-circle loading">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <h1 class="text-2xl font-semibold mb-2" data-i18n="activation_loading_title">Verificando tu cuenta</h1>
+            <p class="text-gray-600 text-sm mb-6" data-i18n="activation_loading_subtitle">
+                Por favor espera mientras activamos tu cuenta...
+            </p>
+            <div class="flex justify-center">
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- ESTADO: ACTIVADA (ÉXITO) -->
+        <!-- ============================================ -->
+        <div id="stateSuccess" class="form-section">
+            <div class="icon-circle success">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1 class="text-2xl font-semibold mb-2" data-i18n="activation_success_title">¡Cuenta activada!</h1>
+            <p class="text-gray-600 text-sm mb-6" data-i18n="activation_success_subtitle">
+                Tu cuenta ha sido activada exitosamente. Ya puedes iniciar sesión.
+            </p>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- ESTADO: ERROR -->
+        <!-- ============================================ -->
+        <div id="stateError" class="form-section">
+            <div class="icon-circle error">
+                <i class="fas fa-times-circle"></i>
+            </div>
+            <h1 class="text-2xl font-semibold mb-2" data-i18n="activation_error_title">Error al activar la cuenta</h1>
+            <p class="text-gray-600 text-sm mb-2" id="errorMessage" data-i18n="activation_error_subtitle">
+                No se pudo activar tu cuenta. El enlace puede haber expirado o ser inválido.
+            </p>
+            <p class="text-gray-500 text-xs mb-6" data-i18n="activation_error_help">
+                Si el problema persiste, contacta con soporte.
+            </p>
+            <div class="flex flex-col gap-3">
+                <button onclick="retryActivation()" class="btn-primary w-full justify-center"
+                    data-i18n="activation_error_retry">
+                    <i class="fas fa-redo mr-1"></i> Reintentar
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://www.elegantys.net/identity/translations.js"></script>
+    <script src="https://www.elegantys.net/identity/pkg.activation.js"></script>
+
+    <script>
+        try {
+            window.UI_CONFIG = JSON.parse('{{{ config }}}');
+        } catch (err) {
+            window.UI_CONFIG = {};
+        }
+
+        // ============================================
+        // DARK THEME
+        // ============================================
+        if (window.UI_CONFIG.login_darkmode) {
+            document.body.classList.add('dark-theme');
+        }
+
+        // ============================================
+        // TRANSLATIONS
+        // ============================================
+        const browserLang = getValidLanguage('en');
+
+        if (window.UI_CONFIG.login_language == 'browser') {
+            setLanguage(browserLang);
+        } else {
+            if (!setLanguage(window.UI_CONFIG.login_language)) {
+                setLanguage(browserLang);
+            }
+        }
+
+        // ============================================
+        // DOM REFS
+        // ============================================
+        const stateLoading = document.getElementById('stateLoading');
+        const stateSuccess = document.getElementById('stateSuccess');
+        const stateError = document.getElementById('stateError');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // ============================================
+        // MESSAGE SYSTEM
+        // ============================================
+        function showMessage(message, type = 'info') {
+            const messageContainer = document.getElementById('messageContainer');
+            const messageContent = document.getElementById('messageContent');
+            const messageIcon = document.getElementById('messageIcon');
+            const messageText = document.getElementById('messageText');
+
+            let bgColor, textColor, icon;
+            switch (type) {
+                case 'success':
+                    bgColor = 'bg-green-50';
+                    textColor = 'text-green-800';
+                    icon = 'fas fa-check-circle';
+                    break;
+                case 'error':
+                    bgColor = 'bg-red-50';
+                    textColor = 'text-red-800';
+                    icon = 'fas fa-exclamation-circle';
+                    break;
+                case 'warning':
+                    bgColor = 'bg-yellow-50';
+                    textColor = 'text-yellow-800';
+                    icon = 'fas fa-exclamation-triangle';
+                    break;
+                default:
+                    bgColor = 'bg-blue-50';
+                    textColor = 'text-blue-800';
+                    icon = 'fas fa-info-circle';
+            }
+
+            messageContainer.className = `message-container rounded-lg p-4 mb-4 ${bgColor} ${textColor}`;
+            messageIcon.className = `${icon} ${textColor}`;
+            messageText.textContent = message;
+
+            messageContainer.classList.remove('hidden');
+            setTimeout(() => {
+                messageContainer.classList.add('show');
+            }, 10);
+
+            if (type !== 'error') {
+                setTimeout(() => {
+                    hideMessage();
+                }, 15000);
+            }
+        }
+
+        function hideMessage() {
+            const messageContainer = document.getElementById('messageContainer');
+            messageContainer.classList.remove('show');
+            setTimeout(() => {
+                messageContainer.classList.add('hidden');
+            }, 300);
+        }
+
+        // ============================================
+        // SWITCH STATES
+        // ============================================
+        function showState(state) {
+            [stateLoading, stateSuccess, stateError].forEach(el => el.classList.remove('active'));
+            document.getElementById('state' + state).classList.add('active');
+        }
+
+        // ============================================
+        // ACTIVATION LOGIC
+        // ============================================
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                username: params.get('username') || '',
+                code: params.get('code') || '',
+                success: params.get('success') || '',
+                message: params.get('message') || ''
+            };
+        }
+
+        async function activateAccount() {
+            const params = getUrlParams();
+
+            // Verificar si ya viene con estado desde el backend
+            if (params.success === 'true') {
+                showState('Success');
+                return;
+            }
+
+            if (params.success === 'false') {
+                showState('Error');
+                if (params.message) {
+                    errorMessage.textContent = params.message;
+                }
+                return;
+            }
+
+
+            // Intentar activar la cuenta
+            try {
+                const response = await fetch('../polizei/verify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        username: params.username,
+                        code: params.code
+                     })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showState('Success');
+                } else {
+                    showState('Error');
+                    errorMessage.textContent = t('activation_error_default') || 'No se pudo activar la cuenta.';
+                }
+            } catch (error) {
+                showState('Error');
+                errorMessage.textContent = t('activation_error_connection') || 'Error de conexión. Por favor, intenta de nuevo.';
+            }
+        }
+
+        // ============================================
+        // RETRY ACTIVATION
+        // ============================================
+        function retryActivation() {
+            const params = getUrlParams();
+            showState('Loading');
+            activateAccount();
+        }
+
+        // ============================================
+        // INIT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mostrar estado de carga mientras se procesa
+            showState('Loading');
+
+            // Iniciar activación después de un breve delay para mostrar el estado
+            setTimeout(() => {
+                activateAccount();
+            }, 800);
+        });
+    </script>
+
+</body>
+
+</html>

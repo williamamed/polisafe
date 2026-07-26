@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro exitoso</title>
+</head>
+<body style="margin:0; padding:0; background:#f5f5f5; font-family:Arial, Helvetica, sans-serif;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" style="padding: 40px 0;">
+    <tr>
+      <td align="center">
+
+        <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:10px; overflow:hidden;">
+          
+          <!-- Header -->
+          <tr>
+            <td style="background:#2563eb; padding:24px; text-align:center; color:white; font-size:22px; font-weight:bold;">
+              Registro exitoso 🎉
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding: 30px; color:#333333; font-size:15px; line-height:1.6;">
+
+              <p style="margin-bottom:16px;">Hola <strong>{{fullName}}</strong>,</p>
+
+              <p style="margin-bottom:16px;">
+                ¡Tu registro fue completado con éxito! Estos son los datos de tu cuenta:
+              </p>
+
+              <table style="margin: 20px 0; width: 100%; border-spacing:0;">
+                <tr>
+                  <td style="padding: 8px 0; font-weight:bold;">Usuario:</td>
+                  <td>{{username}}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-weight:bold;">Nombre completo:</td>
+                  <td>{{fullName}}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-weight:bold;">Código de verificación:</td>
+                  <td>{{code}}</td>
+                </tr>
+              </table>
+
+              <p>Para continuar, hacé clic en el siguiente botón:</p>
+
+              <!-- Botón -->
+              <div style="text-align:center; margin: 25px 0;">
+                <a href="{{actionUrl}}" 
+                  style="background:#2563eb; color:white; text-decoration:none; padding:12px 24px; border-radius:6px; font-size:16px; display:inline-block;">
+                  Activar cuenta
+                </a>
+              </div>
+
+              <p style="color:#555; font-size:13px;">
+                Si el botón no funciona, podés copiar y pegar esta URL en tu navegador:<br>
+                <span style="color:#2563eb;">{{actionUrl}}</span>
+              </p>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background:#f0f0f0; padding:16px; text-align:center; color:#666; font-size:12px;">
+              Este correo fue generado automáticamente. Por favor, no respondas a este mensaje.
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

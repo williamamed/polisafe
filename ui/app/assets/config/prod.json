@@ -1,0 +1,17 @@
+{
+    "securityService": "https://www.elegantys.net",
+    "urls": {
+        "mediaURL": "https://www.elegantys.net/api/v4/archive/media",
+        "tiendaURL": "https://www.elegantys.net/api/v4/comercial/tienda"
+    },
+    "services": {
+        "media": "https://www.elegantys.net/api/v4/archive",
+        "security": "https://www.elegantys.net/api/v4/security",
+        "maitre": "https://www.elegantys.net/api/v4/comercial"
+    },
+    "main": "https://www.elegantys.net/api/v4/comercial",
+    
+    "mapbox": {
+        "token": "pk.eyJ1Ijoid2F0YW1heW8iLCJhIjoiY2ptZjNrNmcwMDQxbzNxcXl4andmcHM4cCJ9.b9tPh0WptnBD9BSvlmusIA"
+    }
+}

@@ -1,0 +1,62 @@
+:root span.elg {
+    height: 14px !important;
+    width: 14px !important;
+    
+    background-color: var(--primary-color);
+    content: "";
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+}
+
+:root span.elg-text-color{
+    background-color: var(--p-text-color);
+}
+
+:root .elg.car-seat {
+    -webkit-mask-image: url(./car-seat.svg);
+    mask-image: url(./car-seat.svg);
+}
+
+:root .elg.car-seat-2 {
+    -webkit-mask-image: url(./seat-pictogram.svg);
+    mask-image: url(./seat-pictogram.svg);
+}
+
+:root .elg.route {
+    -webkit-mask-image: url(./route.svg);
+    mask-image: url(./route.svg);
+}
+
+:root .elg.departure {
+    -webkit-mask-image: url(./departure.svg);
+    mask-image: url(./departure.svg);
+}
+
+
+:root .elg.h-4 {
+    height: 30px !important;
+    width: 30px !important;
+    display: inline-block;
+}
+
+:root .elg.h-3 {
+    height: 40px !important;
+    width: 40px !important;
+    display: inline-block;
+}
+
+:root .elg.h-2 {
+    height: 50px !important;
+    width: 50px !important;
+    display: inline-block;
+}
+
+:root .elg.h-1 {
+    height: 60px !important;
+    width: 60px !important;
+    display: inline-block;
+}

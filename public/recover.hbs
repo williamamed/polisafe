@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ appSettings.login_name }} - Recuperar contraseña</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+        * {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+        }
+
+        .btn-primary {
+            background-color: #c8b273;
+            color: white;
+            transition: all 0.3s ease;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #b89d5e;
+            box-shadow: 0 2px 8px rgba(200, 178, 115, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #6b7280;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid #d1d5db;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f3f4f6;
+        }
+
+        .login-container {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+        }
+
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 32px;
+        }
+
+        .step-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #d1d5db;
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active {
+            background-color: #c8b273;
+            width: 32px;
+            border-radius: 4px;
+        }
+
+        .step-dot.completed {
+            background-color: #10b981;
+        }
+
+        .step-label {
+            font-size: 12px;
+            color: #9ca3af;
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        .step-label.active {
+            color: #c8b273;
+            font-weight: 500;
+        }
+
+        .code-input-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 28px 0;
+        }
+
+        .code-input-group input {
+            width: 52px;
+            height: 60px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 600;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            transition: all 0.2s;
+            background-color: white;
+            color: #1f2937;
+            caret-color: #c8b273;
+        }
+
+        .code-input-group input:focus {
+            border-color: #c8b273;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(200, 178, 115, 0.15);
+        }
+
+        .code-input-group input.error {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+        }
+
+        .code-input-group input.success {
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+        }
+
+        .form-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-container {
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .message-container.show {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 16px;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .resend-timer {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 15px;
+        }
+
+        .input-field:focus {
+            border-color: #c8b273;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(200, 178, 115, 0.15);
+        }
+
+        .input-field.error {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+        }
+
+        .input-field.success {
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+        }
+
+        .password-toggle {
+            cursor: pointer;
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            margin-top: 12px;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+
+        .password-toggle:hover {
+            color: #6b7280;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        /* Variables del tema oscuro */
+        body.dark-theme {
+            --dark-bg-primary: #0a0f1c;
+            --dark-bg-card: #111827;
+            --dark-text-primary: #f1f5f9;
+            --dark-text-secondary: #cbd5e6;
+            --dark-text-muted: #94a3b8;
+            --dark-border: #1f2937;
+            --dark-input-bg: #0a0f1c;
+            --dark-input-border: #374151;
+            --dark-accent: #3b82f6;
+            --dark-accent-hover: #60a5fa;
+        }
+
+        /* Dark Theme */
+        body.dark-theme {
+            background-color: #0a0f1c !important;
+        }
+
+        body.dark-theme .login-container {
+            background-color: #111827 !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        body.dark-theme h1,
+        body.dark-theme h2,
+        body.dark-theme h3,
+        body.dark-theme p,
+        body.dark-theme label,
+        body.dark-theme span:not(.password-toggle i),
+        body.dark-theme .step-label {
+            color: #f1f5f9 !important;
+        }
+
+
+        body.dark-theme .text-gray-600,
+        body.dark-theme .text-gray-500,
+        body.dark-theme .resend-timer {
+            color: #cbd5e6 !important;
+        }
+
+        body.dark-theme .input-field {
+            background-color: #0a0f1c !important;
+            border-color: #374151 !important;
+            color: #f1f5f9 !important;
+        }
+
+        body.dark-theme .input-field::placeholder {
+            color: #6b7280 !important;
+        }
+
+        body.dark-theme .input-field:focus {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+        }
+
+        body.dark-theme .btn-primary {
+            background-color: #3b82f6 !important;
+        }
+
+        body.dark-theme .btn-primary:hover {
+            background-color: #2563eb !important;
+        }
+
+        body.dark-theme .btn-secondary {
+            border-color: #374151 !important;
+            color: #cbd5e6 !important;
+        }
+
+        body.dark-theme .btn-secondary:hover {
+            background-color: #1f2937 !important;
+        }
+
+        body.dark-theme .code-input-group input {
+            background-color: #0a0f1c !important;
+            border-color: #374151 !important;
+            color: #f1f5f9 !important;
+        }
+
+        body.dark-theme .code-input-group input:focus {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+        }
+
+        body.dark-theme .step-dot {
+            background-color: #374151;
+        }
+
+        body.dark-theme .step-dot.active {
+            background-color: #3b82f6;
+        }
+
+        body.dark-theme .step-dot.completed {
+            background-color: #10b981;
+        }
+
+        body.dark-theme .step-label.active {
+            color: #3b82f6;
+        }
+
+        body.dark-theme .message-container.bg-green-50 {
+            background-color: rgba(34, 197, 94, 0.15) !important;
+        }
+
+        body.dark-theme .message-container.bg-red-50 {
+            background-color: rgba(239, 68, 68, 0.15) !important;
+        }
+
+        body.dark-theme .message-container.bg-yellow-50 {
+            background-color: rgba(234, 179, 8, 0.15) !important;
+        }
+
+        body.dark-theme .message-container.bg-blue-50 {
+            background-color: rgba(59, 130, 246, 0.15) !important;
+        }
+
+        body.dark-theme .message-container .text-green-800 {
+            color: #4ade80 !important;
+        }
+
+        body.dark-theme .message-container .text-red-800 {
+            color: #f87171 !important;
+        }
+
+        body.dark-theme .message-container .text-yellow-800 {
+            color: #facc15 !important;
+        }
+
+        body.dark-theme .message-container .text-blue-800 {
+            color: #60a5fa !important;
+        }
+
+        body.dark-theme .password-toggle {
+            color: #94a3b8 !important;
+        }
+
+        body.dark-theme .password-toggle:hover {
+            color: #cbd5e6 !important;
+        }
+    </style>
+
+    {{#if appSettings.login_css_url}}
+    <link rel="stylesheet" href="{{appSettings.login_css_url}}">
+    {{/if}}
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="login-container bg-white w-full max-w-md p-8">
+
+        <!-- Logo -->
+        <div class="flex justify-center mb-6">
+            <img class="h-14" src="{{ appSettings.login_icon_url }}" alt="Logo">
+        </div>
+
+        <!-- Step Indicator -->
+        <div class="step-indicator">
+            <div>
+                <div class="step-dot active" id="step1Dot"></div>
+                <div class="step-label active" id="step1Label" data-i18n="reset_step_email">Email</div>
+            </div>
+            <div class="w-12 h-0.5 bg-gray-300" id="line1"></div>
+            <div>
+                <div class="step-dot" id="step2Dot"></div>
+                <div class="step-label" id="step2Label" data-i18n="reset_step_code">Código</div>
+            </div>
+            <div class="w-12 h-0.5 bg-gray-300" id="line2"></div>
+            <div>
+                <div class="step-dot" id="step3Dot"></div>
+                <div class="step-label" id="step3Label" data-i18n="reset_step_password">Nueva</div>
+            </div>
+        </div>
+
+        <!-- Mensajes de estado -->
+        <div id="messageContainer" class="message-container rounded-lg p-4 mb-4 hidden">
+            <div id="messageContent" class="flex items-center">
+                <i id="messageIcon" class="mr-2"></i>
+                <span id="messageText" class="pl-2"></span>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PASO 1: Solicitar Email -->
+        <!-- ============================================ -->
+        <div id="step1" class="form-section active">
+            <h1 class="text-2xl font-semibold text-center mb-2" data-i18n="reset_title">Recuperar contraseña</h1>
+            <p class="text-center text-gray-600 text-sm mb-6" data-i18n="reset_subtitle">
+                Ingresa tu correo electrónico y te enviaremos un código de verificación
+            </p>
+
+            <form id="emailForm" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="reset_email_label">
+                        Correo electrónico
+                    </label>
+                    <input type="email" id="resetEmail" data-i18n-placeholder="reset_email_placeholder"
+                        placeholder="ejemplo@correo.com" class="input-field" required autocomplete="email">
+                </div>
+
+                <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2"
+                    id="sendCodeBtn">
+                    <span id="sendCodeText" data-i18n="reset_send_code">Enviar código</span>
+                    <div id="sendCodeSpinner" class="loading-spinner hidden"></div>
+                </button>
+
+                <div class="text-center">
+                    <a href="#" onclick="goToLogin(); return false;"
+                        class="text-sm text-gray-500 hover:text-gray-700 transition-colors">
+                        <i class="fas fa-arrow-left mr-1"></i>
+                        <span data-i18n="reset_back_to_login">Volver al inicio de sesión</span>
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PASO 2: Verificar Código -->
+        <!-- ============================================ -->
+        <div id="step2" class="form-section">
+            <h1 class="text-2xl font-semibold text-center mb-2" data-i18n="reset_verify_title">Verifica tu código</h1>
+            <p class="text-center text-gray-600 text-sm mb-2" data-i18n="reset_verify_subtitle">
+                Ingresa el código de 6 dígitos que enviamos a
+            </p>
+            <p class="text-center font-medium text-sm text-gray-800 mb-6" id="emailDisplay"></p>
+
+            <div class="code-input-group" id="codeInputs">
+                <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="code-input" data-index="0"
+                    autofocus>
+                <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="code-input" data-index="1">
+                <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="code-input" data-index="2">
+                <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="code-input" data-index="3">
+                <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="code-input" data-index="4">
+                <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="code-input" data-index="5">
+            </div>
+
+            <div class="flex flex-col items-center gap-4">
+                <button class="btn-primary w-full flex items-center justify-center gap-2" id="verifyCodeBtn">
+                    <span id="verifyCodeText" data-i18n="reset_verify_code">Verificar código</span>
+                    <div id="verifyCodeSpinner" class="loading-spinner hidden"></div>
+                </button>
+
+                <div class="flex items-center gap-2 text-sm">
+                    <span class="resend-timer" data-i18n="reset_didnt_receive">¿No recibiste el código?</span>
+                    <button id="resendCodeBtn" class="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+                        data-i18n="reset_resend">Reenviar</button>
+                    <span class="resend-timer" id="timerDisplay"></span>
+                </div>
+
+                <button onclick="goToStep1()" class="text-sm text-gray-500 hover:text-gray-700 transition-colors">
+                    <i class="fas fa-arrow-left mr-1"></i>
+                    <span data-i18n="reset_change_email">Cambiar correo electrónico</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PASO 3: Nueva Contraseña -->
+        <!-- ============================================ -->
+        <div id="step3" class="form-section">
+            <h1 class="text-2xl font-semibold text-center mb-2" data-i18n="reset_new_password_title">Crear nueva
+                contraseña</h1>
+            <p class="text-center text-gray-600 text-sm mb-6" data-i18n="reset_new_password_subtitle">
+                La contraseña debe tener al menos 8 caracteres
+            </p>
+
+            <form id="passwordForm" class="space-y-5">
+                <div class="relative">
+                    <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="reset_new_password_label">
+                        Nueva contraseña
+                    </label>
+                    <input type="password" id="newPassword" data-i18n-placeholder="reset_new_password_placeholder"
+                        placeholder="Ingresa tu nueva contraseña" class="input-field pr-10" required minlength="8">
+                    <span class="password-toggle" id="newPasswordToggle">
+                        <i class="far fa-eye"></i>
+                    </span>
+                </div>
+
+                <div class="relative">
+                    <label class="block text-sm font-medium text-gray-700 mb-1"
+                        data-i18n="reset_confirm_password_label">
+                        Confirmar contraseña
+                    </label>
+                    <input type="password" id="confirmPassword"
+                        data-i18n-placeholder="reset_confirm_password_placeholder" placeholder="Confirma tu contraseña"
+                        class="input-field pr-10" required minlength="8">
+                    <span class="password-toggle" id="confirmPasswordToggle">
+                        <i class="far fa-eye"></i>
+                    </span>
+                </div>
+
+                <div id="passwordStrength" class="text-sm hidden">
+                    <span data-i18n="reset_password_strength">Fortaleza:</span>
+                    <span id="strengthText" class="font-medium"></span>
+                </div>
+
+                <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2"
+                    id="resetPasswordBtn">
+                    <span id="resetPasswordText" data-i18n="reset_change_password">Cambiar contraseña</span>
+                    <div id="resetPasswordSpinner" class="loading-spinner hidden"></div>
+                </button>
+
+                <div class="text-center">
+                    <a href="#" onclick="goToLogin(); return false;"
+                        class="text-sm text-gray-500 hover:text-gray-700 transition-colors">
+                        <i class="fas fa-arrow-left mr-1"></i>
+                        <span data-i18n="reset_back_to_login">Volver al inicio de sesión</span>
+                    </a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="https://www.elegantys.net/identity/translations.js"></script>
+    <script src="https://www.elegantys.net/identity/pkg.verify.js"></script>
+
+    <script>
+        try {
+            window.UI_CONFIG = JSON.parse('{{{ config }}}');
+        } catch (err) {
+            window.UI_CONFIG = {};
+        }
+
+        // ============================================
+        // DARK THEME
+        // ============================================
+        if (window.UI_CONFIG.login_darkmode) {
+            document.body.classList.add('dark-theme');
+        }
+
+        // ============================================
+        // TRANSLATIONS
+        // ============================================
+        const browserLang = getValidLanguage('en');
+        
+        //Aqui va validar si el browser va primero
+        if (window.UI_CONFIG.login_language == 'browser') {
+            setLanguage(browserLang)
+        } else {
+            // Probar el idioma configurado
+            if (!setLanguage(window.UI_CONFIG.login_language))
+                setLanguage(browserLang)
+        }
+
+
+        // Inicialización: tomamos parámetros OAuth desde querystring (si vienen)
+        function qs(name) {
+            const params = new URLSearchParams(location.search);
+            return params.get(name) || '';
+        }
+
+        // ============================================
+        // STATE
+        // ============================================
+        let currentStep = 1;
+        let email = '';
+        let resetToken = '';
+        let resendTimer = 0;
+        let timerInterval = null;
+
+        // ============================================
+        // DOM REFS
+        // ============================================
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const step1Dot = document.getElementById('step1Dot');
+        const step2Dot = document.getElementById('step2Dot');
+        const step3Dot = document.getElementById('step3Dot');
+        const step1Label = document.getElementById('step1Label');
+        const step2Label = document.getElementById('step2Label');
+        const step3Label = document.getElementById('step3Label');
+        const line1 = document.getElementById('line1');
+        const line2 = document.getElementById('line2');
+        const emailDisplay = document.getElementById('emailDisplay');
+        const codeInputs = document.querySelectorAll('.code-input');
+        const messageContainer = document.getElementById('messageContainer');
+        const messageContent = document.getElementById('messageContent');
+        const messageIcon = document.getElementById('messageIcon');
+        const messageText = document.getElementById('messageText');
+
+        // ============================================
+        // STEP MANAGEMENT
+        // ============================================
+        function goToStep(step) {
+            currentStep = step;
+            [step1, step2, step3].forEach(el => el.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+
+            // Update dots
+            [step1Dot, step2Dot, step3Dot].forEach((dot, i) => {
+                dot.className = 'step-dot';
+                if (i + 1 === step) dot.classList.add('active');
+                else if (i + 1 < step) dot.classList.add('completed');
+            });
+
+            // Update lines
+            line1.className = 'w-12 h-0.5 ' + (step > 1 ? 'bg-green-400' : 'bg-gray-300');
+            line2.className = 'w-12 h-0.5 ' + (step > 2 ? 'bg-green-400' : 'bg-gray-300');
+
+            // Update labels
+            [step1Label, step2Label, step3Label].forEach((label, i) => {
+                label.className = 'step-label';
+                if (i + 1 === step) label.classList.add('active');
+            });
+
+            // Focus first input of step
+            if (step === 2) {
+                setTimeout(() => codeInputs[0].focus(), 300);
+            }
+            if (step === 3) {
+                setTimeout(() => document.getElementById('newPassword').focus(), 300);
+            }
+        }
+
+        function goToStep1() {
+            goToStep(1);
+            hideMessage();
+        }
+
+        function goToStep2() {
+            goToStep(2);
+        }
+
+        function goToStep3() {
+            goToStep(3);
+        }
+
+        function showLoginSection() {
+            // Redirigir al login
+            window.history.back()
+        }
+
+        function goToLogin() {
+            showLoginSection();
+        }
+
+
+
+        // ============================================
+        // MESSAGE SYSTEM
+        // ============================================
+        // Función para mostrar mensajes en el layout
+        function showMessage(message, type = 'info') {
+            const messageContainer = document.getElementById('messageContainer');
+            const messageContent = document.getElementById('messageContent');
+            const messageIcon = document.getElementById('messageIcon');
+            const messageText = document.getElementById('messageText');
+
+            // Configurar colores e iconos según el tipo
+            let bgColor, textColor, icon;
+            switch (type) {
+                case 'success':
+                    bgColor = 'bg-green-50';
+                    textColor = 'text-green-800';
+                    icon = 'fas fa-check-circle';
+                    break;
+                case 'error':
+                    bgColor = 'bg-red-50';
+                    textColor = 'text-red-800';
+                    icon = 'fas fa-exclamation-circle';
+                    break;
+                case 'warning':
+                    bgColor = 'bg-yellow-50';
+                    textColor = 'text-yellow-800';
+                    icon = 'fas fa-exclamation-triangle';
+                    break;
+                default:
+                    bgColor = 'bg-blue-50';
+                    textColor = 'text-blue-800';
+                    icon = 'fas fa-info-circle';
+            }
+
+            // Aplicar estilos y contenido
+            messageContainer.className = `message-container rounded p-4 mb-4 ${bgColor} ${textColor}`;
+            messageIcon.className = `${icon} ${textColor}`;
+            messageText.textContent = message;
+
+            // Mostrar el mensaje con animación
+            messageContainer.classList.remove('hidden');
+            setTimeout(() => {
+                messageContainer.classList.add('show');
+            }, 10);
+
+            // Ocultar automáticamente después de 5 segundos (excepto para errores)
+            if (type !== 'error') {
+                setTimeout(() => {
+                    hideMessage();
+                }, 15000);
+            }
+        }
+
+        // Función para ocultar mensajes
+        function hideMessage() {
+            const messageContainer = document.getElementById('messageContainer');
+            messageContainer.classList.remove('show');
+            setTimeout(() => {
+                messageContainer.classList.add('hidden');
+            }, 300);
+        }
+
+        // ============================================
+        // CODE INPUT HANDLING
+        // ============================================
+        codeInputs.forEach((input, index) => {
+            input.addEventListener('input', function () {
+                this.value = this.value.replace(/\D/g, '');
+                if (this.value.length === 1 && index < codeInputs.length - 1) {
+                    codeInputs[index + 1].focus();
+                }
+                // Check if all filled
+                const allFilled = Array.from(codeInputs).every(inp => inp.value.length === 1);
+                if (allFilled) {
+                    document.getElementById('verifyCodeBtn').focus();
+                }
+            });
+
+            input.addEventListener('keydown', function (e) {
+                if (e.key === 'Backspace' && this.value.length === 0 && index > 0) {
+                    codeInputs[index - 1].focus();
+                }
+                if (e.key === 'Enter') {
+                    document.getElementById('verifyCodeBtn').click();
+                }
+            });
+
+            input.addEventListener('paste', function (e) {
+                e.preventDefault();
+                const paste = (e.clipboardData || window.clipboardData).getData('text');
+                const digits = paste.replace(/\D/g, '').slice(0, 6);
+                digits.split('').forEach((digit, i) => {
+                    if (i < codeInputs.length) {
+                        codeInputs[i].value = digit;
+                    }
+                });
+                const lastIndex = Math.min(digits.length, codeInputs.length) - 1;
+                if (lastIndex >= 0 && lastIndex < codeInputs.length - 1) {
+                    codeInputs[lastIndex + 1]?.focus();
+                } else if (lastIndex === codeInputs.length - 1) {
+                    document.getElementById('verifyCodeBtn').focus();
+                }
+            });
+        });
+
+        function getCode() {
+            return Array.from(codeInputs).map(inp => inp.value).join('');
+        }
+
+        function clearCodeInputs() {
+            codeInputs.forEach(inp => inp.value = '');
+            codeInputs[0].focus();
+        }
+
+        // ============================================
+        // PASSWORD TOGGLES
+        // ============================================
+        document.getElementById('newPasswordToggle').addEventListener('click', function () {
+            const input = document.getElementById('newPassword');
+            const type = input.type === 'password' ? 'text' : 'password';
+            input.type = type;
+            this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+        });
+
+        document.getElementById('confirmPasswordToggle').addEventListener('click', function () {
+            const input = document.getElementById('confirmPassword');
+            const type = input.type === 'password' ? 'text' : 'password';
+            input.type = type;
+            this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+        });
+
+        // Password strength
+        document.getElementById('newPassword').addEventListener('input', function () {
+            const strengthEl = document.getElementById('passwordStrength');
+            const strengthText = document.getElementById('strengthText');
+            const val = this.value;
+
+            if (val.length === 0) {
+                strengthEl.classList.add('hidden');
+                return;
+            }
+            strengthEl.classList.remove('hidden');
+
+            let strength = 0;
+            if (val.length >= 8) strength++;
+            if (val.match(/[a-z]/)) strength++;
+            if (val.match(/[A-Z]/)) strength++;
+            if (val.match(/\d/)) strength++;
+            if (val.match(/[^a-zA-Z\d]/)) strength++;
+
+            const levels = [
+                { text: t('reset_strength_weak') || 'Débil', color: '#ef4444' },
+                { text: t('reset_strength_fair') || 'Regular', color: '#f59e0b' },
+                { text: t('reset_strength_good') || 'Buena', color: '#3b82f6' },
+                { text: t('reset_strength_strong') || 'Fuerte', color: '#10b981' },
+                { text: t('reset_strength_very_strong') || 'Muy fuerte', color: '#10b981' }
+            ];
+            const idx = Math.min(strength, 4);
+            strengthText.textContent = levels[idx].text;
+            strengthText.style.color = levels[idx].color;
+        });
+
+        // ============================================
+        // RESEND TIMER
+        // ============================================
+        function startResendTimer(seconds = 60) {
+            resendTimer = seconds;
+            const btn = document.getElementById('resendCodeBtn');
+            const timerDisplay = document.getElementById('timerDisplay');
+            btn.disabled = true;
+            btn.classList.add('opacity-50', 'cursor-not-allowed');
+            timerDisplay.textContent = `(${seconds}s)`;
+
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                resendTimer--;
+                if (resendTimer <= 0) {
+                    clearInterval(timerInterval);
+                    timerDisplay.textContent = '';
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                } else {
+                    timerDisplay.textContent = `(${resendTimer}s)`;
+                }
+            }, 1000);
+        }
+
+        // ============================================
+        // API CALLS
+        // ============================================
+        async function callApi(endpoint, data) {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            return response.json();
+        }
+
+        // ============================================
+        // STEP 1: SEND CODE
+        // ============================================
+        document.getElementById('emailForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            hideMessage();
+
+            const emailInput = document.getElementById('resetEmail');
+            email = emailInput.value.trim();
+
+            if (!email || !email.includes('@')) {
+                showMessage(t('reset_error_invalid_email') || 'Ingresa un correo electrónico válido', 'error');
+                emailInput.classList.add('error');
+                return;
+            }
+            emailInput.classList.remove('error');
+
+            const btn = document.getElementById('sendCodeBtn');
+            const text = document.getElementById('sendCodeText');
+            const spinner = document.getElementById('sendCodeSpinner');
+            btn.disabled = true;
+            text.textContent = t('reset_sending') || 'Enviando...';
+            spinner.classList.remove('hidden');
+
+            try {
+                const result = await callApi('../../polizei/recover', { username: email, tid: qs('tid') });
+
+                goToStep2();
+                clearCodeInputs();
+                startResendTimer(60);
+            } catch (error) {
+                showMessage(t('reset_error_connection') || 'Error de conexión', 'error');
+            } finally {
+                btn.disabled = false;
+                text.textContent = t('reset_send_code') || 'Enviar código';
+                spinner.classList.add('hidden');
+            }
+        });
+
+        // ============================================
+        // RESEND CODE
+        // ============================================
+        document.getElementById('resendCodeBtn').addEventListener('click', async function () {
+            if (this.disabled) return;
+            hideMessage();
+
+            const btn = this;
+            btn.disabled = true;
+            btn.textContent = t('reset_sending') || 'Enviando...';
+
+            try {
+                const result = await callApi('../../polizei/recover', { username: email, tid: qs('tid') });
+
+                if (result.success) {
+                    resetToken = result.token || '';
+                    showMessage(t('reset_code_resent') || 'Código reenviado correctamente', 'success');
+                    clearCodeInputs();
+                    startResendTimer(60);
+                } else {
+                    showMessage(result.message || t('reset_error_resend_failed') || 'Error al reenviar el código', 'error');
+                    btn.disabled = false;
+                    btn.textContent = t('reset_resend') || 'Reenviar';
+                }
+            } catch (error) {
+                showMessage(t('reset_error_connection') || 'Error de conexión', 'error');
+                btn.disabled = false;
+                btn.textContent = t('reset_resend') || 'Reenviar';
+            }
+        });
+
+        // ============================================
+        // STEP 2: VERIFY CODE
+        // ============================================
+        document.getElementById('verifyCodeBtn').addEventListener('click', async function () {
+            //hideMessage();
+
+            const code = getCode();
+            if (code.length !== 6) {
+                showMessage(t('reset_error_invalid_code') || 'Ingresa el código completo de 6 dígitos', 'error');
+                codeInputs.forEach(inp => inp.classList.add('error'));
+                return;
+            }
+            codeInputs.forEach(inp => inp.classList.remove('error'));
+
+            const btn = this;
+            const text = document.getElementById('verifyCodeText');
+            const spinner = document.getElementById('verifyCodeSpinner');
+            btn.disabled = true;
+            text.textContent = t('reset_verifying') || 'Verificando...';
+            spinner.classList.remove('hidden');
+
+            try {
+                const response = await fetch('../../polizei/verify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username: email,
+                        code
+                    })
+                });
+
+                if (!response.ok) {
+                    showMessage(t('reset_error_invalid_code') || 'Código inválido', 'error');
+                    codeInputs.forEach(inp => inp.classList.add('error'));
+                    setTimeout(() => codeInputs.forEach(inp => inp.classList.remove('error')), 2000);
+                    return;
+                }
+
+                const data = response.json();
+
+                showMessage(t('reset_code_valid') || 'Código verificado correctamente', 'success');
+                codeInputs.forEach(inp => inp.classList.add('success'));
+                setTimeout(() => {
+                    goToStep3();
+                    document.getElementById('newPassword').focus();
+                }, 500);
+
+            } catch (error) {
+                console.log(error)
+                showMessage(t('reset_error_connection') || 'Error de conexión', 'error');
+            } finally {
+                btn.disabled = false;
+                text.textContent = t('reset_verify_code') || 'Verificar código';
+                spinner.classList.add('hidden');
+            }
+        });
+
+        // ============================================
+        // STEP 3: RESET PASSWORD
+        // ============================================
+        document.getElementById('passwordForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const emailInput = document.getElementById('resetEmail');
+            const email = emailInput.value.trim();
+
+            if (newPassword.length < 8) {
+                showMessage(t('reset_error_password_length') || 'La contraseña debe tener al menos 8 caracteres', 'error');
+                document.getElementById('newPassword').classList.add('error');
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                showMessage(t('reset_error_password_mismatch') || 'Las contraseñas no coinciden', 'error');
+                document.getElementById('confirmPassword').classList.add('error');
+                return;
+            }
+
+            document.getElementById('newPassword').classList.remove('error');
+            document.getElementById('confirmPassword').classList.remove('error');
+
+            const btn = document.getElementById('resetPasswordBtn');
+            const text = document.getElementById('resetPasswordText');
+            const spinner = document.getElementById('resetPasswordSpinner');
+            btn.disabled = true;
+            text.textContent = t('reset_changing') || 'Cambiando...';
+            spinner.classList.remove('hidden');
+
+            try {
+
+                const response = await fetch('../../polizei/verify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username: email,
+                        code: getCode(),
+                        password: newPassword
+                    })
+                });
+
+                if (!response.ok) {
+                    showMessage(result.message || t('reset_error_change_failed') || 'Error al cambiar la contraseña', 'error');
+                    return;
+                }
+
+                const data = response.json();
+
+                showMessage(t('reset_success') || 'Contraseña cambiada exitosamente', 'success');
+                goToStep1();
+                setTimeout(() => {
+                    window.history.back()
+                }, 6000)
+
+            } catch (error) {
+                showMessage(t('reset_error_connection') || 'Error de conexión', 'error');
+            } finally {
+                btn.disabled = false;
+                text.textContent = t('reset_change_password') || 'Cambiar contraseña';
+                spinner.classList.add('hidden');
+            }
+        });
+
+        // ============================================
+        // KEYBOARD SHORTCUTS
+        // ============================================
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                if (currentStep === 2) goToStep1();
+                else if (currentStep === 3) goToStep2();
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

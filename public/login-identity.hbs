@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ appSettings.login_name }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .google-blue {
+            color: #af9a60ff;
+        }
+
+        .bg-google-blue {
+            background-color: #4285f4;
+        }
+
+        .border-google-blue {
+            border-color: #4285f4;
+        }
+
+        .focus-google-blue:focus {
+            border-color: #4285f4;
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+        }
+
+        .btn-google {
+            background-color: #c8b273;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-google:hover {
+            background-color: #3367d6;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-container {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .form-section {
+            transition: all 0.3s ease;
+        }
+
+        .hidden-section {
+            display: none;
+            opacity: 0;
+        }
+
+        .visible-section {
+            display: block;
+            opacity: 1;
+        }
+
+        .password-toggle {
+            cursor: pointer;
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #5f6368;
+        }
+
+        .message-container {
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .message-container.show {
+            max-height: 200px;
+            margin-top: 16px;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, .3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        .google-signin-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 10px 16px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            background: white;
+            color: #3c4043;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .google-signin-btn:hover {
+            background-color: #f8f9fa;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .google-signin-btn:active {
+            background-color: #f1f3f4;
+        }
+
+        .google-signin-btn img {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #dadce0;
+        }
+
+        .divider-text {
+            padding: 0 10px;
+            color: #5f6368;
+            font-size: 14px;
+        }
+
+
+        /* ============================================
+   TEMA OSCURO AZUL - SOBRESCRITURA DE ESTILOS
+   ============================================ */
+
+        /* Variables del tema oscuro */
+        body.dark-theme {
+            --dark-bg-primary: #0a0f1c;
+            --dark-bg-card: #111827;
+            --dark-text-primary: #f1f5f9;
+            --dark-text-secondary: #cbd5e6;
+            --dark-text-muted: #94a3b8;
+            --dark-border: #1f2937;
+            --dark-input-bg: #0a0f1c;
+            --dark-input-border: #374151;
+            --dark-accent: #3b82f6;
+            --dark-accent-hover: #60a5fa;
+        }
+
+        /* Aplicar tema oscuro al body */
+        body.dark-theme {
+            background-color: #0a0f1c !important;
+        }
+
+        /* Contenedor principal */
+        body.dark-theme .login-container {
+            background-color: #111827 !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        /* Textos */
+        body.dark-theme h1,
+        body.dark-theme h2,
+        body.dark-theme h3,
+        body.dark-theme p,
+        body.dark-theme span:not(.password-toggle i) {
+            color: #f1f5f9 !important;
+        }
+
+        body.dark-theme .text-gray-600,
+        body.dark-theme .text-gray-700 {
+            color: #cbd5e6 !important;
+        }
+
+        body.dark-theme .text-xs.text-gray-600 {
+            color: #94a3b8 !important;
+        }
+
+        /* Inputs */
+        body.dark-theme input {
+            background-color: #0a0f1c !important;
+            border-color: #374151 !important;
+            color: #f1f5f9 !important;
+        }
+
+        body.dark-theme input::placeholder {
+            color: #6b7280 !important;
+        }
+
+        body.dark-theme input:focus {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+        }
+
+        /* Enlaces google-blue */
+        body.dark-theme .google-blue {
+            color: #3b82f6 !important;
+        }
+
+        body.dark-theme .google-blue:hover {
+            color: #60a5fa !important;
+        }
+
+        /* Botón principal */
+        body.dark-theme .btn-google {
+            background-color: #3b82f6 !important;
+            background-image: none !important;
+        }
+
+        body.dark-theme .btn-google:hover {
+            background-color: #2563eb !important;
+        }
+
+        /* Checkbox */
+        body.dark-theme input[type="checkbox"] {
+            accent-color: #3b82f6 !important;
+        }
+
+        /* Divisor */
+        body.dark-theme .divider::before,
+        body.dark-theme .divider::after {
+            border-bottom-color: #1f2937 !important;
+        }
+
+        body.dark-theme .divider-text {
+            color: #94a3b8 !important;
+            background-color: #111827 !important;
+        }
+
+        /* Botón de Google Sign-In */
+        body.dark-theme .google-signin-btn {
+            background-color: #0a0f1c !important;
+            border-color: #1f2937 !important;
+            color: #f1f5f9 !important;
+        }
+
+        body.dark-theme .google-signin-btn:hover {
+            background-color: #1f2937 !important;
+        }
+
+        body.dark-theme .google-signin-btn img {
+            filter: brightness(0) invert(1);
+        }
+
+        /* Toggle de contraseña */
+        body.dark-theme .password-toggle {
+            color: #94a3b8 !important;
+        }
+
+        body.dark-theme .password-toggle:hover {
+            color: #cbd5e6 !important;
+        }
+
+        /* Mensajes de estado */
+        body.dark-theme .message-container.bg-green-50 {
+            background-color: rgba(34, 197, 94, 0.15) !important;
+        }
+
+        body.dark-theme .message-container.bg-red-50 {
+            background-color: rgba(239, 68, 68, 0.15) !important;
+        }
+
+        body.dark-theme .message-container.bg-yellow-50 {
+            background-color: rgba(234, 179, 8, 0.15) !important;
+        }
+
+        body.dark-theme .message-container.bg-blue-50 {
+            background-color: rgba(59, 130, 246, 0.15) !important;
+        }
+
+        body.dark-theme .message-container .text-green-800 {
+            color: #4ade80 !important;
+        }
+
+        body.dark-theme .message-container .text-red-800 {
+            color: #f87171 !important;
+        }
+
+        body.dark-theme .message-container .text-yellow-800 {
+            color: #facc15 !important;
+        }
+
+        body.dark-theme .message-container .text-blue-800 {
+            color: #60a5fa !important;
+        }
+
+        /* URL params container */
+        body.dark-theme #urlParams {
+            background-color: #1e293b !important;
+        }
+
+        /* Enlaces generales */
+        body.dark-theme a:not(.google-blue) {
+            color: #3b82f6 !important;
+        }
+
+        body.dark-theme a:not(.google-blue):hover {
+            color: #60a5fa !important;
+        }
+
+        /* Scrollbar para tema oscuro */
+        body.dark-theme::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        body.dark-theme::-webkit-scrollbar-track {
+            background: #0a0f1c;
+        }
+
+        body.dark-theme::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+
+        body.dark-theme::-webkit-scrollbar-thumb:hover {
+            background: #374151;
+        }
+    </style>
+
+    {{#if appSettings.login_css_url}}
+    <link rel="stylesheet" href="{{appSettings.login_css_url}}">
+    {{/if}}
+
+
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="login-container bg-white w-full max-w-md p-8">
+        <!-- Logo -->
+        <div class="flex justify-center mb-8">
+            <div class="flex items-center">
+                <img class="h-16" src="{{ appSettings.login_icon_url }}">
+            </div>
+        </div>
+
+        <!-- Mensajes de estado -->
+        <div id="messageContainer" class="message-container rounded p-4 mb-4 hidden">
+            <div id="messageContent" class="flex items-center">
+                <i id="messageIcon" class="mr-2"></i>
+                <span id="messageText" class="pl-2"></span>
+            </div>
+        </div>
+
+        <!-- Sección de Login -->
+        <div id="loginSection" class="form-section visible-section">
+            <h1 class="text-2xl font-normal text-center mb-2">{{ appSettings.login_name }}</h1>
+            <p class="text-center text-gray-600 mb-8">{{ appSettings.login_description }}</p>
+
+            <!-- Formulario de Login -->
+            <form id="loginForm" class="space-y-6">
+                <div>
+                    <input type="text" id="loginEmail" data-i18n-placeholder="login_email"
+                        placeholder="Correo electrónico o teléfono"
+                        class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus-google-blue"
+                        required>
+                </div>
+
+                <div class="relative" id="passwordContainer">
+                    <input type="password" id="loginPassword" data-i18n-placeholder="login_password"
+                        placeholder="Contraseña"
+                        class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus-google-blue pr-10"
+                        required>
+                    <span class="password-toggle" id="loginPasswordToggle">
+                        <i class="far fa-eye"></i>
+                    </span>
+                </div>
+
+                <input type="hidden" name="client_id" id="client_id" value="{{client_id}}">
+                <input type="hidden" name="redirect_uri" id="redirect_uri" value="{{redirect_uri}}">
+                <input type="hidden" name="scope" id="scope" value="{{scope}}">
+                <input type="hidden" name="state" id="state" value="{{state}}">
+                <input type="hidden" name="response_type" id="response_type" value="{{response_type}}">
+
+
+                <div class="divider">
+                    <span class="divider-text" data-i18n="login_or">o</span>
+                </div>
+
+                {{#if appSettings.login_google_provider}}
+                <!-- Botón de Google Sign-In -->
+                <div onclick="provider('google')" id="googleSignInButton" class="google-signin-btn mb-6">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4="
+                        alt="Google">
+                    <span data-i18n="login_google">Continuar con Google</span>
+                </div>
+                {{/if}}
+
+                {{#if appSettings.login_linkedin_provider}}
+                <!-- Botón LinkedIn -->
+                <div onclick="provider('linkedin')" id="linkedinSignInButton" class="google-signin-btn mb-6">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMEE2NkMyIiBkPSJNMjAuNDQ3IDIwLjQ1MmgtMy41NTR2LTUuNTY5YzAtMS4zMjgtLjAyNy0zLjAzNy0xLjg1Mi0zLjAzNy0xLjg1MyAwLTIuMTM2IDEuNDQ1LTIuMTM2IDIuOTM5djUuNjY3SDkuMzUxVjloMy40MTR2MS41NjFoLjA0NmMuNDc3LS45IDEuNjM3LTEuODUgMy4zNy0xLjg1IDMuNjAxIDAgNC4yNjcgMi4zNyA0LjI2NyA1LjQ1NXY2LjI4NnpNNS4zMzcgNy40MzNjLTEuMTQ0IDAtMi4wNjMtLjkyNi0yLjA2My0yLjA2NSAwLTEuMTM4LjkyLTIuMDYzIDIuMDYzLTIuMDYzIDEuMTQgMCAyLjA2NC45MjUgMi4wNjQgMi4wNjMgMCAxLjEzOS0uOTI1IDIuMDY1LTIuMDY0IDIuMDY1em0xLjc4MiAxMy4wMTlIMy41NTVWOWgzLjU2NHYxMS40NTJ6TTIyLjIyNSAwaC0yMC40NTVDLjc5MiAwIDAgLjc3NCAwIDEuNzI5djIwLjU0MkMwIDIzLjIyNy43OTIgMjQgMS43NzEgMjRoMjAuNDUxYy45NzkgMCAxLjc3MS0uNzczIDEuNzcxLTEuNzI5VjEuNzI5QzI0IC43NzQgMjMuMjAyIDAgMjIuMjI1IDB6Ii8+PC9zdmc+"
+                        alt="LinkedIn">
+                    <span data-i18n="login_linkedin">Continuar con LinkedIn</span>
+                </div>
+
+                {{/if}}
+
+                {{#if appSettings.login_facebook_provider}}
+                <!-- Botón Facebook -->
+                <div onclick="provider('facebook')" id="facebookSignInButton" class="google-signin-btn mb-6">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMTg3N0YyIiBkPSJNMjQgMTIuMDczYzAtNi42MjctNS4zNzMtMTItMTItMTJzLTEyIDUuMzczLTEyIDEyYzAgNS45OSA0LjM4OCAxMC45NTQgMTAuMTI1IDExLjg1NHYtOC4zODVINy4wNzh2LTMuNDdoMy4wNDdWOS40M2MwLTMuMDA3IDEuNzkyLTQuNjY5IDQuNTMzLTQuNjY5IDEuMzEyIDAgMi42ODYuMjM1IDIuNjg2LjIzNXYyLjk1M0gxNS44M2MtMS40OTEgMC0xLjk1Ni45MjUtMS45NTYgMS44NzR2Mi4yNWgzLjMyOGwtLjUzMiAzLjQ3aC0yLjc5NnY4LjM4NUMxOS42MTIgMjMuMDI3IDI0IDE4LjA2MiAyNCAxMi4wNzN6Ii8+PC9zdmc+"
+                        alt="Facebook">
+                    <span data-i18n="login_facebook">Continuar con Facebook</span>
+                </div>
+
+                {{/if}}
+
+                {{#if appSettings.login_github_provider}}
+                <!-- Botón GitHub -->
+                <div onclick="provider('github')" id="githubSignInButton" class="google-signin-btn mb-6">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMjQyOTJGIiBkPSJNMTIgMkM2LjQ3NyAyIDIgNi40ODQgMiAxMi4wMTdjMCA0LjQyNSAyLjg2NSA4LjE4IDYuODM5IDkuNTA0LjUuMDkyLjY4Mi0uMjE3LjY4Mi0uNDgzIDAtLjIzNy0uMDA4LS44NjgtLjAxMy0xLjcwMy0yLjc4Mi42MDUtMy4zNjktMS4zNDMtMy4zNjktMS4zNDMtLjQ1NC0xLjE1OC0xLjExLTEuNDY2LTEuMTEtMS40NjYtLjkwOC0uNjIuMDY5LS42MDguMDY5LS42MDggMS4wMDMuMDcgMS41MzEgMS4wMzIgMS41MzEgMS4wMzIuODkyIDEuNTMgMi4zNDEgMS4wODggMi45MS44MzIuMDkyLS42NDcuMzUtMS4wODguNjM2LTEuMzM4LTIuMjItLjI1My00LjU1NS0xLjExMy00LjU1NS00Ljk1MSAwLTEuMDkzLjM5LTEuOTg4IDEuMDI5LTIuNjg4LS4xMDMtLjI1My0uNDQ2LTEuMjcyLjA5OC0yLjY1IDAgMCAuODQtLjI3IDIuNzUgMS4wMjZBOS41NjQgOS41NjQgMCAwMTEyIDYuODQ0Yy44NS4wMDQgMS43MDUuMTE1IDIuNTA0LjMzNyAxLjkwOS0xLjI5NiAyLjc0Ny0xLjAyNyAyLjc0Ny0xLjAyNy41NDYgMS4zNzkuMjAyIDIuMzk4LjEgMi42NTEuNjQuNyAxLjAyOCAxLjU5NSAxLjAyOCAyLjY4OCAwIDMuODQ4LTIuMzM5IDQuNjk1LTQuNTY2IDQuOTQzLjM1OS4zMDkuNjc4LjkyLjY3OCAxLjg1NSAwIDEuMzM4LS4wMTIgMi40MTktLjAxMiAyLjc0NyAwIC4yNjguMTguNTguNjg4LjQ4MkExMC4wMTkgMTAuMDE5IDAgMDAyMiAxMi4wMTdDMjIgNi40ODQgMTcuNTIyIDIgMTIgMnoiLz48L3N2Zz4="
+                        alt="GitHub">
+                    <span data-i18n="login_github">Continuar con GitHub</span>
+                </div>
+                {{/if}}
+
+
+                <div class="flex items-center">
+                    <input type="checkbox" id="remember"
+                        class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                    <label for="rememberMe" class="ml-2 block text-sm text-gray-700"
+                        data-i18n="login_remember">Recordarme</label>
+                </div>
+
+                <div class="text-sm">
+                    <a href="recover?client_id={{client_id}}&tid={{tid}}" class="google-blue font-medium hover:underline" data-i18n="login_recover">¿Has olvidado tu correo
+                        electrónico?</a>
+                </div>
+
+                <div class="flex justify-between pt-4">
+                    {{#if appSettings.login_button_register_name}}
+                    <a type="button"
+                        href="{{appSettings.login_register_url}}?client_id={{client_id}}&tid={{tid}}&sign_in={{signIn}}"
+                        id="showRegister" class="text-sm font-medium google-blue hover:underline"
+                        data-i18n="login_register">{{appSettings.login_button_register_name}}</a>
+                    {{/if}}
+
+                    <span class="text-sm font-medium google-blue hover:underline"></span>
+
+                    <button type="submit"
+                        class="btn-google px-6 py-2 rounded font-medium flex items-center justify-center bg-gradient-to-r from-[#c8b273] to-[#c8b273] hover:bg-gradient-to-l">
+                        <span id="loginBtnText" data-i18n="login_next">{{appSettings.login_button_next_name}}</span>
+                        <div id="loginSpinner" class="loading-spinner ml-2 hidden"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+    <script id="auto-rem">
+        try {
+            window.UI_CONFIG = JSON.parse('{{{ config }}}');
+        } catch (err) {
+
+        }
+        document.getElementById('auto-rem').remove();
+
+        function applyDarkTheme() {
+            document.body.classList.add('dark-theme');
+
+        }
+
+        if (window.UI_CONFIG.login_darkmode) {
+            // Aplicar tema al cargar la página
+            applyDarkTheme();
+        }
+    </script>
+
+    <script src="https://www.elegantys.net/identity/translations.js"></script>
+
+    <script>
+        const browserLang = getValidLanguage('en');
+
+        //Aqui va validar si el browser va primero
+        if (window.UI_CONFIG.login_language == 'browser') {
+            setLanguage(browserLang)
+        } else {
+            // Probar el idioma configurado
+            if (!setLanguage(window.UI_CONFIG.login_language))
+                setLanguage(browserLang)
+        }
+
+
+        //console.log(window.UI_CONFIG)
+        function provider(prov) {
+            location.href = 'provider?provider=' + prov;
+        }
+
+        // Función para mostrar mensajes en el layout
+        function showMessage(message, type = 'info') {
+            const messageContainer = document.getElementById('messageContainer');
+            const messageContent = document.getElementById('messageContent');
+            const messageIcon = document.getElementById('messageIcon');
+            const messageText = document.getElementById('messageText');
+
+            // Configurar colores e iconos según el tipo
+            let bgColor, textColor, icon;
+            switch (type) {
+                case 'success':
+                    bgColor = 'bg-green-50';
+                    textColor = 'text-green-800';
+                    icon = 'fas fa-check-circle';
+                    break;
+                case 'error':
+                    bgColor = 'bg-red-50';
+                    textColor = 'text-red-800';
+                    icon = 'fas fa-exclamation-circle';
+                    break;
+                case 'warning':
+                    bgColor = 'bg-yellow-50';
+                    textColor = 'text-yellow-800';
+                    icon = 'fas fa-exclamation-triangle';
+                    break;
+                default:
+                    bgColor = 'bg-blue-50';
+                    textColor = 'text-blue-800';
+                    icon = 'fas fa-info-circle';
+            }
+
+            // Aplicar estilos y contenido
+            messageContainer.className = `message-container rounded p-4 mb-4 ${bgColor} ${textColor}`;
+            messageIcon.className = `${icon} ${textColor}`;
+            messageText.textContent = message;
+
+            // Mostrar el mensaje con animación
+            messageContainer.classList.remove('hidden');
+            setTimeout(() => {
+                messageContainer.classList.add('show');
+            }, 10);
+
+            // Ocultar automáticamente después de 5 segundos (excepto para errores)
+            if (type !== 'error') {
+                setTimeout(() => {
+                    hideMessage();
+                }, 15000);
+            }
+        }
+
+        // Función para ocultar mensajes
+        function hideMessage() {
+            const messageContainer = document.getElementById('messageContainer');
+            messageContainer.classList.remove('show');
+            setTimeout(() => {
+                messageContainer.classList.add('hidden');
+            }, 300);
+        }
+
+        // Función para alternar visibilidad de contraseña
+        function setupPasswordToggles() {
+            // Login password toggle
+            const loginPasswordToggle = document.getElementById('loginPasswordToggle');
+            const loginPassword = document.getElementById('loginPassword');
+
+            loginPasswordToggle.addEventListener('click', function () {
+                const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                loginPassword.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+            });
+
+
+        }
+
+
+        async function submitOauth(e) {
+            e.preventDefault();
+            //errorEl.classList.add('hidden');
+
+            const payload = {
+                client_id: document.getElementById('client_id').value,
+                redirect_uri: document.getElementById('redirect_uri').value,
+                scope: document.getElementById('scope').value,
+                state: document.getElementById('state').value,
+                response_type: document.getElementById('response_type').value,
+                username: document.getElementById('loginEmail').value,
+                password: document.getElementById('loginPassword').value,
+                remember: document.getElementById('remember').checked,
+                grant_type: 'password',
+                signIn: '{{signIn}}'
+            };
+
+
+            // Validación básica
+            if (!payload.username || !payload.password) {
+                showMessage(t('error_fill_fields'), 'error');
+                return;
+            }
+
+            // Mostrar estado de carga
+            const loginBtn = document.querySelector('#loginForm button[type="submit"]');
+            const loginBtnText = document.getElementById('loginBtnText');
+            const loginSpinner = document.getElementById('loginSpinner');
+
+            loginBtn.disabled = true;
+            //loginBtnText.textContent = 'Iniciando sesión...';
+            loginSpinner.classList.remove('hidden');
+
+            try {
+
+                // Ajusta la URL del backend a la tuya:
+                const res = await fetch('auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(payload),
+                    credentials: 'include' // si usas cookies
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    switch (res.status) {
+                        case 401: {
+                            showMessage(t('error_invalid_credentials'), 'error');
+                            break;
+                        }
+
+                        default: {
+                            showMessage(t('error_login_failed'), 'error');
+                        }
+                    }
+
+                    // Restaurar estado del botón
+                    loginBtn.disabled = false;
+                    //loginBtnText.textContent = 'Siguiente';
+                    loginSpinner.classList.add('hidden');
+                    return;
+                }
+
+                if (data.ok) {
+                    if(data.type=='magic'){
+                        showMessage(t('login_magic_success'), 'success');
+                    }else{
+                        location.href = '';
+                    }
+                    
+                    // Restaurar estado del botón
+                    loginBtn.disabled = false;
+                    //loginBtnText.textContent = 'Siguiente';
+                    loginSpinner.classList.add('hidden');
+                    return;
+                }
+
+                showMessage(t('error_unexpected'), 'error');
+
+                // Restaurar estado del botón
+                loginBtn.disabled = false;
+                //loginBtnText.textContent = 'Siguiente';
+                loginSpinner.classList.add('hidden');
+
+            } catch (err) {
+                console.error(err);
+                showMessage(t('error_login_failed'), 'error');
+
+                // Restaurar estado del botón
+                loginBtn.disabled = false;
+                //loginBtnText.textContent = 'Siguiente';
+                loginSpinner.classList.add('hidden');
+            }
+        }
+
+
+        // Inicialización cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mostrar parámetros de URL si existen
+            //displayUrlParams();
+
+            // Configurar toggles de contraseña
+            setupPasswordToggles();
+
+            // Añadir eventos a los formularios
+            document.getElementById('loginForm').addEventListener('submit', submitOauth);
+
+
+
+
+            if (window.UI_CONFIG.login_magic_link) {
+                // Aplicar tema al cargar la página
+                document.getElementById('loginPassword').value='xx'
+                document.getElementById('passwordContainer').classList.add('hidden');
+            }
+            //initializeGoogleSignIn();
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

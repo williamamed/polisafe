@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ appSettings.login_name }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>\
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8fafc;
+    }
+
+    .google-blue {
+      color: #af9a60ff;
+    }
+
+    .bg-google-blue {
+      background-color: #4285f4;
+    }
+
+    .border-google-blue {
+      border-color: #4285f4;
+    }
+
+    .focus-google-blue:focus {
+      border-color: #4285f4;
+      box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+    }
+
+    .btn-google {
+      background-color: #c8b273;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .btn-google:hover {
+      background-color: #3367d6;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .login-container {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    .form-section {
+      transition: all 0.3s ease;
+    }
+
+    .hidden-section {
+      display: none;
+      opacity: 0;
+    }
+
+    .visible-section {
+      display: block;
+      opacity: 1;
+    }
+
+    .password-toggle {
+      cursor: pointer;
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #5f6368;
+    }
+
+    .message-container {
+      transition: all 0.3s ease;
+      max-height: 0;
+      overflow: hidden;
+    }
+
+    .message-container.show {
+      max-height: 200px;
+      margin-top: 16px;
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, .3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+
+    .google-signin-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 10px 16px;
+      border: 1px solid #dadce0;
+      border-radius: 4px;
+      background: white;
+      color: #3c4043;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .google-signin-btn:hover {
+      background-color: #f8f9fa;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .google-signin-btn:active {
+      background-color: #f1f3f4;
+    }
+
+    .google-signin-btn img {
+      width: 18px;
+      height: 18px;
+      margin-right: 12px;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #dadce0;
+    }
+
+    .divider-text {
+      padding: 0 10px;
+      color: #5f6368;
+      font-size: 14px;
+    }
+
+
+    /* ============================================
+   TEMA OSCURO AZUL - SOBRESCRITURA DE ESTILOS
+   ============================================ */
+
+    /* Variables del tema oscuro */
+    body.dark-theme {
+      --dark-bg-primary: #0a0f1c;
+      --dark-bg-card: #111827;
+      --dark-text-primary: #f1f5f9;
+      --dark-text-secondary: #cbd5e6;
+      --dark-text-muted: #94a3b8;
+      --dark-border: #1f2937;
+      --dark-input-bg: #0a0f1c;
+      --dark-input-border: #374151;
+      --dark-accent: #3b82f6;
+      --dark-accent-hover: #60a5fa;
+    }
+
+    /* Aplicar tema oscuro al body */
+    body.dark-theme {
+      background-color: #0a0f1c !important;
+    }
+
+    /* Contenedor principal */
+    body.dark-theme .login-container {
+      background-color: #111827 !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    /* Textos */
+    body.dark-theme h1,
+    body.dark-theme h2,
+    body.dark-theme h3,
+    body.dark-theme p,
+    body.dark-theme span:not(.password-toggle i) {
+      color: #f1f5f9 !important;
+    }
+
+    body.dark-theme .text-gray-600,
+    body.dark-theme .text-gray-700 {
+      color: #cbd5e6 !important;
+    }
+
+    body.dark-theme .text-xs.text-gray-600 {
+      color: #94a3b8 !important;
+    }
+
+    /* Inputs */
+    body.dark-theme input {
+      background-color: #0a0f1c !important;
+      border-color: #374151 !important;
+      color: #f1f5f9 !important;
+    }
+
+    body.dark-theme input::placeholder {
+      color: #6b7280 !important;
+    }
+
+    body.dark-theme input:focus {
+      border-color: #3b82f6 !important;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+    }
+
+    /* Enlaces google-blue */
+    body.dark-theme .google-blue {
+      color: #3b82f6 !important;
+    }
+
+    body.dark-theme .google-blue:hover {
+      color: #60a5fa !important;
+    }
+
+    /* Botón principal */
+    body.dark-theme .btn-google {
+      background-color: #3b82f6 !important;
+      background-image: none !important;
+    }
+
+    body.dark-theme .btn-google:hover {
+      background-color: #2563eb !important;
+    }
+
+    /* Checkbox */
+    body.dark-theme input[type="checkbox"] {
+      accent-color: #3b82f6 !important;
+    }
+
+    /* Divisor */
+    body.dark-theme .divider::before,
+    body.dark-theme .divider::after {
+      border-bottom-color: #1f2937 !important;
+    }
+
+    body.dark-theme .divider-text {
+      color: #94a3b8 !important;
+      background-color: #111827 !important;
+    }
+
+    /* Botón de Google Sign-In */
+    body.dark-theme .google-signin-btn {
+      background-color: #0a0f1c !important;
+      border-color: #1f2937 !important;
+      color: #f1f5f9 !important;
+    }
+
+    body.dark-theme .google-signin-btn:hover {
+      background-color: #1f2937 !important;
+    }
+
+    body.dark-theme .google-signin-btn img {
+      filter: brightness(0) invert(1);
+    }
+
+    /* Toggle de contraseña */
+    body.dark-theme .password-toggle {
+      color: #94a3b8 !important;
+    }
+
+    body.dark-theme .password-toggle:hover {
+      color: #cbd5e6 !important;
+    }
+
+    /* Mensajes de estado */
+    body.dark-theme .message-container.bg-green-50 {
+      background-color: rgba(34, 197, 94, 0.15) !important;
+    }
+
+    body.dark-theme .message-container.bg-red-50 {
+      background-color: rgba(239, 68, 68, 0.15) !important;
+    }
+
+    body.dark-theme .message-container.bg-yellow-50 {
+      background-color: rgba(234, 179, 8, 0.15) !important;
+    }
+
+    body.dark-theme .message-container.bg-blue-50 {
+      background-color: rgba(59, 130, 246, 0.15) !important;
+    }
+
+    body.dark-theme .message-container .text-green-800 {
+      color: #4ade80 !important;
+    }
+
+    body.dark-theme .message-container .text-red-800 {
+      color: #f87171 !important;
+    }
+
+    body.dark-theme .message-container .text-yellow-800 {
+      color: #facc15 !important;
+    }
+
+    body.dark-theme .message-container .text-blue-800 {
+      color: #60a5fa !important;
+    }
+
+    /* URL params container */
+    body.dark-theme #urlParams {
+      background-color: #1e293b !important;
+    }
+
+    /* Enlaces generales */
+    body.dark-theme a:not(.google-blue) {
+      color: #3b82f6 !important;
+    }
+
+    body.dark-theme a:not(.google-blue):hover {
+      color: #60a5fa !important;
+    }
+
+    /* Scrollbar para tema oscuro */
+    body.dark-theme::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    body.dark-theme::-webkit-scrollbar-track {
+      background: #0a0f1c;
+    }
+
+    body.dark-theme::-webkit-scrollbar-thumb {
+      background: #1f2937;
+      border-radius: 4px;
+    }
+
+    body.dark-theme::-webkit-scrollbar-thumb:hover {
+      background: #374151;
+    }
+  </style>
+
+  {{#if appSettings.login_css_url}}
+  <link rel="stylesheet" href="{{appSettings.login_css_url}}">
+  {{/if}}
+
+
+</head>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+  <main class="login-container w-full max-w-2xl p-6 bg-white rounded-2xl shadow-md ml-4 mr-4">
+    <header class="flex items-center gap-4 mb-6">
+      <img class="h-16" src="{{ appSettings.login_icon_url }}">
+      <div>
+        <h1 class="text-lg font-medium">{{ appSettings.login_name }}</h1>
+        <p class="text-sm text-gray-500" data-i18n="consent_description">Solicita los siguientes permisos para acceder a
+          tu cuenta.</p>
+      </div>
+    </header>
+
+    <!-- Scopes list -->
+    <form id="consentForm" class="space-y-4">
+      <input type="hidden" name="client_id" id="client_id" value="{{client_id}}">
+      <input type="hidden" name="redirect_uri" id="redirect_uri" value="{{redirect_uri}}">
+      <input type="hidden" name="scope" id="scope" value="{{scope}}">
+      <input type="hidden" name="state" id="state" value="{{state}}">
+      <input type="hidden" name="response_type" id="response_type" value="{{response_type}}">
+
+      <div class="login-container bg-gray-50 rounded p-4">
+        <h3 class="font-medium mb-2" data-i18n="consent_requested">Permisos solicitados</h3>
+        <ul id="scopesList" class="space-y-2 text-sm text-gray-700">
+          <!-- dinámico -->
+        </ul>
+      </div>
+
+      <div class="flex gap-3 justify-end">
+        <button type="button" id="denyBtn" class="px-4 py-2 rounded-md text-gray-700"
+          data-i18n="consent_denied">Denegar</button>
+        <button type="submit" id="allowBtn"
+          class="btn-google px-6 py-2 rounded font-medium flex items-center justify-center bg-gradient-to-r from-[#c8b273] to-[#c8b273] hover:bg-gradient-to-l"
+          data-i18n="consent_allow">Permitir</button>
+      </div>
+
+      <div id="error" class="hidden text-red-600 text-sm mt-2"></div>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <script id="auto-rem">
+    try {
+      window.UI_CONFIG = JSON.parse('{{{ config }}}');
+    } catch (err) {
+
+    }
+    document.getElementById('auto-rem').remove();
+
+    function applyDarkTheme() {
+      document.body.classList.add('dark-theme');
+
+    }
+
+    if (window.UI_CONFIG.login_darkmode) {
+      // Aplicar tema al cargar la página
+      applyDarkTheme();
+    }
+  </script>
+
+  <script src="https://www.elegantys.net/identity/translations.js"></script>
+  <script src="https://www.elegantys.net/identity/pkg.consent.js"></script>
+
+  <script>
+    // ============================================
+    // TRANSLATIONS
+    // ============================================
+    const browserLang = getValidLanguage('en');
+
+    if (window.UI_CONFIG.login_language == 'browser') {
+      setLanguage(browserLang);
+    } else {
+      if (!setLanguage(window.UI_CONFIG.login_language)) {
+        setLanguage(browserLang);
+      }
+    }
+
+    // Obtener parámetros desde querystring y renderizar scopes
+    function qs(name) {
+      const params = new URLSearchParams(location.search);
+      return params.get(name) || '';
+    }
+
+    const clientId = document.getElementById('client_id').value;
+    const redirectUri = document.getElementById('redirect_uri').value;
+    const state = document.getElementById('state').value;
+    const scope = document.getElementById('scope').value;
+    const responseType = document.getElementById('response_type').value;
+
+    const scopes = {{{ permissions }}};
+
+    const scopesList = document.getElementById('scopesList');
+    scopes.forEach(s => {
+      const li = document.createElement('li');
+      li.className = 'flex items-start gap-3';
+      li.innerHTML = `
+        <div class="flex-shrink-0 mt-1">
+          <svg class="w-5 h-5 text-green-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414L8.414 15 5 11.586a1 1 0 111.414-1.414L8.414 12.172 15.293 5.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+        </div>
+        <div>
+          <div class="font-medium">${s.name}</div>
+          <div class="text-xs text-gray-500">"${s.description}"</div>
+        </div>
+      `;
+      scopesList.appendChild(li);
+    });
+
+    const form = document.getElementById('consentForm');
+    const errorEl = document.getElementById('error');
+    document.getElementById('denyBtn').addEventListener('click', async () => {
+      // Denegar -> notificar al backend (o redirigir con error)
+      try {
+        const payload = { client_id: clientId, decision: 'deny', state, scope };
+        const res = await fetch('/auth/consent', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          credentials: 'include'
+        });
+        const data = await res.json();
+        if (data.redirect) {
+          location.href = data.redirect;
+          return;
+        }
+        // fallback: redirect with error
+        const u = new URL(redirectUri || window.location.origin + '/');
+        u.searchParams.set('error', 'access_denied');
+        if (state) u.searchParams.set('state', state);
+        location.href = u.toString();
+      } catch (err) {
+        errorEl.textContent = 'No se pudo procesar la acción';
+        errorEl.classList.remove('hidden');
+      }
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.classList.add('hidden');
+
+      try {
+        const payload = {
+          clientId: '{{client_id}}',
+          decision: 'allow',
+          scope: scopes.map((s) => s.name).join(' '),
+          redirectUri: redirectUri,
+          codeChallenge: qs('code_challenge'),
+          codeChallengeMethod: qs('code_challenge_method'),
+          state
+        };
+
+        const res = await fetch('auth/consent', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          credentials: 'include'
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          errorEl.textContent = data?.error || 'Error en el servidor';
+          errorEl.classList.remove('hidden');
+          return;
+        }
+        console.log(qs('returnUrl'))
+        location.href = qs('returnUrl');
+        return;
+        // Caso ideal: backend devuelve { redirect: 'https://client/cb?code=...' }
+        if (data.redirect) {
+          location.href = data.redirect;
+          return;
+        }
+
+        // Alternativa: backend devuelve code
+        if (data.code) {
+          const u = new URL(redirectUri || window.location.origin + '/');
+          u.searchParams.set('code', data.code);
+          if (state) u.searchParams.set('state', state);
+          location.href = u.toString();
+          return;
+        }
+
+        // fallback
+        errorEl.textContent = 'Respuesta inesperada del servidor';
+        errorEl.classList.remove('hidden');
+
+      } catch (err) {
+        console.error(err);
+        errorEl.textContent = 'No se pudo conectar con el servidor';
+        errorEl.classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+
+</html>

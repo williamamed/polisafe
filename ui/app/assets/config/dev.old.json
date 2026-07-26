@@ -1,0 +1,15 @@
+{
+    "securityService": "http://localhost:3000",
+    "urls": {
+        "mediaURL": "http://localhost:8000/api/v4/archive/media",
+        "tiendaURL": "http://localhost:8005/api/v4/comercial/tienda"
+    },
+    "services":{
+        "media":"http://localhost:8000/api/v4/archive",
+        "security":"http://localhost:3000/api/v4/security",
+        "maitre":"http://localhost:8005/api/v4/comercial",
+        "rrhh":"http://localhost:8007/api/v4/org/rrhh"
+    },
+    "main":"http://localhost:8005/api/v4/comercial",
+    "scopeId": 0
+}

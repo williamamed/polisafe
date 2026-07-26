@@ -1,0 +1,130 @@
+.app-toolbar {
+    background-color: rgb(50, 47, 133) !important;
+}
+
+.main-sidenav-content-container {
+
+    color: black !important;
+    background-color: #f4f4f4 !important;
+}
+
+.product-card {
+    background-color: rgba(255, 240, 240, 0.54) !important;
+    box-shadow: 0 4px 8px rgba(32, 32, 32, 0.23) !important;
+}
+
+.product-title {
+    color: black !important;
+}
+
+.product-price {
+    font-size: 1.2em;
+    color: #1a1818 !important;
+}
+
+.add-to-cart-button {
+    background-color: transparent;
+    border: none;
+    color: #9b553f !important;
+}
+
+.product-details-container {
+    background-color: rgba(255, 240, 240, 0.54) !important;
+    box-shadow: 0 4px 8px rgba(32, 32, 32, 0.23) !important;
+}
+
+.product-description {
+    color: gray !important;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.cart-container {
+    margin-left: 2%;
+    margin-right: 2%;
+    padding: 20px;
+    background-color: rgba(255, 240, 240, 0.54) !important;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(32, 32, 32, 0.23) !important;
+    color: black !important;
+}
+
+.cart-container h2 {
+    color: black !important
+}
+
+.cart-item-title {
+    font-size: 1.5em;
+    margin: 0;
+    color: black !important;
+}
+
+.cart-item-price {
+    font-size: 1.2em;
+    color: black !important;
+}
+
+.cart-container button {
+    background-color: #227aff !important;
+    color: white;
+}
+
+.back-button {
+    margin-left: 5%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    background: none;
+    color: rgb(72, 67, 211) !important;
+    border: none;
+}
+
+.back-button:hover {
+
+    background: rgb(72, 67, 211) !important;
+    color: white !important;
+}
+
+.main-sidenav {
+    position: fixed;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    width: 250px;
+
+    background-color: rgb(50, 47, 133) !important;
+}
+
+.main-nav-list-item:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(74, 71, 170) !important;
+}
+
+.user-image {
+    border-radius: 50% !important;
+}
+
+.product-details-container button {
+    background-color: #227aff !important;
+    color: white;
+}
+
+.product-details-container .add-to-cart-button {
+
+    color: white !important;
+}
+
+.app-toolbar .site-logo {
+    content: url("no-image-placeholder.png") !important;
+}
+
+.main-sidenav .divider {
+    border-color: #252367;
+}
+
+.sidenav-container .site-logo {
+    content: url("no-image-placeholder.png") !important;
+}
+
+.cart-summary p {
+    color: gray !important;
+}

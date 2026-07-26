@@ -1,0 +1,169 @@
+{
+    "title": "Hola",
+    "hi": "Ahhhh",
+    "info-global":"Bienvenido a Polisafe, plataforma de gestión de seguridad",
+
+    "polisafe":{
+        "user":{
+            "title":"Usuario",
+            "form":{
+                "title":"Usuario",
+                "name":"Nombre",
+                "username":"Usuario",
+                "email":"Email",
+                "phone":"Telefono",
+                "state":"Estado",
+                "placeholder-state":"Seleccione..."
+            },
+            "change-password":{
+                "title":"Cambiar contraseña",
+                "password":"Contraseña nueva",
+                "repassword":"Repetir Contraseña"
+            },
+            "active":"Activo",
+            "disable":"Desactivado",
+            "created":"Creado",
+            "updated":"Actualizado",
+            "delete-scope":"Eliminar del scope",
+            "password":"Cambiar password",
+            "roles":"Asignar roles",
+            "add-scope":"Adicionar existente al scope"
+        },
+
+        "invitation":{
+            "title":"Invitación",
+            "subtitle":"Usted ha sido invitado a unirse a la organización",
+            "email":"Email",
+            "password": "Contraseña nueva",
+            "name":"Nombre y apellidos"
+        },
+
+        "role":{
+            "title":"Roles",
+            "form":{
+                "title":"Rol",
+                "name":"Nombre",
+                "description":"Descripción"
+            },
+            
+            "permission":"Permisos"
+        },
+
+        "scope":{
+            "title":"Espacios de Trabajo",
+            "form":{
+                "title":"Espacio de Trabajo",
+                "name":"Nombre",
+                "description":"Descripción"
+            },
+            "menu":{
+                "role":"Roles",
+                "permission":"Permisos",
+                "meta":"Metadatos",
+                "image":"Cargar imagen",
+                "users":"Usuarios"
+            },
+            "form-meta":{
+                "gen-key":"Generar clave"
+            },
+            "meta":{
+                "title":"Metados"
+            }
+        },
+
+        "permission":{
+            "title":"Permisos",
+            "form":{
+                "title":"Permiso",
+                "name":"Nombre",
+                "description":"Descripción",
+                "folder":"Agrupador",
+                "method":"Método (Opcional)",
+                "methodFilter":"Filtrar por nombre"
+            },
+            "form-swagger":{
+                "title":"Importar desde swagger",
+                "name":"Url"
+            },
+            "actions":{
+                "import":"Import desde swagger",
+                "save-permission":"Guardar permisos del rol"
+            }
+        },
+
+        "clients":{
+            "title":"Clientes oauth",
+            "form":{
+                "title":"Cliente",
+                "name":"Nombre",
+                "redirect_uris":"URIs de redirección (separados por coma)",
+                "grants":"Grants",
+                "scopes":"Scopes",
+                "type":"Tipo",
+                "postLogoutRedirectUris":"URIs de redireccion logout (separados por coma)",
+                "access_token_include_permissions":"Activar permisos ACCESS_TOKEN",
+                "openid_include_permissions":"Activar permisos ID_TOKEN"
+            },
+            "actions":{
+                "import":"Import desde swagger",
+                "save-permission":"Guardar permisos del rol"
+            }
+        },
+        "scopes":{
+            "title":"Scopes oauth",
+            "form":{
+                "title":"Nuevo Scope",
+                "title-update":"Editar Scope",
+                "name":"Nombre",
+                "displayName":"Nombre visible",
+                "description":"Descripción"
+            },
+            "actions":{
+                "import":"Import desde swagger",
+                "save-permission":"Guardar permisos del rol"
+            }
+        }
+    },
+
+    "agencia":{
+        "hero":{
+            "description":"Crea viajes, vende pasajes y promociona tu agencia de transportación",
+            "title":"Comienza tu agencia",
+            "button":"Comenzar"
+        },
+        "stats":{
+            "title":"Nuestros servicios van en",
+            "subtitle":"crecimiento"
+        },
+        "servicios":{
+            "title":"SERVICIOS",
+            "subtitle":"crecimiento",
+            "subtitle-pasaje":"Permite a tu equipo automatizar los pasajes",
+            "descripcion-pasaje":"Gestiona desde cualquier lugar las solicitudes de transportación de tus clientes, asigna pasajes y envía el ticket de viaje de forma automática"
+        }
+    },
+
+    "accion": {
+        "aceptar": "Aceptar",
+        "adicionar": "Adicionar",
+        "salvar": "Salvar",
+        "cancelar": "Cancelar",
+        "editar": "Editar",
+        "eliminar": "Eliminar",
+        "preguntaEliminar": "Está seguro que desea eliminar este elemento?",
+        "confirmacion": "Confirmación",
+        "titulo": "Acciones",
+        "atras": "Atras",
+        "adelante": "Adelante",
+        "abrir":"Abrir",
+        "continuar":"Continuar",
+        "iniciar":"Iniciar",
+        "terminado":"Terminado",
+        "de":"de"
+    },
+    "menu":{
+        "home":"Inicio",
+        "darkmode":"Modo oscuro",
+        "lightmode":"Modo claro"
+    }
+}
