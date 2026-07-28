@@ -95,12 +95,6 @@ let OauthController = class OauthController {
         if (!userLogin) {
             (new same_origin_cookie_guard_1.SameOriginCookieGuard())
                 .setOriginCookie(response);
-            console.log({
-                ...authRequest,
-                config: JSON.stringify(settings),
-                appSettings: settings,
-                tid: client.tenant,
-            });
             return response.render('login-identity', {
                 ...authRequest,
                 config: JSON.stringify(settings),

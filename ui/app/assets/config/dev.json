@@ -1,7 +1,7 @@
 {
   "services": {
     "media": "http://localhost:8000/api/v4/archive",
-    "security": "https://id.avia-global.com/api/v5/security",
+    "security": "http://localhost:3000/api/v4/security",
     "maitre": "http://localhost:8005/api/v4/comercial"
   },
   "main": "http://localhost:8005/api/v4/comercial",
@@ -95,9 +95,9 @@
     "post_logout_redirect_uri": "http://localhost:4200/app/logout"
   },
   "oauth": {
-    "client_id": "f71c8413fb0540156f2f3f303fa31d6ad70f83918420fb8ee1db833b031b8655",
+    "client_id": "a0bcebda7c580af0ed765b315392859dc0e98de718e221aa1c96065c7136d759",
     "tid": "1",
-    "authority": "https://id.avia-global.com/api/v5/security/polisafe",
+    "authority": "http://localhost:3000/api/v4/security/polisafe",
     "redirect_uri": "http://localhost:4200/app/callback",
     "silent_redirect_uri": "http://localhost:4200/app/core/oauth2/silent-refresh-callback.html",
     "scope": "openid profile",

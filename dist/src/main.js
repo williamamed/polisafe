@@ -23,6 +23,8 @@ async function bootstrap() {
         }
         next();
     });
+    const express = app.getHttpAdapter().getInstance();
+    express.set('trust proxy', true);
     app.useGlobalPipes(new common_1.ValidationPipe({
         transform: true,
         disableErrorMessages: false,

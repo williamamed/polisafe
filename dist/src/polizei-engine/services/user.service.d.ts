@@ -17,8 +17,8 @@ export declare class UserService {
     findOneByChannel(channel: string): Promise<SecurityUser>;
     getUserData(username: string): Promise<SecurityUser>;
     create(data: any): Promise<SecurityUser>;
-    update(data: any): Promise<[affectedCount: number]>;
-    destroy(data: any): Promise<number>;
+    update(data: any, tenant?: number): Promise<[affectedCount: number]>;
+    destroy(data: any, tenant?: number): Promise<number>;
     addRoles(idUser: number, roles: Array<number>, context?: number): Promise<unknown>;
     addRole(idUser: number, role: number): Promise<unknown>;
     addRoleList(idUser: number, roles: Array<number>): Promise<unknown>;

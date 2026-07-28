@@ -24,10 +24,10 @@
             "disable":"Desactivado",
             "created":"Creado",
             "updated":"Actualizado",
-            "delete-scope":"Eliminar del scope",
+            "delete-scope":"Expulsar del Tenant",
             "password":"Cambiar password",
             "roles":"Asignar roles",
-            "add-scope":"Adicionar existente al scope"
+            "add-scope":"Adicionar existente al Tenant"
         },
 
         "invitation":{

@@ -18,12 +18,13 @@ let TraceService = class TraceService {
     async create(data) {
         return await this.traceModel.create(data);
     }
-    async register(username, idScope, description, state = 1) {
+    async register(username, idScope, description, state = 1, meta = {}) {
         return await this.traceModel.create({
             username: username,
             state: state,
             description: description,
-            idScope: idScope
+            idScope: idScope,
+            meta: meta
         });
     }
     async reviewHit(id, rango) {

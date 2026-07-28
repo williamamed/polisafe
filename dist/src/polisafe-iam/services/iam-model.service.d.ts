@@ -5,6 +5,7 @@ import { Code } from '../interfaces/code.interface';
 import { Tenant } from '../interfaces/tenant.interface';
 import { Permission } from '../interfaces/permission.interface';
 export declare class IamModelService implements IdentityModel {
+    log(tid: string, logging: string, state: number, username?: string): Promise<void>;
     getUserOrRegister(user: User, tid: string): Promise<User>;
     getTenantSettings(tenantId: string): Promise<any>;
     getPermissionsByRoles(roles: string[]): Promise<Permission[]>;

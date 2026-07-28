@@ -7,4 +7,5 @@ export declare class SecurityTrace extends Model {
     description: string;
     idScope: number;
     scope: SecurityScope;
+    meta: any;
 }

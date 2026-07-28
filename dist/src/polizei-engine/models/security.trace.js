@@ -40,6 +40,10 @@ __decorate([
     (0, sequelize_typescript_1.BelongsTo)(() => security_scope_1.SecurityScope),
     __metadata("design:type", security_scope_1.SecurityScope)
 ], SecurityTrace.prototype, "scope", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)(sequelize_typescript_1.DataType.JSONB),
+    __metadata("design:type", Object)
+], SecurityTrace.prototype, "meta", void 0);
 exports.SecurityTrace = SecurityTrace = __decorate([
     (0, sequelize_typescript_1.Table)({
         schema: 'security'

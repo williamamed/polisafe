@@ -194,17 +194,27 @@ let UserService = class UserService {
         user.$add('scopes', data.idScope);
         return user;
     }
-    async update(data) {
+    async update(data, tenant) {
         let userFind = await this.userModel.findOne({
             where: {
                 id: data.id
-            }
+            },
+            ...tenant ? {
+                include: [{
+                        required: true,
+                        model: security_scope_1.SecurityScope,
+                        where: {
+                            id: tenant
+                        }
+                    }]
+            } : {}
         });
         if (!userFind)
             throw new common_1.ConflictException("User not found");
         let updated = userFind.get({ plain: true });
         updated = {
             ...updated,
+            ...data,
             profile: {
                 ...updated.profile,
                 ...data.profile
@@ -217,7 +227,23 @@ let UserService = class UserService {
             individualHooks: true
         });
     }
-    async destroy(data) {
+    async destroy(data, tenant) {
+        let userFind = await this.userModel.findOne({
+            where: {
+                id: data.id
+            },
+            ...tenant ? {
+                include: [{
+                        required: true,
+                        model: security_scope_1.SecurityScope,
+                        where: {
+                            id: tenant
+                        }
+                    }]
+            } : {}
+        });
+        if (!userFind)
+            throw new common_1.ConflictException("User not found");
         return await this.userModel.destroy({
             where: {
                 id: data.id

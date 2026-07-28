@@ -18,6 +18,7 @@ const permission_service_1 = require("./permission.service");
 const scope_service_1 = require("./scope.service");
 const role_service_1 = require("./role.service");
 const auth_service_1 = require("./auth.service");
+const trace_service_1 = require("./trace.service");
 let IamModelService = class IamModelService {
     async findByEmail(email, tid) {
         let user = await this.userService.findByUsernameAndTenant(email, parseInt(tid));
@@ -274,6 +275,14 @@ let IamModelService = class IamModelService {
             family_name: family_name
         };
     }
+    async log(tid, logging, state, username, metadata) {
+        try {
+            await this.traceService.register(username ? username : '', Number(tid), logging, state, metadata);
+        }
+        catch (error) {
+            common_1.Logger.error(error, "Cant register trace", "Iam model");
+        }
+    }
 };
 exports.IamModelService = IamModelService;
 __decorate([
@@ -292,6 +301,10 @@ __decorate([
     (0, common_1.Inject)(),
     __metadata("design:type", role_service_1.RoleService)
 ], IamModelService.prototype, "roleService", void 0);
+__decorate([
+    (0, common_1.Inject)(),
+    __metadata("design:type", trace_service_1.TraceService)
+], IamModelService.prototype, "traceService", void 0);
 __decorate([
     (0, common_1.Inject)(),
     __metadata("design:type", permission_service_1.PermissionService)

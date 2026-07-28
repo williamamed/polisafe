@@ -10,6 +10,9 @@ exports.IamModelService = void 0;
 const common_1 = require("@nestjs/common");
 const model_decorator_1 = require("../decorators/model.decorator");
 let IamModelService = class IamModelService {
+    log(tid, logging, state, username) {
+        throw new Error('Method not implemented.');
+    }
     getUserOrRegister(user, tid) {
         throw new Error('Method not implemented.');
     }

@@ -8,6 +8,7 @@ export declare class IamModelService implements IdentityModel {
     private authService;
     private scopeService;
     private roleService;
+    private traceService;
     private permissionService;
     findByEmail(email: string, tid: string): Promise<User>;
     findById(id: string): Promise<User>;
@@ -22,4 +23,5 @@ export declare class IamModelService implements IdentityModel {
         given_name: string;
         family_name: string;
     };
+    log(tid: string, logging: string, state: number, username?: string, metadata?: any): Promise<void>;
 }

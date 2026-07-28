@@ -27,11 +27,11 @@ let UserController = class UserController {
         await this.scopeService.isIn(Number(user.tenant), Number(userDto.idScope));
         return this.userService.create(userDto);
     }
-    update(userDto) {
-        return this.userService.update(userDto);
+    update(userDto, user) {
+        return this.userService.update(userDto, Number(user.tenant));
     }
-    destroy(userDto) {
-        return this.userService.destroy(userDto);
+    destroy(userDto, user) {
+        return this.userService.destroy(userDto, Number(user.tenant));
     }
     addRoles(id, roles, context, user) {
         return this.userService.addRoles(id, roles, context ? Number(user.tenant) : null);
@@ -72,15 +72,17 @@ __decorate([
 __decorate([
     (0, common_1.Post)("update"),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, permission_decorator_1.UserToken)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "update", null);
 __decorate([
     (0, common_1.Post)("delete"),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, permission_decorator_1.UserToken)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "destroy", null);
 __decorate([
