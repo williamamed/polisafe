@@ -438,6 +438,7 @@
                 </div>
                 {{/if}}
 
+                <div id="customProviders"></div>
 
                 <div class="flex items-center">
                     <input type="checkbox" id="remember"
@@ -480,6 +481,23 @@
         } catch (err) {
 
         }
+
+        window.UI_CONFIG.custom = {};
+        Object.keys(window.UI_CONFIG).forEach((key) => {
+            const prefix = 'login.custom.';
+            if (!key.startsWith(prefix)) return;
+            const rest = key.slice(prefix.length);
+            const dotIndex = rest.indexOf('.');
+            if (dotIndex === -1) {
+                window.UI_CONFIG.custom[rest] = window.UI_CONFIG[key];
+                return;
+            }
+            const name = rest.slice(0, dotIndex);
+            const prop = rest.slice(dotIndex + 1);
+            if (!window.UI_CONFIG.custom[name]) window.UI_CONFIG.custom[name] = {};
+            window.UI_CONFIG.custom[name][prop] = window.UI_CONFIG[key];
+        });
+        
         document.getElementById('auto-rem').remove();
 
         function applyDarkTheme() {
@@ -508,8 +526,24 @@
         }
 
 
-        //console.log(window.UI_CONFIG)
+        function showBlockingLoader() {
+            if (document.getElementById('blockingLoader')) return;
+            const overlay = document.createElement('div');
+            overlay.id = 'blockingLoader';
+            overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(10,15,28,0.85);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;';
+            const spinner = document.createElement('div');
+            spinner.className = 'loading-spinner';
+            spinner.style.cssText = 'width:40px;height:40px;border-width:4px;';
+            const text = document.createElement('div');
+            text.style.cssText = 'color:#f1f5f9;font-size:16px;font-weight:500;';
+            text.textContent = 'Redirigiendo...';
+            overlay.appendChild(spinner);
+            overlay.appendChild(text);
+            document.body.appendChild(overlay);
+        }
+
         function provider(prov) {
+            showBlockingLoader();
             location.href = 'provider?provider=' + prov;
         }
 
@@ -561,6 +595,36 @@
                     hideMessage();
                 }, 15000);
             }
+        }
+
+        // Función para crear los botones de proveedores custom
+        function renderCustomProviders() {
+            const container = document.getElementById('customProviders');
+            if (!container) return;
+            Object.keys(window.UI_CONFIG.custom || {}).forEach((name) => {
+                const cfg = window.UI_CONFIG.custom[name];
+                if (!cfg.provider || cfg.provider === false || cfg.provider === 'false') return;
+
+                const btn = document.createElement('div');
+                btn.className = 'google-signin-btn mb-6';
+                btn.id = name.replace(/[^a-zA-Z0-9_-]/g, '') + 'SignInButton';
+                
+                btn.setAttribute('onclick', "provider('" + name + "')");
+
+                const label = cfg.name || name;
+                if (cfg.icon_url || cfg.icon) {
+                    const img = document.createElement('img');
+                    img.src = cfg.icon_url || cfg.icon;
+                    img.alt = label;
+                    btn.appendChild(img);
+                }
+
+                const span = document.createElement('span');
+                span.textContent = cfg.label || 'Continuar con ' + label ;
+                btn.appendChild(span);
+
+                container.appendChild(btn);
+            });
         }
 
         // Función para ocultar mensajes
@@ -695,6 +759,8 @@
 
             // Añadir eventos a los formularios
             document.getElementById('loginForm').addEventListener('submit', submitOauth);
+
+            renderCustomProviders();
 
 
 

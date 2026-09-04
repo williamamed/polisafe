@@ -10,6 +10,7 @@ export declare class ProvidersService {
             scope: string;
             responseType: string;
             getCodeChallengeMethod: string;
+            userinfoUrl: string;
         };
         linkedin: {
             name: string;
@@ -19,6 +20,7 @@ export declare class ProvidersService {
             scope: string;
             responseType: string;
             getCodeChallengeMethod: string;
+            userinfoUrl: string;
         };
         github: {
             name: string;
@@ -28,6 +30,7 @@ export declare class ProvidersService {
             scope: string;
             responseType: string;
             getCodeChallengeMethod: string;
+            userinfoUrl: string;
         };
         facebook: {
             name: string;
@@ -37,6 +40,7 @@ export declare class ProvidersService {
             scope: string;
             responseType: string;
             getCodeChallengeMethod: string;
+            userinfoUrl: string;
         };
     };
     httpService: HttpService;
@@ -64,7 +68,7 @@ export declare class ProvidersService {
         url: any;
     }>;
     exchangeCodeForTokens(providerName: any, code: any, codeVerifier: any, appSettings: ISettings): Promise<any>;
-    getUserProfile(providerName: any, accessToken: any): Promise<{
+    getUserProfile(providerName: any, accessToken: any, url: string): Promise<{
         provider: any;
         id: any;
         email: any;

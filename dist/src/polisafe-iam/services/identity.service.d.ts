@@ -16,15 +16,12 @@ export declare class IdentityService implements OnModuleInit {
         scope: string;
         tid: string;
     }): Promise<any>;
-    getSettings(tenantId: string): Promise<ISettings>;
+    getSettings(tenantId: string, visibility: 'public' | 'private' | 'any'): Promise<ISettings>;
     getClientSettings(tenantId: string, clientId: string): Promise<ISettings>;
+    getPublicClientSettings(tenantId: string, clientId: string): Promise<ISettings>;
     getAppSettings(tenantId: string, app: string): Promise<ISettings>;
     getClaims2(sub: string, scope: string, client_id: string): Promise<{}>;
-    getPermissionsMapClient(scope: string, cliendId: string): Promise<{
-        name: string;
-        displayName: string;
-        description: string;
-    }[]>;
+    getPermissionsMapClient(scope: string, cliendId: string): Promise<any>;
     getPermissionsMap(scope: string, tenant: string): Promise<{
         name: any;
         description: any;

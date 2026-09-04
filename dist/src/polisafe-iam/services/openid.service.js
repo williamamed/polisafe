@@ -15,7 +15,7 @@ const config_1 = require("@nestjs/config");
 const jwt_1 = require("@nestjs/jwt");
 const identity_service_1 = require("./identity.service");
 const key_service_1 = require("./key.service");
-const moment = require("moment");
+const dayjs = require("dayjs");
 let OpenidService = class OpenidService {
     async getOpenIdClaims(data) {
         const scopesMap = new Map();
@@ -120,8 +120,8 @@ let OpenidService = class OpenidService {
             const unidad = expiresIn.slice(-1);
             payload = {
                 ...payload,
-                "exp": moment().add(valor, unidad).unix(),
-                "iat": moment().unix()
+                "exp": dayjs().add(valor, unidad).unix(),
+                "iat": dayjs().unix()
             };
             return payload;
         }

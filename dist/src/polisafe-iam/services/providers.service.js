@@ -1,9 +1,32 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
@@ -11,7 +34,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProvidersService = void 0;
 const common_1 = require("@nestjs/common");
-const crypto = require("crypto");
+const crypto = __importStar(require("crypto"));
 const buffer_1 = require("buffer");
 const url_1 = require("url");
 const axios_1 = require("@nestjs/axios");
@@ -26,7 +49,8 @@ let ProvidersService = class ProvidersService {
                 clientId: 'TU_GOOGLE_CLIENT_ID',
                 scope: 'email profile openid',
                 responseType: 'code',
-                getCodeChallengeMethod: 'S256'
+                getCodeChallengeMethod: 'S256',
+                userinfoUrl: 'https://www.googleapis.com/oauth2/v3/userinfo'
             },
             linkedin: {
                 name: 'LinkedIn',
@@ -35,7 +59,8 @@ let ProvidersService = class ProvidersService {
                 clientId: 'TU_LINKEDIN_CLIENT_ID',
                 scope: 'openid email profile',
                 responseType: 'code',
-                getCodeChallengeMethod: 'S256'
+                getCodeChallengeMethod: 'S256',
+                userinfoUrl: 'https://api.linkedin.com/v2/userinfo'
             },
             github: {
                 name: 'GitHub',
@@ -44,7 +69,8 @@ let ProvidersService = class ProvidersService {
                 clientId: 'TU_GITHUB_CLIENT_ID',
                 scope: 'read:user user:email',
                 responseType: 'code',
-                getCodeChallengeMethod: 'plain'
+                getCodeChallengeMethod: 'plain',
+                userinfoUrl: 'https://api.github.com/user'
             },
             facebook: {
                 name: 'Facebook',
@@ -53,7 +79,8 @@ let ProvidersService = class ProvidersService {
                 clientId: 'TU_FACEBOOK_APP_ID',
                 scope: 'email public_profile',
                 responseType: 'code',
-                getCodeChallengeMethod: 'plain'
+                getCodeChallengeMethod: 'plain',
+                userinfoUrl: 'https://graph.facebook.com/v18.0/me?fields=id,name,email'
             }
         };
     }
@@ -74,12 +101,26 @@ let ProvidersService = class ProvidersService {
         return this.generateRandomString(32);
     }
     async startAuth(providerName, urlLogin, appSettings) {
-        const provider = this.PROVIDERS[providerName];
-        if (!provider) {
+        let provider = this.PROVIDERS[providerName];
+        if (!provider && !appSettings['login.custom.' + providerName + '.provider']) {
             throw new common_1.BadRequestException("Provider not supported: " + providerName);
         }
-        if (!appSettings['login_' + providerName + '_provider']) {
-            throw new common_1.BadRequestException("Provider not active");
+        if (appSettings['login.custom.' + providerName + '.provider']) {
+            provider = {
+                getCodeChallengeMethod: appSettings['login.custom.' + providerName + '.challenge'],
+                authUrl: appSettings['login.custom.' + providerName + '.authurl'],
+                tokenUrl: appSettings['login.custom.' + providerName + '.tokenurl'],
+                clientId: appSettings['login.custom.' + providerName + '.client_id'],
+                scope: appSettings['login.custom.' + providerName + '.scope'] || 'email profile openid',
+                responseType: appSettings['login.custom.' + providerName + '.response'],
+                name: providerName
+            };
+        }
+        else {
+            if (!appSettings['login_' + providerName + '_provider']) {
+                throw new common_1.BadRequestException("Provider not active");
+            }
+            provider.clientId = appSettings['login_' + providerName + '_client_id'];
         }
         const codeVerifier = await this.generateCodeVerifier();
         const codeChallenge = await this.generateCodeChallenge(codeVerifier, provider.getCodeChallengeMethod);
@@ -89,8 +130,8 @@ let ProvidersService = class ProvidersService {
             url: urlLogin
         };
         const params = new url_1.URLSearchParams({
-            client_id: appSettings['login_' + providerName + '_client_id'],
-            redirect_uri: `http://localhost:3000/api/v4/security/polisafe/oauth/callback`,
+            client_id: provider.clientId,
+            redirect_uri: `${process.env.PLS_PUBLIC_URL}${process.env.APP_PREFIX}/polisafe/oauth/callback`,
             response_type: provider.responseType,
             scope: provider.scope,
             state: this.encode(stateLogin),
@@ -113,6 +154,28 @@ let ProvidersService = class ProvidersService {
         const state = query.state;
         const error = query.error;
         const errorDescription = query.error_description;
+        let provider = this.PROVIDERS[providerName];
+        if (!provider && !appSettings['login.custom.' + providerName + '.provider']) {
+            throw new common_1.BadRequestException("Provider not supported: " + providerName);
+        }
+        if (appSettings['login.custom.' + providerName + '.provider']) {
+            provider = {
+                getCodeChallengeMethod: appSettings['login.custom.' + providerName + '.challenge'],
+                authUrl: appSettings['login.custom.' + providerName + '.authurl'],
+                tokenUrl: appSettings['login.custom.' + providerName + '.tokenurl'],
+                clientId: appSettings['login.custom.' + providerName + '.client_id'],
+                scope: appSettings['login.custom.' + providerName + '.scope'] || 'email profile openid',
+                responseType: appSettings['login.custom.' + providerName + '.response'],
+                userinfoUrl: appSettings['login.custom.' + providerName + '.userinfo'],
+                name: providerName
+            };
+        }
+        else {
+            if (!appSettings['login_' + providerName + '_provider']) {
+                throw new common_1.BadRequestException("Provider not active");
+            }
+            provider.clientId = appSettings['login_' + providerName + '_client_id'];
+        }
         if (!state || state !== savedState) {
             throw new Error('Estado inválido - posible ataque CSRF');
         }
@@ -124,7 +187,7 @@ let ProvidersService = class ProvidersService {
         }
         try {
             const tokens = await this.exchangeCodeForTokens(providerName, code, codeVerifier, appSettings);
-            const userProfile = await this.getUserProfile(providerName, tokens.access_token);
+            const userProfile = await this.getUserProfile(providerName, tokens.access_token, provider.userinfoUrl);
             return {
                 userProfile: userProfile,
                 url: stateLogin.url
@@ -135,21 +198,40 @@ let ProvidersService = class ProvidersService {
         }
     }
     async exchangeCodeForTokens(providerName, code, codeVerifier, appSettings) {
-        const provider = this.PROVIDERS[providerName];
+        let provider = this.PROVIDERS[providerName];
+        if (appSettings['login.custom.' + providerName + '.provider']) {
+            provider = {
+                getCodeChallengeMethod: appSettings['login.custom.' + providerName + '.challenge'],
+                authUrl: appSettings['login.custom.' + providerName + '.authurl'],
+                tokenUrl: appSettings['login.custom.' + providerName + '.tokenurl'],
+                clientId: appSettings['login.custom.' + providerName + '.client_id'],
+                clientSecret: appSettings['login.custom.' + providerName + '.client_secret'],
+                scope: appSettings['login.custom.' + providerName + '.scope'] || 'email profile openid',
+                responseType: appSettings['login.custom.' + providerName + '.response'],
+                name: providerName
+            };
+        }
+        else {
+            if (!appSettings['login_' + providerName + '_provider']) {
+                throw new common_1.BadRequestException("Provider not active");
+            }
+            provider.clientId = appSettings['login_' + providerName + '_client_id'];
+            provider.clientSecret = appSettings['login_' + providerName + '_client_secret'];
+        }
         const params = new url_1.URLSearchParams({
-            client_id: appSettings['login_' + providerName + '_client_id'],
+            client_id: provider.clientId,
             code: code,
-            redirect_uri: `http://localhost:3000/api/v4/security/polisafe/oauth/callback`,
+            redirect_uri: `${process.env.PLS_PUBLIC_URL}${process.env.APP_PREFIX}/polisafe/oauth/callback`,
             grant_type: 'authorization_code',
-            ...appSettings['login_' + providerName + '_client_secret'] ? {
-                client_secret: appSettings['login_' + providerName + '_client_secret']
+            ...provider.clientSecret ? {
+                client_secret: provider.clientSecret
             } : {}
         });
         if (provider.getCodeChallengeMethod === 'S256' || provider.getCodeChallengeMethod === 'plain') {
             params.append('code_verifier', codeVerifier);
         }
         if (providerName === 'github') {
-            params.append('client_secret', appSettings['login_' + providerName + '_client_secret']);
+            params.append('client_secret', provider.clientSecret);
         }
         try {
             let response = await (0, rxjs_1.firstValueFrom)(this.httpService.post(provider.tokenUrl, params, {
@@ -165,18 +247,12 @@ let ProvidersService = class ProvidersService {
             return tokens;
         }
         catch (error) {
-            throw new Error(`Token exchange failed: ${error.status} - ${error.message}`);
+            throw new Error(`Token exchange failed: ${error.status} - ${error.message} `);
         }
     }
-    async getUserProfile(providerName, accessToken) {
-        const endpoints = {
-            google: 'https://www.googleapis.com/oauth2/v3/userinfo',
-            linkedin: 'https://api.linkedin.com/v2/userinfo',
-            github: 'https://api.github.com/user',
-            facebook: 'https://graph.facebook.com/v18.0/me?fields=id,name,email'
-        };
+    async getUserProfile(providerName, accessToken, url) {
         try {
-            let response = await (0, rxjs_1.firstValueFrom)(this.httpService.post(endpoints[providerName], {}, {
+            let response = await (0, rxjs_1.firstValueFrom)(this.httpService.get(url, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }

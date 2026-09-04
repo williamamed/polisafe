@@ -1,10 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
 const swagger_1 = require("@nestjs/swagger");
 const path_1 = require("path");
-const cookieParser = require("cookie-parser");
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const common_1 = require("@nestjs/common");
 const creator_service_1 = require("./polizei-engine/services/creator.service");
 async function bootstrap() {
@@ -13,13 +16,25 @@ async function bootstrap() {
     app.setGlobalPrefix(process.env.APP_PREFIX, {
         exclude: ['/']
     });
-    app.use(cookieParser());
+    app.use((0, cookie_parser_1.default)());
     app.useStaticAssets((0, path_1.join)(__dirname, '..', '..', 'ui/app'), {
         prefix: '/app/',
+    });
+    app.useStaticAssets((0, path_1.join)(__dirname, '..', '..', 'ui/landing'), {
+        prefix: '/'
     });
     app.use((req, res, next) => {
         if (req.path.startsWith('/app') && !req.path.match(/\.(js|css|png|jpg|jpeg|ico|svg|ttf|woff|woff2|eot|json)$/)) {
             return res.sendFile((0, path_1.join)(__dirname, '..', '..', 'ui', 'app', 'index.html'));
+        }
+        next();
+    });
+    app.use((req, res, next) => {
+        const isAsset = req.path.match(/\.(js|css|png|jpg|jpeg|ico|svg|ttf|woff|woff2|eot|json)$/);
+        const isApi = req.path.startsWith(process.env.APP_PREFIX);
+        const isApp = req.path.startsWith('/app');
+        if (req.method === 'GET' && !isAsset && !isApi && !isApp) {
+            return res.sendFile((0, path_1.join)(__dirname, '..', '..', 'ui', 'landing', 'index.html'));
         }
         next();
     });

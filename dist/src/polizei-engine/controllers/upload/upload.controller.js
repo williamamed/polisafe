@@ -24,6 +24,7 @@ const fs_1 = require("fs");
 const url_service_1 = require("../../services/url.service");
 const config_1 = require("@nestjs/config");
 const swagger_1 = require("@nestjs/swagger");
+const permission_decorator_1 = require("../../../polisafe-sdk/decorators/permission.decorator");
 let UploadController = class UploadController {
     constructor(uploadService) {
         this.uploadService = uploadService;
@@ -89,6 +90,7 @@ __decorate([
 ], UploadController.prototype, "configService", void 0);
 __decorate([
     (0, common_1.Post)('file'),
+    (0, permission_decorator_1.Permission)(),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file', {
         storage: (0, multer_1.diskStorage)({
             destination: process.env.FILES_HUB || './uploads',
@@ -140,6 +142,7 @@ __decorate([
 ], UploadController.prototype, "uploadFileWithCustomName", null);
 __decorate([
     (0, common_1.Delete)('file/:filename'),
+    (0, permission_decorator_1.Permission)(),
     __param(0, (0, common_1.Param)('filename')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -156,6 +159,7 @@ __decorate([
 exports.UploadController = UploadController = __decorate([
     (0, common_1.Controller)('polizei/upload'),
     (0, swagger_1.ApiTags)("Upload"),
+    (0, swagger_1.ApiBearerAuth)(),
     __metadata("design:paramtypes", [upload_service_1.UploadService])
 ], UploadController);
 //# sourceMappingURL=upload.controller.js.map

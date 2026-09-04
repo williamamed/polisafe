@@ -8,6 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JwtCookieStrategyService = void 0;
 const passport_jwt_1 = require("passport-jwt");
@@ -15,7 +18,7 @@ const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
 const key_service_1 = require("./key.service");
 const jwt_1 = require("@nestjs/jwt");
-const jwksClient = require("jwks-rsa");
+const jwks_rsa_1 = __importDefault(require("jwks-rsa"));
 const config_1 = require("@nestjs/config");
 let JwtCookieStrategyService = class JwtCookieStrategyService extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy, 'jwt-cookie') {
     constructor() {
@@ -36,7 +39,7 @@ let JwtCookieStrategyService = class JwtCookieStrategyService extends (0, passpo
                     }
                     const jwksUri = `${this.configService.get('PLS_PUBLIC_URL')}${this.configService.get('APP_PREFIX')}/polisafe/openid/${tenantId}/certs`;
                     console.log(`Obteniendo clave JWKS para tenant: ${tenantId}, URI: ${jwksUri}`);
-                    const client = jwksClient({
+                    const client = (0, jwks_rsa_1.default)({
                         jwksUri: jwksUri,
                         cache: true,
                         rateLimit: true,

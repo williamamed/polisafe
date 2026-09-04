@@ -1,4 +1,5 @@
 import { RegisterDto } from '../dto/register.dto';
+import { IpService } from '../services/ip.service';
 export declare class LoginController {
     private authService;
     private userService;
@@ -6,6 +7,7 @@ export declare class LoginController {
     private creatorService;
     private jwtService;
     private invitationService;
+    ipService: IpService;
     signUp(registerDto: RegisterDto): Promise<{
         message: string;
     }>;
@@ -28,4 +30,5 @@ export declare class LoginController {
     picture(config: Record<string, any>): Promise<{
         image: any;
     }>;
+    ip(config: Record<string, any>): Promise<import("../services/ip.service").IpInfo>;
 }

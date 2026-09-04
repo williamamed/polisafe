@@ -1,9 +1,32 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
@@ -13,9 +36,8 @@ exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const jwt_1 = require("@nestjs/jwt");
-const bcrypt = require("bcryptjs");
-const moment = require("moment");
-const backbone_register_service_1 = require("../../backbone/backbone.register.service");
+const bcrypt = __importStar(require("bcryptjs"));
+const dayjs = require("dayjs");
 const scope_service_1 = require("./scope.service");
 const role_service_1 = require("./role.service");
 const security_session_1 = require("../models/security.session");
@@ -266,7 +288,7 @@ let AuthService = class AuthService {
                     profile: {
                         email: payloadGoogle.data.email
                     },
-                    password: payloadGoogle.data.sub + moment().toString(),
+                    password: payloadGoogle.data.sub + dayjs().toString(),
                     fullname: payloadGoogle.data.name
                 }, true);
                 let user = await this.getUserToken(payloadGoogle.data.email);
@@ -298,31 +320,6 @@ let AuthService = class AuthService {
         await user.$set('scopes', [neg.id]);
         if (notCheck)
             return;
-        try {
-            await this.backboneService.publish({
-                value: {
-                    email: {
-                        to: user.profile.email,
-                        template: process.env.EMAIL_TEMPLATE_REGISTRATION || "registration"
-                    },
-                    data: {
-                        title: "Verificacion de cuenta",
-                        fullname: user.fullname,
-                        email: user.profile.email,
-                        username: user.username,
-                        code: payload.profile.vCode,
-                        url: `${process.env.ACCOUNT_VERIFY_URL}?u=${user.username}&code=${payload.profile.vCode}`
-                    },
-                    title: "Verificación de cuenta"
-                },
-                key: "notification:sender",
-                topic: "comunication"
-            });
-        }
-        catch (error) {
-            await user.destroy();
-            throw new common_1.ServiceUnavailableException("Backbone is not ready");
-        }
     }
     async verifyCode(payload) {
         let userFind = await this.userService.findOne(payload.username);
@@ -430,9 +427,12 @@ let AuthService = class AuthService {
         let user = await this.userService.create(payload);
         if (autoRoles && autoRoles.value && Array.isArray(autoRoles.value))
             await user.$set('roles', autoRoles.value);
-        let tenants = [tid];
+        let tenants = [];
         if (autoTenant && autoTenant.value && Array.isArray(autoTenant.value)) {
             tenants = tenants.concat(autoTenant.value);
+        }
+        else {
+            tenants = [tid];
         }
         await user.$set('scopes', tenants);
         if (notCheck)
@@ -495,10 +495,6 @@ __decorate([
     (0, common_1.Inject)(),
     __metadata("design:type", notification_service_1.NotificationService)
 ], AuthService.prototype, "notificationService", void 0);
-__decorate([
-    (0, common_1.Inject)(),
-    __metadata("design:type", backbone_register_service_1.BackboneRegisterService)
-], AuthService.prototype, "backboneService", void 0);
 __decorate([
     (0, common_1.Inject)(),
     __metadata("design:type", jwt_1.JwtService)

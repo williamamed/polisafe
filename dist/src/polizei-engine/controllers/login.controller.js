@@ -22,6 +22,7 @@ const scope_service_1 = require("../services/scope.service");
 const swagger_1 = require("@nestjs/swagger");
 const invitation_service_1 = require("../services/invitation.service");
 const register_dto_1 = require("../dto/register.dto");
+const ip_service_1 = require("../services/ip.service");
 let LoginController = class LoginController {
     async signUp(registerDto) {
         await this.authService.signUp({
@@ -60,6 +61,9 @@ let LoginController = class LoginController {
             image: user.profile ? user.profile.idImage : null
         };
     }
+    async ip(config) {
+        return await this.ipService.getIpInfo();
+    }
 };
 exports.LoginController = LoginController;
 __decorate([
@@ -86,6 +90,10 @@ __decorate([
     (0, common_1.Inject)(),
     __metadata("design:type", invitation_service_1.InvitationService)
 ], LoginController.prototype, "invitationService", void 0);
+__decorate([
+    (0, common_1.Inject)(),
+    __metadata("design:type", ip_service_1.IpService)
+], LoginController.prototype, "ipService", void 0);
 __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     (0, common_1.Post)('register'),
@@ -134,6 +142,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], LoginController.prototype, "picture", null);
+__decorate([
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, common_1.Get)('test-ip'),
+    __param(0, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], LoginController.prototype, "ip", null);
 exports.LoginController = LoginController = __decorate([
     (0, common_1.Controller)('polizei'),
     (0, swagger_1.ApiTags)("Polizei")

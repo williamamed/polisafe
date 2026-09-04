@@ -37,6 +37,7 @@ const providers_service_1 = require("../services/providers.service");
 const url_1 = require("url");
 const register_page_dto_1 = require("../dto/register-page.dto");
 const notification_oauth_service_1 = require("../services/notification-oauth.service");
+const log_enum_1 = require("../log.enum");
 let OauthController = class OauthController {
     async authorize() { }
     async authorizeGet(req, authRequest, response) {
@@ -91,7 +92,7 @@ let OauthController = class OauthController {
             return;
         }
         let userLogin = (req.user);
-        let settings = await this.identityService.getClientSettings(client.tenant, client.clientId);
+        let settings = await this.identityService.getPublicClientSettings(client.tenant, client.clientId);
         if (!userLogin) {
             (new same_origin_cookie_guard_1.SameOriginCookieGuard())
                 .setOriginCookie(response);
@@ -217,6 +218,7 @@ let OauthController = class OauthController {
                         error_description: "Invalid code"
                     });
                 try {
+                    this.identityService.getModel().log(client.tenant, 'Exchange code', log_enum_1.LogType.EXCHANGE_CODE);
                     return await this.authService.exchangeAuthorizationCode(authCode, token.code_verifier, true, client);
                 }
                 catch (error) {
@@ -298,6 +300,7 @@ let OauthController = class OauthController {
             }, {
                 ...webhookHeaders
             });
+            this.identityService.getModel().log(client.tenant, 'Login magic', log_enum_1.LogType.LOGIN_MAGIC);
             return {
                 ok: true,
                 type: 'magic'
@@ -320,6 +323,7 @@ let OauthController = class OauthController {
             client: client
         });
         response.cookie('a-' + client.clientId, tokenResponse.access_token, { httpOnly: true, secure: this.configService.get('NODE_ENV') === 'production', sameSite: 'lax' });
+        this.identityService.getModel().log(client.tenant, 'Login base', log_enum_1.LogType.LOGIN_BASE);
         return {
             ok: true,
             type: 'password'
@@ -370,6 +374,7 @@ let OauthController = class OauthController {
             client: client
         });
         response.cookie('a-' + client.clientId, tokenResponse.access_token, { httpOnly: true, secure: this.configService.get('NODE_ENV') === 'production', sameSite: 'lax' });
+        this.identityService.getModel().log(client.tenant, 'Login Provider', log_enum_1.LogType.LOGIN_PROVIDER);
         return response.redirect(externalLogin.url);
     }
     async provider(query, req, response) {
@@ -387,7 +392,7 @@ let OauthController = class OauthController {
         let client = await this.clientService.getClientById(query.client_id);
         if (!client)
             throw new common_1.NotFoundException();
-        let settings = await this.identityService.getClientSettings(client.tenant, client.clientId);
+        let settings = await this.identityService.getPublicClientSettings(client.tenant, client.clientId);
         if (!settings.login_button_register_name)
             throw new common_1.ForbiddenException("Not active");
         return response.render('register', {
@@ -419,13 +424,14 @@ let OauthController = class OauthController {
         });
         await this.authCodeService.invalidateCode(codeUrl);
         response.cookie('a-' + client.clientId, tokenResponse.access_token, { httpOnly: true, secure: this.configService.get('NODE_ENV') === 'production', sameSite: 'lax' });
+        this.identityService.getModel().log(client.tenant, 'Login Magic callback', log_enum_1.LogType.LOGIN_MAGIC);
         return response.redirect(decodeURIComponent(redirectOauth));
     }
     async recover(query, req, response) {
         let client = await this.clientService.getClientById(query.client_id);
         if (!client)
             throw new common_1.NotFoundException();
-        let settings = await this.identityService.getClientSettings(client.tenant, client.clientId);
+        let settings = await this.identityService.getPublicClientSettings(client.tenant, client.clientId);
         if (!settings.login_button_register_name)
             throw new common_1.ForbiddenException("Not active");
         return response.render('recover', {

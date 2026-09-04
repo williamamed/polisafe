@@ -1,9 +1,32 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
@@ -13,7 +36,7 @@ exports.IdentityService = void 0;
 const common_1 = require("@nestjs/common");
 const core_1 = require("@nestjs/core");
 const client_service_1 = require("./client.service");
-const crypto = require("crypto");
+const crypto = __importStar(require("crypto"));
 const SCOPE_PATTERN = /^[a-z0-9-]+:[a-z-]+:[a-z-]+$/;
 const URI_SCOPE_PATTERN = /^https:\/\/api\.[^/]+\/scopes\/[^#]+#[^.]+.[^#]+$/;
 let IdentityService = class IdentityService {
@@ -75,7 +98,7 @@ let IdentityService = class IdentityService {
         });
         return payload;
     }
-    async getSettings(tenantId) {
+    async getSettings(tenantId, visibility) {
         let settings = {
             login_name: 'Iniciar sesión',
             login_description: 'Utiliza tu Cuenta de Elegantys',
@@ -85,23 +108,31 @@ let IdentityService = class IdentityService {
             register_description: 'Utiliza tu Cuenta de Elegantys',
             register_icon_url: 'https://www.elegantys.net/identity/elegantys-min.png',
             register_button_name: 'Register',
-            ...(await this.model.getTenantSettings(tenantId, 'polisafe'))
+            ...(await this.model.getTenantSettings(tenantId, 'polisafe', visibility))
         };
         return settings;
     }
     async getClientSettings(tenantId, clientId) {
-        let global = await this.getSettings(tenantId);
+        let global = await this.getSettings(tenantId, 'any');
         let settings = {
             ...global,
-            ...(await this.model.getTenantSettings(tenantId, 'polisafe-' + clientId))
+            ...(await this.model.getTenantSettings(tenantId, 'polisafe-' + clientId, 'any'))
+        };
+        return settings;
+    }
+    async getPublicClientSettings(tenantId, clientId) {
+        let global = await this.getSettings(tenantId, 'public');
+        let settings = {
+            ...global,
+            ...(await this.model.getTenantSettings(tenantId, 'polisafe-' + clientId, 'public'))
         };
         return settings;
     }
     async getAppSettings(tenantId, app) {
-        let global = await this.getSettings(tenantId);
+        let global = await this.getSettings(tenantId, 'any');
         let settings = {
             ...global,
-            ...(await this.model.getTenantSettings(tenantId, app))
+            ...(await this.model.getTenantSettings(tenantId, app, 'any'))
         };
         return settings;
     }

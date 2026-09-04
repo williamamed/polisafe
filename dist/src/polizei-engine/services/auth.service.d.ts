@@ -5,7 +5,6 @@ export declare class AuthService {
     private rolService;
     private scopeService;
     private notificationService;
-    private backboneService;
     private jwtService;
     private sessionModel;
     httpService: HttpService;

@@ -14,11 +14,15 @@ const common_1 = require("@nestjs/common");
 const security_trace_1 = require("../models/security.trace");
 const sequelize_1 = require("@nestjs/sequelize");
 const sequelize_2 = require("sequelize");
+const ip_service_1 = require("./ip.service");
 let TraceService = class TraceService {
     async create(data) {
         return await this.traceModel.create(data);
     }
     async register(username, idScope, description, state = 1, meta = {}) {
+        const { ip, location, error } = await this.ipService.getIpInfo();
+        meta.ip = ip;
+        meta.location = location || error;
         return await this.traceModel.create({
             username: username,
             state: state,
@@ -83,6 +87,10 @@ __decorate([
     (0, sequelize_1.InjectModel)(security_trace_1.SecurityTrace),
     __metadata("design:type", Object)
 ], TraceService.prototype, "traceModel", void 0);
+__decorate([
+    (0, common_1.Inject)(),
+    __metadata("design:type", ip_service_1.IpService)
+], TraceService.prototype, "ipService", void 0);
 exports.TraceService = TraceService = __decorate([
     (0, common_1.Injectable)()
 ], TraceService);

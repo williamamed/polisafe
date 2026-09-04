@@ -10,6 +10,6 @@ export interface IdentityModel {
     getUserOrRegister(user: User, tid: string): Promise<User>;
     getTenantsByUserId(userId: string): Promise<Tenant[]>;
     getPermissionsByRoles(roles: string[]): Promise<Permission[]>;
-    getTenantSettings(tenantId: string, app: string): Promise<ISettings>;
+    getTenantSettings(tenantId: string, app: string, visibility: 'private' | 'public' | 'any'): Promise<ISettings>;
     log(tid: string, logging: string, state: number, username?: string, metadata?: any): Promise<void>;
 }

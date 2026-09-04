@@ -23,66 +23,22 @@ const swagger_1 = require("@nestjs/swagger");
 const user_service_1 = require("../../services/user.service");
 const permission_decorator_1 = require("../../../polisafe-sdk/decorators/permission.decorator");
 const authorize_io_dto_1 = require("../../dto/authorize-io.dto");
+const log_enum_1 = require("../../../polisafe-iam/log.enum");
 let IoController = class IoController {
     async verifyAuthorization(data, root) {
         let access = await this.permissionService.isAuthorizedBySub(data.sub, data.url, data.method, Number(root.tid));
+        this.traceService.register(`${data.sub}`, root.id, `Acceso ${access ? 'Permitido' : 'Denegado'}: ${data.url}`, access ? log_enum_1.LogType.AUTHORIZATION_API : log_enum_1.LogType.AUTHORIZATION_API_DENIED, {
+            user: data.sub,
+            url: data.sub,
+            method: data.method,
+            client: root
+        });
         if (!access)
             throw new common_1.NotFoundException();
         return access;
     }
     async getTenants(data, root) {
         return await this.scopeService.getAllUserScopes(Number(root.tid));
-    }
-    async getUsersScope(data, root) {
-        return await this.scopeService.getUsersScope(data.id);
-    }
-    async getQueryUsers(data) {
-        return await this.userService.findUsers(data.username);
-    }
-    async getScope(data) {
-        return await this.scopeService.getScope(data.id);
-    }
-    async authorizeScope(data) {
-        return await this.scopeService.isScopeAuthorize(data.apiKey);
-    }
-    async getUser(data) {
-        return await this.authService.getUserToken(data.username, data.workspace);
-    }
-    async getUserPayload(data) {
-        return await this.authService.getUserPayload(data.username, data.workspace);
-    }
-    async addUserUser(data) {
-        return await this.scopeService.addUser(data);
-    }
-    async createUser(data) {
-        return await this.authService.signUpLegacy(data.user, true);
-    }
-    async addUserRol(data) {
-        return await this.roleService.addUser(data);
-    }
-    async addUserRoles(data) {
-        let user = await this.userService.findOne(data.username);
-        return await this.userService.addRoleList(user.id, data.roles);
-    }
-    async removeUserRoles(data) {
-        let user = await this.userService.findOne(data.username);
-        return await this.userService.removeRoles(user.id, data.roles);
-    }
-    async listUserRoles(data) {
-        let user = await this.userService.findOne(data.username);
-        return await this.userService.listRoles(user.id);
-    }
-    async removeUserUser(data) {
-        return await this.scopeService.removeUser(data);
-    }
-    async getScopeOwner(data) {
-        return await this.scopeService.getOwner(data.id);
-    }
-    async getScopesData(data) {
-        return await this.scopeService.getScopesByIds(data.scopes, data.attr ? data.attr : {});
-    }
-    async addScopeData(data) {
-        return await this.scopeService.editScope(data.scope);
     }
 };
 exports.IoController = IoController;
@@ -130,136 +86,6 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], IoController.prototype, "getTenants", null);
-__decorate([
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.Post)('tenant/users'),
-    (0, permission_decorator_1.Scope)('security:io:tenant:users', 'client'),
-    __param(0, (0, common_1.Body)()),
-    __param(1, (0, permission_decorator_1.UserToken)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", Promise)
-], IoController.prototype, "getUsersScope", null);
-__decorate([
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.Post)('users-search'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], IoController.prototype, "getQueryUsers", null);
-__decorate([
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.Post)('scope'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], IoController.prototype, "getScope", null);
-__decorate([
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.Post)('auth-scope'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], IoController.prototype, "authorizeScope", null);
-__decorate([
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.Post)('get-user-token'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], IoController.prototype, "getUser", null);
-__decorate([
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.Post)('get-user-payload'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], IoController.prototype, "getUserPayload", null);
-__decorate([
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.Post)('add-user-scope'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], IoController.prototype, "addUserUser", null);
-__decorate([
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.Post)('create-user'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], IoController.prototype, "createUser", null);
-__decorate([
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.Post)('add-user-role'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], IoController.prototype, "addUserRol", null);
-__decorate([
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.Post)('add-user-roles'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], IoController.prototype, "addUserRoles", null);
-__decorate([
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.Post)('remove-user-roles'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], IoController.prototype, "removeUserRoles", null);
-__decorate([
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.Post)('list-user-roles'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], IoController.prototype, "listUserRoles", null);
-__decorate([
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.Post)('delete-user-scope'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], IoController.prototype, "removeUserUser", null);
-__decorate([
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.Post)('scope-owner'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], IoController.prototype, "getScopeOwner", null);
-__decorate([
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.Post)('scopes-ids'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], IoController.prototype, "getScopesData", null);
-__decorate([
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.Post)('edit-scope'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], IoController.prototype, "addScopeData", null);
 exports.IoController = IoController = __decorate([
     (0, common_1.Controller)('polizei/io'),
     (0, swagger_1.ApiTags)("Polizei IO-Api"),

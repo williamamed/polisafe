@@ -1,4 +1,9 @@
 export declare enum LogType {
     USER_INFO = 501,
-    USER_INFO2 = 501
+    EXCHANGE_CODE = 502,
+    LOGIN_MAGIC = 503,
+    LOGIN_BASE = 504,
+    LOGIN_PROVIDER = 505,
+    AUTHORIZATION_API = 506,
+    AUTHORIZATION_API_DENIED = 507
 }

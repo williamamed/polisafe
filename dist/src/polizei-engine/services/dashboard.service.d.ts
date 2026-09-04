@@ -1,0 +1,36 @@
+export declare class DashboardService {
+    private traceModel;
+    private userModel;
+    private userScopeModel;
+    private roleModel;
+    private userRoleModel;
+    private permissionModel;
+    private rolePermissionModel;
+    private invitationModel;
+    private scopeModel;
+    private sessionModel;
+    private scopeService;
+    getDashboard(tenant: number, query?: any): Promise<any>;
+    private authSection;
+    private usersSection;
+    private rbacSection;
+    private invitationsSection;
+    private geoSection;
+    private riskSection;
+    private bruteForceAlerts;
+    private maxInWindow;
+    private geoAnomalyAlerts;
+    private inactiveUsers;
+    private getUserIdsInScopes;
+    private scopeNameMap;
+    private scopeLabel;
+    private resolveScopeIds;
+    private buildRange;
+    private previousRange;
+    private buildTimeSeries;
+    private buildHeatmap;
+    private lit;
+    private formatBucket;
+    private formatDate;
+    private widget;
+}

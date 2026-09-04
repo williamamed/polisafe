@@ -26,7 +26,7 @@ class SchemaInitializer {
 
       console.log('All schemas verified/created successfully');
       process.exit(0);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Schema initialization failed:', error);
       process.exit(1);
     }
@@ -51,7 +51,7 @@ class SchemaInitializer {
       } else {
         console.log(`Schema ${schemaName} already exists`);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(`Error ensuring schema ${schemaName}:`, error);
       throw error;
     }

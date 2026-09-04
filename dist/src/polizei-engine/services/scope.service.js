@@ -8,12 +8,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ScopeService = void 0;
 const common_1 = require("@nestjs/common");
+const cache_manager_1 = require("@nestjs/cache-manager");
 const security_scope_1 = require("../models/security.scope");
 const sequelize_1 = require("@nestjs/sequelize");
-const sequelize_2 = require("sequelize");
+const sequelize_2 = __importDefault(require("sequelize"));
 const security_user_1 = require("../models/security.user");
 const security_user_scope_1 = require("../models/security.user.scope");
 const sequelize_3 = require("sequelize");
@@ -335,6 +339,15 @@ let ScopeService = class ScopeService {
             id: scope.id,
             settings: current
         });
+        try {
+            await this.cache.del(`iam:settings:${id}:${app}`);
+            await this.cache.del(`iam:settings:${id}:${app}:any`);
+            await this.cache.del(`iam:settings:${id}:${app}:public`);
+            await this.cache.del(`iam:settings:${id}:${app}:private`);
+        }
+        catch (error) {
+            common_1.Logger.warn(`[cache] del failed for iam:settings:${id}:${app}: ${error.message}`);
+        }
         return await this.getAppSettings(id, app);
     }
     async onHubTenant(event) {
@@ -380,6 +393,10 @@ __decorate([
     (0, sequelize_1.InjectModel)(security_user_scope_1.SecurityUserScope),
     __metadata("design:type", Object)
 ], ScopeService.prototype, "userScopeModel", void 0);
+__decorate([
+    (0, common_1.Inject)(cache_manager_1.CACHE_MANAGER),
+    __metadata("design:type", cache_manager_1.Cache)
+], ScopeService.prototype, "cache", void 0);
 __decorate([
     (0, common_1.Inject)(),
     __metadata("design:type", core_1.ModuleRef)

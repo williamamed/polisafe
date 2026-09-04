@@ -11,13 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JwtStrategyService = void 0;
 const passport_jwt_1 = require("passport-jwt");
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
 const jwt_1 = require("@nestjs/jwt");
-const jwksClient = require("jwks-rsa");
+const jwks_rsa_1 = __importDefault(require("jwks-rsa"));
 const config_1 = require("@nestjs/config");
 const config_polizei_1 = require("../config.polizei");
 let JwtStrategyService = class JwtStrategyService extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy, 'jwt-header') {
@@ -39,7 +42,7 @@ let JwtStrategyService = class JwtStrategyService extends (0, passport_1.Passpor
                     }
                     const jwksUri = `${this.options.serviceUrl}/polisafe/openid/${tenantId}/certs`;
                     console.log(`Obteniendo clave JWKS para tenant: ${tenantId}, URI: ${jwksUri}`);
-                    const client = jwksClient({
+                    const client = (0, jwks_rsa_1.default)({
                         jwksUri: jwksUri,
                         cache: true,
                         rateLimit: true,

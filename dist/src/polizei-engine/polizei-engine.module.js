@@ -52,6 +52,9 @@ const upload_controller_1 = require("./controllers/upload/upload.controller");
 const upload_service_1 = require("./services/upload/upload.service");
 const io_controller_1 = require("./controllers/client-api/io.controller");
 const ui_controller_1 = require("./controllers/ui.controller");
+const ip_service_1 = require("./services/ip.service");
+const dashboard_controller_1 = require("./controllers/dashboard.controller");
+const dashboard_service_1 = require("./services/dashboard.service");
 let PolizeiEngineModule = class PolizeiEngineModule {
 };
 exports.PolizeiEngineModule = PolizeiEngineModule;
@@ -70,7 +73,8 @@ exports.PolizeiEngineModule = PolizeiEngineModule = __decorate([
             scopes_controller_1.ScopesController,
             upload_controller_1.UploadController,
             io_controller_1.IoController,
-            ui_controller_1.UiController
+            ui_controller_1.UiController,
+            dashboard_controller_1.DashboardController
         ],
         providers: [
             user_service_1.UserService,
@@ -87,7 +91,13 @@ exports.PolizeiEngineModule = PolizeiEngineModule = __decorate([
             notification_service_1.NotificationService,
             iam_model_service_1.IamModelService,
             url_service_1.UrlService,
-            upload_service_1.UploadService
+            upload_service_1.UploadService,
+            dashboard_service_1.DashboardService,
+            {
+                provide: ip_service_1.IpService,
+                useClass: ip_service_1.IpService,
+                scope: common_1.Scope.REQUEST,
+            }
         ],
         imports: [
             sequelize_1.SequelizeModule.forFeature([
@@ -110,7 +120,7 @@ exports.PolizeiEngineModule = PolizeiEngineModule = __decorate([
             core_1.DiscoveryModule,
             polisafe_iam_module_1.PolisafeIamModule
         ],
-        exports: [sequelize_1.SequelizeModule]
+        exports: [sequelize_1.SequelizeModule, trace_service_1.TraceService]
     })
 ], PolizeiEngineModule);
 //# sourceMappingURL=polizei-engine.module.js.map

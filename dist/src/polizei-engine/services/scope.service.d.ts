@@ -7,6 +7,7 @@ export declare class ScopeService {
     scopeModel: typeof SecurityScope;
     userModel: typeof SecurityUser;
     userScopeModel: typeof SecurityUserScope;
+    private cache;
     private readonly moduleRef;
     private discoverService;
     private reflector;

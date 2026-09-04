@@ -26,10 +26,6 @@ const core_1 = require("@nestjs/core");
 const openid_service_1 = require("./services/openid.service");
 const schedule_1 = require("@nestjs/schedule");
 const key_service_1 = require("./services/key.service");
-const cache_manager_1 = require("@nestjs/cache-manager");
-const redis_1 = require("@keyv/redis");
-const keyv_1 = require("keyv");
-const cacheable_1 = require("cacheable");
 const scopes_model_1 = require("./models/scopes.model");
 const scopes_service_1 = require("./services/scopes.service");
 const client_scopes_1 = require("./models/client.scopes");
@@ -61,18 +57,6 @@ exports.PolisafeIamModule = PolisafeIamModule = __decorate([
                 client_scopes_1.ClientScopes,
                 access_token_model_1.AccessTokenModel
             ]),
-            cache_manager_1.CacheModule.registerAsync({
-                useFactory: async () => {
-                    return {
-                        stores: [
-                            new keyv_1.Keyv({
-                                store: new cacheable_1.CacheableMemory({ ttl: 60000 }),
-                            }),
-                            new redis_1.default('redis://localhost:6379'),
-                        ],
-                    };
-                },
-            })
         ],
         providers: [
             auth_service_1.AuthService,

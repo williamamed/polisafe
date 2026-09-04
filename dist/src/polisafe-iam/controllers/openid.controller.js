@@ -21,10 +21,14 @@ const openid_service_1 = require("../services/openid.service");
 const client_service_1 = require("../services/client.service");
 const permission_decorator_1 = require("../../polisafe-sdk/decorators/permission.decorator");
 const verify_dto_1 = require("../dto/verify.dto");
+const log_enum_1 = require("../log.enum");
 let OpenidController = class OpenidController {
     async userInfo(userToken) {
         let user = await this.identityService.getModel().getUser(userToken.sub, userToken.tid);
         let client = await this.clientService.getClientById(userToken.client_id);
+        this.identityService.getModel().log(userToken.tid, 'openid endpoint', log_enum_1.LogType.USER_INFO, user.username, {
+            user: userToken
+        });
         return await this.openidService.getOpenIdClaims({
             scope: userToken.scope,
             user: user,

@@ -30,6 +30,21 @@
             "add-scope":"Adicionar existente al Tenant"
         },
 
+        "profile":{
+            "title":"Mi perfil",
+            "name":"Nombre",
+            "username":"Usuario",
+            "email":"Email",
+            "phone":"Telefono",
+            "change-password":"Cambiar contraseña",
+            "password":"Contraseña nueva",
+            "repassword":"Repetir contraseña",
+            "password-mismatch":"Las contraseñas no coinciden",
+            "saved":"Los datos fueron actualizados con éxito.",
+            "password-changed":"La contraseña fue cambiada con éxito.",
+            "current":"Contraseña actual"
+        },
+
         "invitation":{
             "title":"Invitación",
             "subtitle":"Usted ha sido invitado a unirse a la organización",
@@ -45,7 +60,7 @@
                 "name":"Nombre",
                 "description":"Descripción"
             },
-            
+
             "permission":"Permisos"
         },
 
@@ -163,6 +178,7 @@
     },
     "menu":{
         "home":"Inicio",
+        "profile":"Mi perfil",
         "darkmode":"Modo oscuro",
         "lightmode":"Modo claro"
     }

@@ -74,6 +74,22 @@
         "empresa":"Company"
     },
 
+    "polisafe":{
+        "profile":{
+            "title":"My profile",
+            "name":"Name",
+            "username":"Username",
+            "email":"Email",
+            "phone":"Phone",
+            "change-password":"Change password",
+            "password":"New password",
+            "repassword":"Repeat password",
+            "password-mismatch":"Passwords do not match",
+            "saved":"Profile data updated successfully.",
+            "password-changed":"Password changed successfully."
+        }
+    },
+
     "accion":{
         "aceptar":"Accept",
         "adicionar":"Add",
@@ -101,6 +117,7 @@
         "exams":"Exams",
         "graduation":"Entitle",
         "home":"Home",
+        "profile":"My profile",
         "darkmode":"Dark Mode",
         "lightmode":"Light Mode"
     }

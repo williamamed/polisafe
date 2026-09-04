@@ -1,9 +1,32 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
@@ -12,7 +35,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
-const crypto = require("crypto");
+const crypto = __importStar(require("crypto"));
 const config_1 = require("@nestjs/config");
 const auth_code_service_1 = require("./auth-code.service");
 const refresh_token_service_1 = require("./refresh-token.service");
@@ -20,7 +43,7 @@ const identity_service_1 = require("./identity.service");
 const openid_service_1 = require("./openid.service");
 const key_service_1 = require("./key.service");
 const access_token_service_1 = require("./access-token.service");
-const moment = require("moment");
+const dayjs = require("dayjs");
 const client_service_1 = require("./client.service");
 const error_auth_type_1 = require("../error/error-auth.type");
 let AuthService = class AuthService {
@@ -39,7 +62,7 @@ let AuthService = class AuthService {
         payload.jti = accessToken.id;
         const valor = parseInt(duration);
         const unidad = duration.slice(-1);
-        let expires_in = moment().add(valor, unidad).diff(moment(), 'seconds');
+        let expires_in = dayjs().add(valor, unidad).diff(dayjs(), 'seconds');
         return {
             access_token: accessToken.token,
             expires_in: expires_in,
@@ -160,7 +183,7 @@ let AuthService = class AuthService {
         });
         const valor = parseInt(expiresIn);
         const unidad = expiresIn.slice(-1);
-        const expiresAt = moment().add(valor, unidad).toDate();
+        const expiresAt = dayjs().add(valor, unidad).toDate();
         return await this.accessTokenService.create({
             token,
             expiresAt,
@@ -174,7 +197,7 @@ let AuthService = class AuthService {
         const expiresIn = expires ? expires : this.configService.get('PSL_JWT_REFRESH_EXPIRES_IN');
         const valor = parseInt(expiresIn);
         const unidad = expiresIn.slice(-1);
-        const expiresAt = moment().add(valor, unidad).toDate();
+        const expiresAt = dayjs().add(valor, unidad).toDate();
         const key = await this.keyService.getActiveKey(tenant);
         const token = this.jwtService.sign({ sub: userId }, {
             expiresIn,

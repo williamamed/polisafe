@@ -1,9 +1,32 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
@@ -11,7 +34,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IamModelService = void 0;
 const common_1 = require("@nestjs/common");
-const bcrypt = require("bcryptjs");
+const bcrypt = __importStar(require("bcryptjs"));
+const cache_manager_1 = require("@nestjs/cache-manager");
 const model_decorator_1 = require("../../polisafe-iam/decorators/model.decorator");
 const user_service_1 = require("./user.service");
 const permission_service_1 = require("./permission.service");
@@ -20,6 +44,12 @@ const role_service_1 = require("./role.service");
 const auth_service_1 = require("./auth.service");
 const trace_service_1 = require("./trace.service");
 let IamModelService = class IamModelService {
+    get userCacheTtl() {
+        return parseInt(process.env.IAM_USER_CACHE_TTL, 10) || 30000;
+    }
+    get settingsCacheTtl() {
+        return parseInt(process.env.IAM_SETTINGS_CACHE_TTL, 10) || 300000;
+    }
     async findByEmail(email, tid) {
         let user = await this.userService.findByUsernameAndTenant(email, parseInt(tid));
         if (!user)
@@ -82,6 +112,10 @@ let IamModelService = class IamModelService {
         };
     }
     async getUser(sub, tid) {
+        const cacheKey = `iam:user:${sub}:${tid}`;
+        const cached = await this.cacheGet(cacheKey);
+        if (cached)
+            return cached;
         let user = await this.userService.findById(parseInt(sub));
         let userName = this.parseFullNameAdvanced(user.fullname);
         let tenantsAvailable = await this.scopeService.getAllUserScopes(parseInt(tid));
@@ -96,7 +130,7 @@ let IamModelService = class IamModelService {
             .filter((role) => {
             return rolesId.includes(String(role.id));
         });
-        return {
+        const result = {
             "sub": String(user.id),
             "email_verified": user.profile && user.profile.email_verified ? user.profile.email_verified : false,
             "name": user.fullname,
@@ -105,7 +139,7 @@ let IamModelService = class IamModelService {
             "family_name": userName.family_name,
             "username": user.username,
             "id": String(user.id),
-            "picture": user.profile?.idImage ? `${process.env.MEDIA_SERVICE_FILE_ENDPOINT}${user.profile?.idImage}` : "",
+            "picture": user.profile?.picture ? `${user.profile?.picture}` : "",
             "address": user.profile?.address ? `${user.profile?.address}` : "",
             "phone_number": user.profile?.phone ? `${user.profile?.phone}` : "",
             "email": user.profile.email,
@@ -126,11 +160,21 @@ let IamModelService = class IamModelService {
                 };
             })
         };
+        await this.cacheSet(cacheKey, result, this.userCacheTtl);
+        return result;
     }
-    async getTenantSettings(tenantId, app) {
+    async getTenantSettings(tenantId, app, visibility) {
+        const cacheKey = `iam:settings:${tenantId}:${app}:${visibility}`;
+        const cached = await this.cacheGet(cacheKey);
+        if (cached)
+            return cached;
         let appSettings = await this.scopeService.getAppSettings(Number(tenantId), app);
         let settings = {};
         appSettings.map((setting) => {
+            if (visibility == 'private' && setting.visibility)
+                return;
+            if (visibility == 'public' && !setting.visibility)
+                return;
             switch (setting.name) {
                 case 'register.title':
                     settings.register_name = setting.value;
@@ -224,7 +268,9 @@ let IamModelService = class IamModelService {
                 default:
                     break;
             }
+            settings[setting.name] = setting.value;
         });
+        await this.cacheSet(cacheKey, settings, this.settingsCacheTtl);
         return settings;
     }
     async getPermissionsByTenant(tenant) {
@@ -283,6 +329,23 @@ let IamModelService = class IamModelService {
             common_1.Logger.error(error, "Cant register trace", "Iam model");
         }
     }
+    async cacheGet(key) {
+        try {
+            return await this.cache.get(key);
+        }
+        catch (error) {
+            common_1.Logger.warn(`[cache] get failed for ${key}: ${error.message}`);
+            return null;
+        }
+    }
+    async cacheSet(key, value, ttl) {
+        try {
+            await this.cache.set(key, value, ttl);
+        }
+        catch (error) {
+            common_1.Logger.warn(`[cache] set failed for ${key}: ${error.message}`);
+        }
+    }
 };
 exports.IamModelService = IamModelService;
 __decorate([
@@ -309,6 +372,10 @@ __decorate([
     (0, common_1.Inject)(),
     __metadata("design:type", permission_service_1.PermissionService)
 ], IamModelService.prototype, "permissionService", void 0);
+__decorate([
+    (0, common_1.Inject)(cache_manager_1.CACHE_MANAGER),
+    __metadata("design:type", cache_manager_1.Cache)
+], IamModelService.prototype, "cache", void 0);
 exports.IamModelService = IamModelService = __decorate([
     (0, common_1.Injectable)(),
     (0, model_decorator_1.IamModel)()

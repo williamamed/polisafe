@@ -43,6 +43,7 @@ export declare class CreatorService implements OnModuleInit {
                 options: string;
                 group: string;
                 placeholder?: undefined;
+                visibility?: undefined;
                 url?: undefined;
                 mapResult?: undefined;
                 loading?: undefined;
@@ -56,6 +57,7 @@ export declare class CreatorService implements OnModuleInit {
                 description: string;
                 group: string;
                 options?: undefined;
+                visibility?: undefined;
                 url?: undefined;
                 mapResult?: undefined;
                 loading?: undefined;
@@ -69,6 +71,7 @@ export declare class CreatorService implements OnModuleInit {
                 group: string;
                 options?: undefined;
                 placeholder?: undefined;
+                visibility?: undefined;
                 url?: undefined;
                 mapResult?: undefined;
                 loading?: undefined;
@@ -81,6 +84,21 @@ export declare class CreatorService implements OnModuleInit {
                 placeholder: string;
                 group: string;
                 description: string;
+                options?: undefined;
+                visibility?: undefined;
+                url?: undefined;
+                mapResult?: undefined;
+                loading?: undefined;
+                data?: undefined;
+            } | {
+                label: string;
+                name: string;
+                type: string;
+                value: string;
+                placeholder: string;
+                group: string;
+                description: string;
+                visibility: string;
                 options?: undefined;
                 url?: undefined;
                 mapResult?: undefined;
@@ -95,6 +113,7 @@ export declare class CreatorService implements OnModuleInit {
                 group: string;
                 value: boolean;
                 description: string;
+                visibility: string;
                 url?: undefined;
                 mapResult?: undefined;
                 loading?: undefined;
@@ -108,6 +127,21 @@ export declare class CreatorService implements OnModuleInit {
                 group: string;
                 value: string;
                 description: string;
+                visibility: string;
+                url?: undefined;
+                mapResult?: undefined;
+                loading?: undefined;
+                data?: undefined;
+            } | {
+                type: string;
+                name: string;
+                label: string;
+                options: any;
+                placeholder: string;
+                group: string;
+                value: string;
+                description: string;
+                visibility?: undefined;
                 url?: undefined;
                 mapResult?: undefined;
                 loading?: undefined;
@@ -119,10 +153,25 @@ export declare class CreatorService implements OnModuleInit {
                 options: any;
                 placeholder: any;
                 group: string;
+                url: string;
+                mapResult: string;
+                loading: boolean;
+                data: any[];
+                value: any;
+                description: string;
+                visibility?: undefined;
+            } | {
+                type: string;
+                name: string;
+                label: string;
+                options: any;
+                placeholder: any;
+                group: string;
                 url: any;
                 mapResult: any;
                 value: boolean;
                 description: string;
+                visibility: string;
                 loading?: undefined;
                 data?: undefined;
             } | {
@@ -136,6 +185,7 @@ export declare class CreatorService implements OnModuleInit {
                 mapResult: any;
                 value: string;
                 description: string;
+                visibility?: undefined;
                 loading?: undefined;
                 data?: undefined;
             } | {
@@ -154,6 +204,77 @@ export declare class CreatorService implements OnModuleInit {
                 }[];
                 value: string;
                 description: string;
+                visibility: string;
+            } | {
+                type: string;
+                name: string;
+                label: string;
+                options: any;
+                placeholder: any;
+                group: string;
+                url: any;
+                mapResult: any;
+                value: string;
+                description: string;
+                visibility: string;
+                loading?: undefined;
+                data?: undefined;
+            } | {
+                type: string;
+                name: string;
+                label: string;
+                options: any;
+                placeholder: any;
+                group: string;
+                url: any;
+                visibility: boolean;
+                mapResult: any;
+                value: boolean;
+                description?: undefined;
+                loading?: undefined;
+                data?: undefined;
+            } | {
+                type: string;
+                name: string;
+                label: string;
+                options: any;
+                placeholder: any;
+                group: string;
+                url: any;
+                visibility: boolean;
+                mapResult: any;
+                value: string;
+                description?: undefined;
+                loading?: undefined;
+                data?: undefined;
+            } | {
+                type: string;
+                name: string;
+                label: any;
+                options: any;
+                placeholder: string;
+                group: string;
+                url: any;
+                visibility: boolean;
+                mapResult: any;
+                value: string;
+                description?: undefined;
+                loading?: undefined;
+                data?: undefined;
+            } | {
+                type: string;
+                name: string;
+                label: string;
+                options: any;
+                placeholder: string;
+                group: string;
+                url: any;
+                visibility: any;
+                mapResult: any;
+                value: string;
+                description?: undefined;
+                loading?: undefined;
+                data?: undefined;
             })[];
         };
     };

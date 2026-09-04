@@ -291,7 +291,8 @@ let CreatorService = class CreatorService {
                         "value": "Polisafe Security",
                         "placeholder": "",
                         "group": "Login",
-                        "description": "Nombre de la cabecera del login"
+                        "description": "Nombre de la cabecera del login",
+                        "visibility": "public"
                     },
                     {
                         "label": "Descripcion Cabecera",
@@ -300,7 +301,8 @@ let CreatorService = class CreatorService {
                         "value": "Bienvenido !",
                         "placeholder": "",
                         "group": "Login",
-                        "description": "Descripcion de la cabecera del login"
+                        "description": "Descripcion de la cabecera del login",
+                        "visibility": "public"
                     },
                     {
                         "type": "boolean",
@@ -311,6 +313,7 @@ let CreatorService = class CreatorService {
                         "group": "Login",
                         "value": false,
                         "description": "Activa el modo oscuro para el login",
+                        "visibility": "public"
                     },
                     {
                         "type": "input",
@@ -321,6 +324,7 @@ let CreatorService = class CreatorService {
                         "group": "Login",
                         "value": "Seguir",
                         "description": "Texto personalizado del boton de login",
+                        "visibility": "public"
                     },
                     {
                         "type": "input",
@@ -331,6 +335,7 @@ let CreatorService = class CreatorService {
                         "group": "Login",
                         "value": "Crear",
                         "description": "Texto personalizado del boton de registro",
+                        "visibility": "public"
                     },
                     {
                         "type": "input",
@@ -341,6 +346,7 @@ let CreatorService = class CreatorService {
                         "group": "Login",
                         "value": "register",
                         "description": "URL personalizada para la pagina de registro, sino se expecifica se muestra la pagina por defecto",
+                        "visibility": "public"
                     },
                     {
                         "type": "input",
@@ -351,6 +357,7 @@ let CreatorService = class CreatorService {
                         "group": "Login",
                         "value": "",
                         "description": "URL del archivo de CSS para personalizar la pagina de login",
+                        "visibility": "public"
                     },
                     {
                         "type": "boolean",
@@ -358,9 +365,10 @@ let CreatorService = class CreatorService {
                         "label": "Google Auth",
                         "options": null,
                         "placeholder": null,
-                        "group": "Login",
+                        "group": "Google",
                         "value": true,
                         "description": "Activar el proveedor de autenticacion de Google",
+                        "visibility": "public"
                     },
                     {
                         "type": "input",
@@ -368,7 +376,7 @@ let CreatorService = class CreatorService {
                         "label": "Google ClientId",
                         "options": null,
                         "placeholder": "client_id",
-                        "group": "Login",
+                        "group": "Google",
                         "value": "",
                         "description": "Client-id del proveedor de google",
                     },
@@ -378,7 +386,7 @@ let CreatorService = class CreatorService {
                         "label": "Google ClientSecret",
                         "options": null,
                         "placeholder": "client_secret",
-                        "group": "Login",
+                        "group": "Google",
                         "value": "",
                         "description": "Client-secret del proveedor de google (Google no cumple enteramente la especificacion oauth y hay que especificarlo)",
                     },
@@ -421,6 +429,7 @@ let CreatorService = class CreatorService {
                         "mapResult": null,
                         "value": false,
                         "description": "Activar la opcion de login MagicLink (Se enviara un codigo de autenticacion a tu email)",
+                        "visibility": "public"
                     },
                     {
                         "type": "input",
@@ -476,6 +485,7 @@ let CreatorService = class CreatorService {
                         ],
                         "value": "browser",
                         "description": "Lenguaje por defecto a utilizar en la pagina de login y registro",
+                        "visibility": "public"
                     },
                     {
                         "type": "multiselect",
@@ -516,6 +526,138 @@ let CreatorService = class CreatorService {
                         "mapResult": null,
                         "value": "",
                         "description": "Email de contacto a mostrar en las pantallas publicas de login, registro e invitacion",
+                        "visibility": "public"
+                    },
+                    {
+                        "type": "boolean",
+                        "name": "login.github.provider",
+                        "label": "Github Auth",
+                        "options": null,
+                        "placeholder": null,
+                        "group": "Github",
+                        "value": true,
+                        "description": "Activar el proveedor de autenticacion de Github",
+                        "visibility": "public"
+                    },
+                    {
+                        "type": "input",
+                        "name": "login.github.client_id",
+                        "label": "Github ClientId",
+                        "options": null,
+                        "placeholder": "client_id",
+                        "group": "Github",
+                        "value": "",
+                        "description": "Client-id del proveedor",
+                    },
+                    {
+                        "type": "input",
+                        "name": "login.github.client_secret",
+                        "label": "Github ClientSecret",
+                        "options": null,
+                        "placeholder": "client_secret",
+                        "group": "Github",
+                        "value": "",
+                        "description": "Client-secret del proveedor",
+                    },
+                    {
+                        "type": "boolean",
+                        "name": "login.custom.test.provider",
+                        "label": "Activar Test Provider",
+                        "options": null,
+                        "placeholder": null,
+                        "group": "Provider",
+                        "url": null,
+                        "visibility": true,
+                        "mapResult": null,
+                        "value": true
+                    }, {
+                        "type": "input",
+                        "name": "login.custom.test.icon",
+                        "label": "Icono",
+                        "options": null,
+                        "placeholder": null,
+                        "group": "Provider",
+                        "url": null,
+                        "visibility": true,
+                        "mapResult": null,
+                        "value": ""
+                    }, {
+                        "type": "input",
+                        "name": "login.custom.test.client_id",
+                        "label": null,
+                        "options": null,
+                        "placeholder": "Client id",
+                        "group": "Provider",
+                        "url": null,
+                        "visibility": true,
+                        "mapResult": null,
+                        "value": ""
+                    }, {
+                        "type": "input",
+                        "name": "login.custom.test.client_secret",
+                        "label": "Client Secret",
+                        "options": null,
+                        "placeholder": "Client secret (Some providers needed)",
+                        "group": "Provider",
+                        "url": null,
+                        "visibility": null,
+                        "mapResult": null,
+                        "value": ""
+                    }, {
+                        "type": "input",
+                        "name": "login.custom.test.authurl",
+                        "label": "Auth Url",
+                        "options": null,
+                        "placeholder": "url...",
+                        "group": "Provider",
+                        "url": null,
+                        "visibility": null,
+                        "mapResult": null,
+                        "value": ""
+                    }, {
+                        "type": "input",
+                        "name": "login.custom.test.tokenurl",
+                        "label": "Token Url",
+                        "options": null,
+                        "placeholder": "url...",
+                        "group": "Provider",
+                        "url": null,
+                        "visibility": null,
+                        "mapResult": null,
+                        "value": ""
+                    }, {
+                        "type": "input",
+                        "name": "login.custom.test.response",
+                        "label": "Response Type",
+                        "options": null,
+                        "placeholder": "",
+                        "group": "Provider",
+                        "url": null,
+                        "visibility": null,
+                        "mapResult": null,
+                        "value": "code"
+                    }, {
+                        "type": "input",
+                        "name": "login.custom.test.challenge",
+                        "label": "Code Chalenge",
+                        "options": null,
+                        "placeholder": "",
+                        "group": "Provider",
+                        "url": null,
+                        "visibility": null,
+                        "mapResult": null,
+                        "value": "S256"
+                    }, {
+                        "type": "input",
+                        "name": "login.custom.test.userinfo",
+                        "label": "Userinfo Url",
+                        "options": null,
+                        "placeholder": "url...",
+                        "group": "Provider",
+                        "url": null,
+                        "visibility": null,
+                        "mapResult": null,
+                        "value": ""
                     }
                 ]
             }

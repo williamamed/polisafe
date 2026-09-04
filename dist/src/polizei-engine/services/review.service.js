@@ -14,7 +14,7 @@ const common_1 = require("@nestjs/common");
 const security_user_1 = require("../models/security.user");
 const sequelize_1 = require("@nestjs/sequelize");
 const security_scope_1 = require("../models/security.scope");
-const moment = require("moment");
+const dayjs = require("dayjs");
 const sequelize_2 = require("sequelize");
 const scope_service_1 = require("./scope.service");
 const security_user_scope_1 = require("../models/security.user.scope");
@@ -24,14 +24,14 @@ let ReviewService = class ReviewService {
         let scopes = await this.scopeService.getAllUserScopes(id);
         const ids = scopes.map((item) => item.id);
         return {
-            pie: await this.reviewPie(ids, [moment().startOf('year').toDate(), moment().endOf('year').toDate()]),
-            days: await this.reviewDays(ids, [moment().startOf('year').toDate(), moment().endOf('year').toDate()]),
-            totalSemana: await this.reviewUsuarios(ids, [moment().startOf('week').toDate(), moment().endOf('week').toDate()]),
-            totalMes: await this.reviewUsuarios(ids, [moment().startOf('month').toDate(), moment().endOf('month').toDate()]),
+            pie: await this.reviewPie(ids, [dayjs().startOf('year').toDate(), dayjs().endOf('year').toDate()]),
+            days: await this.reviewDays(ids, [dayjs().startOf('year').toDate(), dayjs().endOf('year').toDate()]),
+            totalSemana: await this.reviewUsuarios(ids, [dayjs().startOf('week').toDate(), dayjs().endOf('week').toDate()]),
+            totalMes: await this.reviewUsuarios(ids, [dayjs().startOf('month').toDate(), dayjs().endOf('month').toDate()]),
             usuarios: await this.reviewUsuariosTotal(ids),
-            hitTotal: await this.traceService.reviewHit(ids, [moment().startOf('year').toDate(), moment().endOf('year').toDate()]),
-            hitStates: await this.traceService.reviewHitState(ids, [moment().startOf('year').toDate(), moment().endOf('year').toDate()]),
-            hitLine: await this.traceService.reviewHitLineTime(ids, [moment().startOf('year').toDate(), moment().endOf('year').toDate()])
+            hitTotal: await this.traceService.reviewHit(ids, [dayjs().startOf('year').toDate(), dayjs().endOf('year').toDate()]),
+            hitStates: await this.traceService.reviewHitState(ids, [dayjs().startOf('year').toDate(), dayjs().endOf('year').toDate()]),
+            hitLine: await this.traceService.reviewHitLineTime(ids, [dayjs().startOf('year').toDate(), dayjs().endOf('year').toDate()])
         };
     }
     async reviewUsuariosTotal(id) {
