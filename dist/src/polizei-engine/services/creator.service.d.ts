@@ -3,7 +3,6 @@ import { SecurityScope } from '../models/security.scope';
 import { SecurityUser } from '../models/security.user';
 import { SecurityRole } from '../models/security.role';
 import { SecurityPermission } from '../models/security.permission';
-import { TraceService } from './trace.service';
 import { SecurityTrace } from '../models/security.trace';
 import { ClientService } from '../../polisafe-iam/services/client.service';
 import { OpenAPIObject } from '@nestjs/swagger';
@@ -14,7 +13,6 @@ export declare class CreatorService implements OnModuleInit {
     roleModel: typeof SecurityRole;
     permissionModel: typeof SecurityPermission;
     traceModel: typeof SecurityTrace;
-    traceService: TraceService;
     clientService: ClientService;
     scopesService: ScopesService;
     private options;

@@ -16,7 +16,6 @@ const security_scope_1 = require("../models/security.scope");
 const security_user_1 = require("../models/security.user");
 const security_role_1 = require("../models/security.role");
 const security_permission_1 = require("../models/security.permission");
-const trace_service_1 = require("./trace.service");
 const security_trace_1 = require("../models/security.trace");
 const config_polizei_1 = require("../../polisafe-sdk/config.polizei");
 const client_service_1 = require("../../polisafe-iam/services/client.service");
@@ -39,7 +38,7 @@ let CreatorService = class CreatorService {
             await this.createProject();
         }
         catch (error) {
-            common_1.Logger.error("Error instalando datos por defecto: " + error.message);
+            common_1.Logger.warn("Error instalando datos por defecto: " + error.message);
         }
     }
     async verifyInstalledClient() {
@@ -160,7 +159,13 @@ let CreatorService = class CreatorService {
         this.options.client_id = client.clientId;
         this.options.client_secret = client.clientSecretHash;
         this.syncUiConfig(this.options.client_id, `${scope.id}`);
-        await this.traceService.register(admin.username, scope.id, `${client.clientId}:${client.clientSecretHash}:${scope.id}`, 20);
+        await this.traceModel.create({
+            username: admin.username,
+            state: 20,
+            description: `${client.clientId}:${client.clientSecretHash}:${scope.id}`,
+            idScope: scope.id,
+            meta: {}
+        });
         return {
             tid: scope.id
         };
@@ -685,10 +690,6 @@ __decorate([
     (0, sequelize_1.InjectModel)(security_trace_1.SecurityTrace),
     __metadata("design:type", Object)
 ], CreatorService.prototype, "traceModel", void 0);
-__decorate([
-    (0, common_1.Inject)(),
-    __metadata("design:type", trace_service_1.TraceService)
-], CreatorService.prototype, "traceService", void 0);
 __decorate([
     (0, common_1.Inject)(),
     __metadata("design:type", client_service_1.ClientService)
