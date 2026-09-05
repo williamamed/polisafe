@@ -1,160 +1,213 @@
 {
-    "title": "Hola",
-    "hi": "Ahhhh",
-    "info-global":"Bienvenido a Polisafe, plataforma de gestión de seguridad",
+    "info-global": "Bienvenido a Polisafe, plataforma de gestión de seguridad",
 
-    "polisafe":{
-        "user":{
-            "title":"Usuario",
-            "form":{
-                "title":"Usuario",
-                "name":"Nombre",
-                "username":"Usuario",
-                "email":"Email",
-                "phone":"Telefono",
-                "state":"Estado",
-                "placeholder-state":"Seleccione..."
+    "polisafe": {
+        "user": {
+            "title": "Usuario",
+            "form": {
+                "title": "Usuario",
+                "name": "Nombre",
+                "username": "Usuario",
+                "email": "Email",
+                "phone": "Telefono",
+                "state": "Estado",
+                "placeholder-state": "Seleccione..."
             },
-            "change-password":{
-                "title":"Cambiar contraseña",
-                "password":"Contraseña nueva",
-                "repassword":"Repetir Contraseña"
+            "change-password": {
+                "title": "Cambiar contraseña",
+                "password": "Contraseña nueva",
+                "repassword": "Repetir Contraseña"
             },
-            "active":"Activo",
-            "disable":"Desactivado",
-            "created":"Creado",
-            "updated":"Actualizado",
-            "delete-scope":"Expulsar del Tenant",
-            "password":"Cambiar password",
-            "roles":"Asignar roles",
-            "add-scope":"Adicionar existente al Tenant"
+            "active": "Activo",
+            "disable": "Desactivado",
+            "created": "Creado",
+            "updated": "Actualizado",
+            "delete-scope": "Expulsar del Tenant",
+            "password": "Cambiar password",
+            "roles": "Asignar roles",
+            "add-scope": "Adicionar existente al Tenant",
+            "roles-select": {
+                "placeholder": "Seleccione roles...",
+                "header": "Roles disponibles",
+                "remove-all": "Quitar todos",
+                "context-role": "Rol del contexto"
+            }
         },
 
-        "profile":{
-            "title":"Mi perfil",
-            "name":"Nombre",
-            "username":"Usuario",
-            "email":"Email",
-            "phone":"Telefono",
-            "change-password":"Cambiar contraseña",
-            "password":"Contraseña nueva",
-            "repassword":"Repetir contraseña",
-            "password-mismatch":"Las contraseñas no coinciden",
-            "saved":"Los datos fueron actualizados con éxito.",
-            "password-changed":"La contraseña fue cambiada con éxito.",
-            "current":"Contraseña actual"
-        },
-
-        "invitation":{
-            "title":"Invitación",
-            "subtitle":"Usted ha sido invitado a unirse a la organización",
-            "email":"Email",
+        "profile": {
+            "title": "Mi perfil",
+            "name": "Nombre",
+            "username": "Usuario",
+            "email": "Email",
+            "phone": "Telefono",
+            "change-password": "Cambiar contraseña",
             "password": "Contraseña nueva",
-            "name":"Nombre y apellidos"
+            "repassword": "Repetir contraseña",
+            "password-mismatch": "Las contraseñas no coinciden",
+            "saved": "Los datos fueron actualizados con éxito.",
+            "password-changed": "La contraseña fue cambiada con éxito.",
+            "validation": "Validación",
+            "password-invalid": "La contraseña actual es incorrecta.",
+            "current": "Contraseña actual"
         },
 
-        "role":{
-            "title":"Roles",
-            "form":{
-                "title":"Rol",
-                "name":"Nombre",
-                "description":"Descripción"
-            },
-
-            "permission":"Permisos"
+        "invitation": {
+            "title": "Invitación",
+            "subtitle": "Usted ha sido invitado a unirse a la organización",
+            "email": "Email",
+            "password": "Contraseña nueva",
+            "name": "Nombre y apellidos",
+            "already-registered": "¿Ya estás registrado? ¿Deseas aceptar la invitación?",
+            "to": "a",
+            "register": "Registrar",
+            "confirm": "Confirmar",
+            "not-found": "¡La invitación a la que hace referencia no se encontró!",
+            "saved": "Ya puedes comenzar a utilizar la cuenta.",
+            "login": "Inicie sesión en la plataforma.",
+            "registro": "Registro"
         },
 
-        "scope":{
-            "title":"Espacios de Trabajo",
-            "form":{
-                "title":"Espacio de Trabajo",
-                "name":"Nombre",
-                "description":"Descripción"
+        "role": {
+            "title": "Roles",
+            "form": {
+                "title": "Rol",
+                "name": "Nombre",
+                "description": "Descripción"
             },
-            "menu":{
-                "role":"Roles",
-                "permission":"Permisos",
-                "meta":"Metadatos",
-                "image":"Cargar imagen",
-                "users":"Usuarios"
+
+            "permission": "Permisos"
+        },
+
+        "scope": {
+            "title": "Espacios de Trabajo",
+            "id-prefix": "Id:",
+            "form": {
+                "title": "Espacio de Trabajo",
+                "name": "Nombre",
+                "description": "Descripción"
             },
-            "form-meta":{
-                "gen-key":"Generar clave"
+            "menu": {
+                "role": "Roles",
+                "permission": "Permisos",
+                "meta": "Metadatos",
+                "image": "Cargar imagen",
+                "users": "Usuarios"
             },
-            "meta":{
-                "title":"Metados"
+            "form-meta": {
+                "gen-key": "Generar clave",
+                "text-gen-key": "Se generará una nueva clave y se reemplazará la actual.",
+                "question-gen-key": "¿Generar nueva clave?"
+            },
+            "meta": {
+                "title": "Metadatos"
             }
         },
 
-        "permission":{
-            "title":"Permisos",
-            "form":{
-                "title":"Permiso",
-                "name":"Nombre",
-                "description":"Descripción",
-                "folder":"Agrupador",
-                "method":"Método (Opcional)",
-                "methodFilter":"Filtrar por nombre"
+        "permission": {
+            "title": "Permisos",
+            "form": {
+                "title": "Permiso",
+                "name": "Nombre",
+                "description": "Descripción",
+                "folder": "Agrupador",
+                "method": "Método (Opcional)",
+                "methodFilter": "Filtrar por nombre"
             },
-            "form-swagger":{
-                "title":"Importar desde swagger",
-                "name":"Url"
+            "form-swagger": {
+                "title": "Importar desde swagger",
+                "name": "Url"
             },
-            "actions":{
-                "import":"Import desde swagger",
-                "save-permission":"Guardar permisos del rol"
+            "actions": {
+                "import": "Import desde swagger",
+                "save-permission": "Guardar permisos del rol",
+                "add-permission": "Adicionar permiso",
+                "delete-group": "Eliminar grupo",
+                "edit-permission": "Modificar permiso",
+                "delete-permission": "Eliminar permiso"
             }
         },
 
-        "clients":{
-            "title":"Clientes oauth",
-            "form":{
-                "title":"Cliente",
-                "name":"Nombre",
-                "redirect_uris":"URIs de redirección (separados por coma)",
-                "grants":"Grants",
-                "scopes":"Scopes",
-                "type":"Tipo",
-                "postLogoutRedirectUris":"URIs de redireccion logout (separados por coma)",
-                "access_token_include_permissions":"Activar permisos ACCESS_TOKEN",
-                "openid_include_permissions":"Activar permisos ID_TOKEN"
+        "clients": {
+            "title": "Clientes oauth",
+            "form": {
+                "title": "Cliente",
+                "name": "Nombre",
+                "redirect_uris": "URIs de redirección (separados por coma)",
+                "grants": "Grants",
+                "scopes": "Scopes",
+                "type": "Tipo",
+                "postLogoutRedirectUris": "URIs de redireccion logout (separados por coma)",
+                "access_token_include_permissions": "Activar permisos ACCESS_TOKEN",
+                "openid_include_permissions": "Activar permisos ID_TOKEN"
             },
-            "actions":{
-                "import":"Import desde swagger",
-                "save-permission":"Guardar permisos del rol"
+            "actions": {
+                "import": "Import desde swagger",
+                "save-permission": "Guardar permisos del rol"
             }
         },
-        "scopes":{
-            "title":"Scopes oauth",
-            "form":{
-                "title":"Nuevo Scope",
-                "title-update":"Editar Scope",
-                "name":"Nombre",
-                "displayName":"Nombre visible",
-                "description":"Descripción"
+        "scopes": {
+            "title": "Scopes oauth",
+            "form": {
+                "title": "Nuevo Scope",
+                "title-update": "Editar Scope",
+                "name": "Nombre",
+                "displayName": "Nombre visible",
+                "description": "Descripción"
             },
-            "actions":{
-                "import":"Import desde swagger",
-                "save-permission":"Guardar permisos del rol"
+            "actions": {
+                "import": "Import desde swagger",
+                "save-permission": "Guardar permisos del rol"
+            }
+        },
+
+        "dashboard": {
+            "greeting": "Hola!",
+            "hits": "Hits",
+            "summary": "Resumen",
+            "load-error": "Error al cargar el dashboard",
+            "total": "Total",
+            "total-with": "Total: {{total}}",
+            "map-events": "{{value}} eventos",
+            "unsupported-type": "Tipo no soportado: {{type}}",
+            "filters": {
+                "business": "Negocio",
+                "granularity": "Granularidad",
+                "from": "Desde",
+                "to": "Hasta",
+                "select-business": "Selecciona negocio"
+            },
+            "granularity": {
+                "hour": "Hora",
+                "day": "Día",
+                "week": "Semana",
+                "month": "Mes"
+            },
+            "sections": {
+                "auth": "Autenticación",
+                "users": "Usuarios",
+                "rbac": "RBAC",
+                "invitations": "Invitaciones",
+                "geo": "Geo",
+                "risk": "Riesgo"
             }
         }
     },
 
-    "agencia":{
-        "hero":{
-            "description":"Crea viajes, vende pasajes y promociona tu agencia de transportación",
-            "title":"Comienza tu agencia",
-            "button":"Comenzar"
+    "agencia": {
+        "hero": {
+            "description": "Crea viajes, vende pasajes y promociona tu agencia de transportación",
+            "title": "Comienza tu agencia",
+            "button": "Comenzar"
         },
-        "stats":{
-            "title":"Nuestros servicios van en",
-            "subtitle":"crecimiento"
+        "stats": {
+            "title": "Nuestros servicios van en",
+            "subtitle": "crecimiento"
         },
-        "servicios":{
-            "title":"SERVICIOS",
-            "subtitle":"crecimiento",
-            "subtitle-pasaje":"Permite a tu equipo automatizar los pasajes",
-            "descripcion-pasaje":"Gestiona desde cualquier lugar las solicitudes de transportación de tus clientes, asigna pasajes y envía el ticket de viaje de forma automática"
+        "servicios": {
+            "title": "SERVICIOS",
+            "subtitle": "crecimiento",
+            "subtitle-pasaje": "Permite a tu equipo automatizar los pasajes",
+            "descripcion-pasaje": "Gestiona desde cualquier lugar las solicitudes de transportación de tus clientes, asigna pasajes y envía el ticket de viaje de forma automática"
         }
     },
 
@@ -165,21 +218,269 @@
         "cancelar": "Cancelar",
         "editar": "Editar",
         "eliminar": "Eliminar",
-        "preguntaEliminar": "Está seguro que desea eliminar este elemento?",
+        "preguntaEliminar": "¿Está seguro que desea eliminar este elemento?",
         "confirmacion": "Confirmación",
         "titulo": "Acciones",
         "atras": "Atras",
         "adelante": "Adelante",
-        "abrir":"Abrir",
-        "continuar":"Continuar",
-        "iniciar":"Iniciar",
-        "terminado":"Terminado",
-        "de":"de"
+        "abrir": "Abrir",
+        "continuar": "Continuar",
+        "iniciar": "Iniciar",
+        "terminado": "Terminado",
+        "de": "de",
+        "buscar": "Buscar...",
+        "registrar": "Registrar",
+        "confirmar": "Confirmar",
+        "copiar": "Copiar",
+        "pagar": "Pagar",
+        "exportar": "Exportar",
+        "invitar": "Invitar",
+        "importar": "Importar",
+        "subir": "Cargar",
+        "salir": "Salir",
+        "guardar": "Guardar",
+        "reintentar": "Reintentar",
+        "seleccione": "Seleccione...",
+        "opciones": "Opciones",
+        "sin-rol": "Sin rol asignado"
     },
-    "menu":{
-        "home":"Inicio",
-        "profile":"Mi perfil",
-        "darkmode":"Modo oscuro",
-        "lightmode":"Modo claro"
+
+    "settings": {
+        "title": "Ajustes",
+        "dialog": {
+            "new-option": "Nueva opción",
+            "type": "Tipo",
+            "name": "Nombre",
+            "label": "Etiqueta",
+            "placeholder": "Placeholder",
+            "group": "Grupo",
+            "visibility": "Visibility",
+            "options": "Opciones",
+            "url": "URL",
+            "map-result-url": "Map Result URL",
+            "type-placeholder": "Tipo de campo"
+        },
+        "types": {
+            "input": "Input",
+            "boolean": "Boolean",
+            "radio": "Radio",
+            "select": "Select",
+            "multiselect": "Multi-Select",
+            "text": "Text",
+            "autogen": "Autogen",
+            "apigen": "API"
+        },
+        "menu": {
+            "add-option": "Adicionar opción",
+            "reset-defaults": "Opciones por defecto(Reset)"
+        },
+        "confirm": {
+            "delete-message": "¿Está seguro que desea eliminar este elemento?",
+            "reset-message": "¿Está seguro que desea cargar la configuración por defecto? Esta operación eliminará los elementos actuales."
+        },
+        "save-options": "Salvar opciones",
+        "default-options": "Opciones por defecto"
+    },
+
+    "menu": {
+        "home": "Inicio",
+        "profile": "Mi perfil",
+        "darkmode": "Modo oscuro",
+        "lightmode": "Modo claro",
+        "logout": "Salir",
+        "language": "Idioma",
+        "pin": "Anclar",
+        "unpin": "Desanclar",
+        "section": {
+            "appearance": "Apariencia",
+            "rbac": "RBAC",
+            "settings": "Gestión"
+        },
+        "polisafe": {
+            "user": "Usuarios",
+            "role": "Roles",
+            "permission": "Permisos",
+            "workspace": "Espacios de trabajo",
+            "oauth2": "OAuth2",
+            "clients": "Clientes",
+            "scopes": "Scopes",
+            "members": "Miembros",
+            "settings": "Ajustes"
+        }
+    },
+
+    "crumb": {
+        "security": "Seguridad",
+        "demo": "Demo",
+        "error": "Error",
+        "profile": "Mi perfil",
+        "polisafe": "Polisafe",
+        "invoices": "Facturas"
+    },
+
+    "topbar": {
+        "search": "Buscar...",
+        "switch-workspace": "Cambiar de espacio de trabajo"
+    },
+
+    "splash": {
+        "loading": "Cargando entorno..."
+    },
+
+    "common": {
+        "error-title": "Error",
+        "conflict-title": "Conflicto",
+        "notfound-detail": "El registro especificado no existe.",
+        "save-title": "Guardar",
+        "delete-title": "Eliminar",
+        "copy-title": "Copiar",
+        "copied": "Copiado al portapapeles.",
+        "upload-title": "Cargar archivo",
+        "uploaded": "El archivo fue cargado.",
+        "upload-error": "No se ha podido cargar el archivo.",
+        "upload-errors": {
+            "request-failed": "Error al procesar la solicitud",
+            "invalid-or-large": "Archivo no válido o demasiado grande",
+            "exceeds-max-size": "El archivo excede el tamaño máximo permitido",
+            "connection-error": "Error de conexión con el servidor",
+            "max-size-template": "El archivo excede el tamaño máximo de {{maxSizeMB}}MB",
+            "type-not-allowed": "Tipo de archivo no permitido"
+        },
+        "saved-detail": "La operación fue realizada con éxito.",
+        "error-detail": "Ha ocurrido un error en la operación, contacte con el administrador.",
+        "conflict-detail": "El registro especificado ya existe.",
+        "no-data": "Sin datos",
+        "records": "{totalRecords} elementos",
+        "delete-confirm": {
+            "message": "Una vez eliminado no se podrá recuperar",
+            "header": "¿Eliminar elemento?"
+        },
+        "confirm-logout": {
+            "message": "¿Está seguro que desea cerrar esta sesión?"
+        },
+        "no-results": "No se encontraron resultados"
+    },
+
+    "error": {
+        "offline": {
+            "title": "Sin conexión",
+            "description": "Ocurrió un error en la comunicación. Verifique su conexión e intente nuevamente."
+        },
+        "unauthorized": {
+            "title": "No autorizado",
+            "description": "Autenticación requerida para acceder a este recurso."
+        },
+        "notfound": {
+            "title": "No encontrado",
+            "description": "No se pudo encontrar el recurso que intenta acceder.",
+            "message": "El recurso solicitado no está disponible."
+        },
+        "internal": {
+            "title": "Error interno",
+            "description": "Ocurrió un error interno en la aplicación y fue notificado al sistema."
+        },
+        "unknown": {
+            "title": "Error desconocido",
+            "description": "Ha ocurrido un error inesperado. Intente nuevamente más tarde."
+        },
+        "go-dashboard": "Ir al panel"
+    },
+
+    "oauth2": {
+        "loading": "Iniciando sesión...",
+        "waiting": "Por favor espera mientras completamos tu autenticación",
+        "welcome": "¡Bienvenido!",
+        "welcome-message": "Has iniciado sesión correctamente",
+        "auth-error-title": "Error de Autenticación",
+        "auth-error-message": "Error al iniciar sesión",
+        "go-dashboard": "Ir al Dashboard"
+    },
+
+    "sso": {
+        "loading": "Cargando",
+        "loading-center": "Cargando centro de cuentas...",
+        "loading-account": "Cargando gestor de cuentas...",
+        "error-config": "Error: No se pudo determinar una configuración de inicio para el gestor de cuentas"
+    },
+
+    "theme": {
+        "primary": "Primario",
+        "surface": "Superficie",
+        "presets": "Preajustes",
+        "menu-mode": "Modo de menú",
+        "static": "Estático",
+        "overlay": "Superpuesto"
+    },
+
+    "oauth": {
+        "clients": {
+            "client-id": "Client Id:",
+            "client-secret": "Client Secret",
+            "redirect-uris": "Redirect URIs:",
+            "grants": "Grants:",
+            "settings": "Ajustes"
+        },
+        "type": {
+            "confidential": "Confidencial",
+            "public": "Público"
+        },
+        "grants": {
+            "authorization-code": "Authorization Code",
+            "client-credentials": "Client Credentials",
+            "password": "Password",
+            "refresh-token": "Refresh Token"
+        }
+    },
+
+    "members": {
+        "title": "Miembros",
+        "subtitle": "Conecta y gestiona a tu equipo en un solo lugar",
+        "invitations": "Invitaciones",
+        "invitations-subtitle": "Gestiona de forma segura el ingreso de nuevos miembros",
+        "copy-link": "Copiar enlace de invitación",
+        "organization": "Organización: {{name}}",
+        "created": "creada: {{date}}",
+        "updated": "modificada: {{date}}",
+        "no-roles": "No hay roles para asignar",
+        "assign-role-title": "Asignar rol",
+        "assign-role-detail": "La asignación de rol fue realizada con éxito.",
+        "link-copied": "Enlace copiado al portapapeles: {{link}}",
+        "copy-error": "Error al copiar al portapapeles",
+        "state": {
+            "pending": "PENDIENTE",
+            "open": "ABIERTO"
+        },
+        "confirm-scope": {
+            "message": "Esta acción eliminará el usuario seleccionado de la organización actual",
+            "header": "¿Eliminar de la organización?"
+        },
+        "confirm-invitation": {
+            "message": "La invitación será eliminada y quedará sin validez",
+            "header": "¿Eliminar invitación?"
+        },
+        "invitation": {
+            "title": "Nueva invitación",
+            "saved": "La invitación fue registrada y enviada.",
+            "not-found": "La invitación a la que hace referencia no se encontró!",
+            "email": "Email",
+            "role": "Rol",
+            "description": "Descripción"
+        }
+    },
+
+    "factura": {
+        "title": "Mis Facturas - Licencias",
+        "subtitle": "Visualiza las facturas de contratación de la aplicación",
+        "state": {
+            "paid": "PAGADO",
+            "pending": "POR COBRAR"
+        },
+        "created": "Creado: {{date}}",
+        "updated": "Actualizado: {{date}}"
+    },
+
+    "widget-license": {
+        "unknown": "Licencia: Desconocida",
+        "license": "Licencia: {{days}} días"
     }
 }

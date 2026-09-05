@@ -1,0 +1,486 @@
+{
+    "info-global": "Bem-vindo ao Polisafe, plataforma de gestão de segurança",
+
+    "polisafe": {
+        "user": {
+            "title": "Utilizador",
+            "form": {
+                "title": "Utilizador",
+                "name": "Nome",
+                "username": "Utilizador",
+                "email": "Email",
+                "phone": "Telefone",
+                "state": "Estado",
+                "placeholder-state": "Selecione..."
+            },
+            "change-password": {
+                "title": "Alterar palavra-passe",
+                "password": "Nova palavra-passe",
+                "repassword": "Repetir palavra-passe"
+            },
+            "active": "Ativo",
+            "disable": "Desativado",
+            "created": "Criado",
+            "updated": "Atualizado",
+            "delete-scope": "Remover do Tenant",
+            "password": "Alterar palavra-passe",
+            "roles": "Atribuir funções",
+            "add-scope": "Adicionar existente ao Tenant",
+            "roles-select": {
+                "placeholder": "Selecione funções...",
+                "header": "Funções disponíveis",
+                "remove-all": "Remover todas",
+                "context-role": "Função do contexto"
+            }
+        },
+
+        "profile": {
+            "title": "O meu perfil",
+            "name": "Nome",
+            "username": "Utilizador",
+            "email": "Email",
+            "phone": "Telefone",
+            "change-password": "Alterar palavra-passe",
+            "password": "Nova palavra-passe",
+            "repassword": "Repetir palavra-passe",
+            "password-mismatch": "As palavras-passe não coincidem",
+            "saved": "Os dados foram atualizados com sucesso.",
+            "password-changed": "A palavra-passe foi alterada com sucesso.",
+            "validation": "Validação",
+            "password-invalid": "A palavra-passe atual está incorreta.",
+            "current": "Palavra-passe atual"
+        },
+
+        "invitation": {
+            "title": "Convite",
+            "subtitle": "Foi convidado a aderir à organização",
+            "email": "Email",
+            "password": "Nova palavra-passe",
+            "name": "Nome e apelidos",
+            "already-registered": "Já está registado? Pretende aceitar o convite?",
+            "to": "para",
+            "register": "Registar",
+            "confirm": "Confirmar",
+            "not-found": "O convite a que se refere não foi encontrado!",
+            "saved": "Já pode começar a utilizar a conta.",
+            "login": "Inicie sessão na plataforma.",
+            "registro": "Registo"
+        },
+
+        "role": {
+            "title": "Funções",
+            "form": {
+                "title": "Função",
+                "name": "Nome",
+                "description": "Descrição"
+            },
+
+            "permission": "Permissões"
+        },
+
+        "scope": {
+            "title": "Espaços de Trabalho",
+            "id-prefix": "Id:",
+            "form": {
+                "title": "Espaço de Trabalho",
+                "name": "Nome",
+                "description": "Descrição"
+            },
+            "menu": {
+                "role": "Funções",
+                "permission": "Permissões",
+                "meta": "Metadados",
+                "image": "Carregar imagem",
+                "users": "Utilizadores"
+            },
+            "form-meta": {
+                "gen-key": "Gerar chave",
+                "text-gen-key": "Será gerada uma nova chave que substituirá a atual.",
+                "question-gen-key": "Gerar nova chave?"
+            },
+            "meta": {
+                "title": "Metadados"
+            }
+        },
+
+        "permission": {
+            "title": "Permissões",
+            "form": {
+                "title": "Permissão",
+                "name": "Nome",
+                "description": "Descrição",
+                "folder": "Agrupador",
+                "method": "Método (Opcional)",
+                "methodFilter": "Filtrar por nome"
+            },
+            "form-swagger": {
+                "title": "Importar do swagger",
+                "name": "URL"
+            },
+            "actions": {
+                "import": "Importar do swagger",
+                "save-permission": "Guardar permissões da função",
+                "add-permission": "Adicionar permissão",
+                "delete-group": "Eliminar grupo",
+                "edit-permission": "Modificar permissão",
+                "delete-permission": "Eliminar permissão"
+            }
+        },
+
+        "clients": {
+            "title": "Clientes OAuth",
+            "form": {
+                "title": "Cliente",
+                "name": "Nome",
+                "redirect_uris": "URIs de redirecionamento (separadas por vírgula)",
+                "grants": "Grants",
+                "scopes": "Scopes",
+                "type": "Tipo",
+                "postLogoutRedirectUris": "URIs de redirecionamento de logout (separadas por vírgula)",
+                "access_token_include_permissions": "Ativar permissões ACCESS_TOKEN",
+                "openid_include_permissions": "Ativar permissões ID_TOKEN"
+            },
+            "actions": {
+                "import": "Importar do swagger",
+                "save-permission": "Guardar permissões da função"
+            }
+        },
+        "scopes": {
+            "title": "Scopes OAuth",
+            "form": {
+                "title": "Novo Scope",
+                "title-update": "Editar Scope",
+                "name": "Nome",
+                "displayName": "Nome visível",
+                "description": "Descrição"
+            },
+            "actions": {
+                "import": "Importar do swagger",
+                "save-permission": "Guardar permissões da função"
+            }
+        },
+
+        "dashboard": {
+            "greeting": "Olá!",
+            "hits": "Hits",
+            "summary": "Resumo",
+            "load-error": "Erro ao carregar o dashboard",
+            "total": "Total",
+            "total-with": "Total: {{total}}",
+            "map-events": "{{value}} eventos",
+            "unsupported-type": "Tipo não suportado: {{type}}",
+            "filters": {
+                "business": "Negócio",
+                "granularity": "Granularidade",
+                "from": "Desde",
+                "to": "Até",
+                "select-business": "Selecione o negócio"
+            },
+            "granularity": {
+                "hour": "Hora",
+                "day": "Dia",
+                "week": "Semana",
+                "month": "Mês"
+            },
+            "sections": {
+                "auth": "Autenticação",
+                "users": "Utilizadores",
+                "rbac": "RBAC",
+                "invitations": "Convites",
+                "geo": "Geo",
+                "risk": "Risco"
+            }
+        }
+    },
+
+    "agencia": {
+        "hero": {
+            "description": "Crie viagens, venda bilhetes e promova a sua agência de transportes",
+            "title": "Comece a sua agência",
+            "button": "Começar"
+        },
+        "stats": {
+            "title": "Os nossos serviços estão em",
+            "subtitle": "crescimento"
+        },
+        "servicios": {
+            "title": "SERVIÇOS",
+            "subtitle": "crescimento",
+            "subtitle-pasaje": "Permita à sua equipa automatizar os bilhetes",
+            "descripcion-pasaje": "Faça a gestão dos pedidos de transporte dos seus clientes a partir de qualquer lugar, atribua bilhetes e envie o bilhete de viagem automaticamente"
+        }
+    },
+
+    "accion": {
+        "aceptar": "Aceitar",
+        "adicionar": "Adicionar",
+        "salvar": "Guardar",
+        "cancelar": "Cancelar",
+        "editar": "Editar",
+        "eliminar": "Eliminar",
+        "preguntaEliminar": "Tem a certeza de que pretende eliminar este elemento?",
+        "confirmacion": "Confirmação",
+        "titulo": "Ações",
+        "atras": "Anterior",
+        "adelante": "Seguinte",
+        "abrir": "Abrir",
+        "continuar": "Continuar",
+        "iniciar": "Iniciar",
+        "terminado": "Concluído",
+        "de": "de",
+        "buscar": "Pesquisar...",
+        "registrar": "Registar",
+        "confirmar": "Confirmar",
+        "copiar": "Copiar",
+        "pagar": "Pagar",
+        "exportar": "Exportar",
+        "invitar": "Convidar",
+        "importar": "Importar",
+        "subir": "Carregar",
+        "salir": "Sair",
+        "guardar": "Guardar",
+        "reintentar": "Tentar novamente",
+        "seleccione": "Selecione...",
+        "opciones": "Opções",
+        "sin-rol": "Sem função atribuída"
+    },
+
+    "settings": {
+        "title": "Definições",
+        "dialog": {
+            "new-option": "Nova opção",
+            "type": "Tipo",
+            "name": "Nome",
+            "label": "Etiqueta",
+            "placeholder": "Placeholder",
+            "group": "Grupo",
+            "visibility": "Visibility",
+            "options": "Opções",
+            "url": "URL",
+            "map-result-url": "Map Result URL",
+            "type-placeholder": "Tipo de campo"
+        },
+        "types": {
+            "input": "Input",
+            "boolean": "Boolean",
+            "radio": "Radio",
+            "select": "Select",
+            "multiselect": "Multi-Select",
+            "text": "Text",
+            "autogen": "Autogen",
+            "apigen": "API"
+        },
+        "menu": {
+            "add-option": "Adicionar opção",
+            "reset-defaults": "Opções predefinidas (Repor)"
+        },
+        "confirm": {
+            "delete-message": "Tem a certeza de que pretende eliminar este elemento?",
+            "reset-message": "Tem a certeza de que pretende carregar a configuração predefinida? Esta operação eliminará os elementos atuais."
+        },
+        "save-options": "Guardar opções",
+        "default-options": "Opções predefinidas"
+    },
+
+    "menu": {
+        "home": "Início",
+        "profile": "O meu perfil",
+        "darkmode": "Modo escuro",
+        "lightmode": "Modo claro",
+        "logout": "Sair",
+        "language": "Idioma",
+        "pin": "Afixar",
+        "unpin": "Desafixar",
+        "section": {
+            "appearance": "Aspeto",
+            "rbac": "RBAC",
+            "settings": "Gestão"
+        },
+        "polisafe": {
+            "user": "Utilizadores",
+            "role": "Funções",
+            "permission": "Permissões",
+            "workspace": "Espaços de trabalho",
+            "oauth2": "OAuth2",
+            "clients": "Clientes",
+            "scopes": "Scopes",
+            "members": "Membros",
+            "settings": "Definições"
+        }
+    },
+
+    "crumb": {
+        "security": "Segurança",
+        "demo": "Demo",
+        "error": "Erro",
+        "profile": "O meu perfil",
+        "polisafe": "Polisafe",
+        "invoices": "Faturas"
+    },
+
+    "topbar": {
+        "search": "Pesquisar...",
+        "switch-workspace": "Mudar de espaço de trabalho"
+    },
+
+    "splash": {
+        "loading": "A carregar o ambiente..."
+    },
+
+    "common": {
+        "error-title": "Erro",
+        "conflict-title": "Conflito",
+        "notfound-detail": "O registo especificado não existe.",
+        "save-title": "Guardar",
+        "delete-title": "Eliminar",
+        "copy-title": "Copiar",
+        "copied": "Copiado para a área de transferência.",
+        "upload-title": "Carregar ficheiro",
+        "uploaded": "O ficheiro foi carregado.",
+        "upload-error": "Não foi possível carregar o ficheiro.",
+        "upload-errors": {
+            "request-failed": "Erro ao processar o pedido",
+            "invalid-or-large": "Ficheiro inválido ou demasiado grande",
+            "exceeds-max-size": "O ficheiro excede o tamanho máximo permitido",
+            "connection-error": "Erro de ligação com o servidor",
+            "max-size-template": "O ficheiro excede o tamanho máximo de {{maxSizeMB}}MB",
+            "type-not-allowed": "Tipo de ficheiro não permitido"
+        },
+        "saved-detail": "A operação foi concluída com sucesso.",
+        "error-detail": "Ocorreu um erro na operação. Contacte o administrador.",
+        "conflict-detail": "O registo especificado já existe.",
+        "no-data": "Sem dados",
+        "records": "{totalRecords} elementos",
+        "delete-confirm": {
+            "message": "Uma vez eliminado, não poderá ser recuperado",
+            "header": "Eliminar elemento?"
+        },
+        "confirm-logout": {
+            "message": "Tem a certeza de que pretende terminar a sua sessão?"
+        },
+        "no-results": "Não foram encontrados resultados"
+    },
+
+    "error": {
+        "offline": {
+            "title": "Sem ligação",
+            "description": "Ocorreu um erro na comunicação. Verifique a sua ligação e tente novamente."
+        },
+        "unauthorized": {
+            "title": "Não autorizado",
+            "description": "É necessária autenticação para aceder a este recurso."
+        },
+        "notfound": {
+            "title": "Não encontrado",
+            "description": "Não foi possível encontrar o recurso a que está a tentar aceder.",
+            "message": "O recurso solicitado não está disponível."
+        },
+        "internal": {
+            "title": "Erro interno",
+            "description": "Ocorreu um erro interno na aplicação e o sistema foi notificado."
+        },
+        "unknown": {
+            "title": "Erro desconhecido",
+            "description": "Ocorreu um erro inesperado. Tente novamente mais tarde."
+        },
+        "go-dashboard": "Ir para o painel de controlo"
+    },
+
+    "oauth2": {
+        "loading": "A iniciar sessão...",
+        "waiting": "Aguarde enquanto concluímos a sua autenticação",
+        "welcome": "Bem-vindo!",
+        "welcome-message": "Iniciou sessão com sucesso",
+        "auth-error-title": "Erro de Autenticação",
+        "auth-error-message": "Erro ao iniciar sessão",
+        "go-dashboard": "Ir para o painel de controlo"
+    },
+
+    "sso": {
+        "loading": "A carregar",
+        "loading-center": "A carregar o centro de contas...",
+        "loading-account": "A carregar o gestor de contas...",
+        "error-config": "Erro: Não foi possível determinar uma configuração de arranque para o gestor de contas"
+    },
+
+    "theme": {
+        "primary": "Primário",
+        "surface": "Superfície",
+        "presets": "Predefinições",
+        "menu-mode": "Modo do menu",
+        "static": "Estático",
+        "overlay": "Sobreposição"
+    },
+
+    "oauth": {
+        "clients": {
+            "client-id": "Client Id:",
+            "client-secret": "Client Secret",
+            "redirect-uris": "Redirect URIs:",
+            "grants": "Grants:",
+            "settings": "Definições"
+        },
+        "type": {
+            "confidential": "Confidencial",
+            "public": "Público"
+        },
+        "grants": {
+            "authorization-code": "Authorization Code",
+            "client-credentials": "Client Credentials",
+            "password": "Password",
+            "refresh-token": "Refresh Token"
+        }
+    },
+
+    "members": {
+        "title": "Membros",
+        "subtitle": "Ligue e faça a gestão da sua equipa num único lugar",
+        "invitations": "Convites",
+        "invitations-subtitle": "Faça a gestão segura da entrada de novos membros",
+        "copy-link": "Copiar link do convite",
+        "organization": "Organização: {{name}}",
+        "created": "criada: {{date}}",
+        "updated": "atualizada: {{date}}",
+        "no-roles": "Não existem funções para atribuir",
+        "assign-role-title": "Atribuir função",
+        "assign-role-detail": "A atribuição da função foi realizada com sucesso.",
+        "link-copied": "Link copiado para a área de transferência: {{link}}",
+        "copy-error": "Erro ao copiar para a área de transferência",
+        "state": {
+            "pending": "PENDENTE",
+            "open": "ABERTO"
+        },
+        "confirm-scope": {
+            "message": "Esta ação removerá o utilizador selecionado da organização atual",
+            "header": "Remover da organização?"
+        },
+        "confirm-invitation": {
+            "message": "O convite será eliminado e ficará sem validade",
+            "header": "Eliminar convite?"
+        },
+        "invitation": {
+            "title": "Novo convite",
+            "saved": "O convite foi registado e enviado.",
+            "not-found": "O convite a que se refere não foi encontrado!",
+            "email": "Email",
+            "role": "Função",
+            "description": "Descrição"
+        }
+    },
+
+    "factura": {
+        "title": "As Minhas Faturas - Licenças",
+        "subtitle": "Consulte as faturas de contratação da aplicação",
+        "state": {
+            "paid": "PAGO",
+            "pending": "POR COBRAR"
+        },
+        "created": "Criado: {{date}}",
+        "updated": "Atualizado: {{date}}"
+    },
+
+    "widget-license": {
+        "unknown": "Licença: Desconhecida",
+        "license": "Licença: {{days}} dias"
+    }
+}

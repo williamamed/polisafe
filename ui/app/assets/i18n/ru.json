@@ -1,0 +1,486 @@
+{
+    "info-global": "Добро пожаловать в Polisafe — платформу управления безопасностью",
+
+    "polisafe": {
+        "user": {
+            "title": "Пользователь",
+            "form": {
+                "title": "Пользователь",
+                "name": "Имя",
+                "username": "Имя пользователя",
+                "email": "Электронная почта",
+                "phone": "Телефон",
+                "state": "Состояние",
+                "placeholder-state": "Выберите..."
+            },
+            "change-password": {
+                "title": "Сменить пароль",
+                "password": "Новый пароль",
+                "repassword": "Повторите пароль"
+            },
+            "active": "Активен",
+            "disable": "Отключён",
+            "created": "Создан",
+            "updated": "Обновлён",
+            "delete-scope": "Исключить из Tenant",
+            "password": "Сменить пароль",
+            "roles": "Назначить роли",
+            "add-scope": "Добавить существующего в Tenant",
+            "roles-select": {
+                "placeholder": "Выберите роли...",
+                "header": "Доступные роли",
+                "remove-all": "Убрать все",
+                "context-role": "Роль контекста"
+            }
+        },
+
+        "profile": {
+            "title": "Мой профиль",
+            "name": "Имя",
+            "username": "Имя пользователя",
+            "email": "Электронная почта",
+            "phone": "Телефон",
+            "change-password": "Сменить пароль",
+            "password": "Новый пароль",
+            "repassword": "Повторите пароль",
+            "password-mismatch": "Пароли не совпадают",
+            "saved": "Данные успешно обновлены.",
+            "password-changed": "Пароль успешно изменён.",
+            "validation": "Проверка",
+            "password-invalid": "Текущий пароль указан неверно.",
+            "current": "Текущий пароль"
+        },
+
+        "invitation": {
+            "title": "Приглашение",
+            "subtitle": "Вас пригласили присоединиться к организации",
+            "email": "Электронная почта",
+            "password": "Новый пароль",
+            "name": "Имя и фамилия",
+            "already-registered": "Уже зарегистрированы? Хотите принять приглашение?",
+            "to": "в",
+            "register": "Зарегистрироваться",
+            "confirm": "Подтвердить",
+            "not-found": "Приглашение, на которое вы ссылаетесь, не найдено!",
+            "saved": "Теперь вы можете начать использовать свою учётную запись.",
+            "login": "Войдите в систему на платформе.",
+            "registro": "Регистрация"
+        },
+
+        "role": {
+            "title": "Роли",
+            "form": {
+                "title": "Роль",
+                "name": "Название",
+                "description": "Описание"
+            },
+
+            "permission": "Разрешения"
+        },
+
+        "scope": {
+            "title": "Рабочие пространства",
+            "id-prefix": "Id:",
+            "form": {
+                "title": "Рабочее пространство",
+                "name": "Название",
+                "description": "Описание"
+            },
+            "menu": {
+                "role": "Роли",
+                "permission": "Разрешения",
+                "meta": "Метаданные",
+                "image": "Загрузить изображение",
+                "users": "Пользователи"
+            },
+            "form-meta": {
+                "gen-key": "Сгенерировать ключ",
+                "text-gen-key": "Будет сгенерирован новый ключ, который заменит текущий.",
+                "question-gen-key": "Сгенерировать новый ключ?"
+            },
+            "meta": {
+                "title": "Метаданные"
+            }
+        },
+
+        "permission": {
+            "title": "Разрешения",
+            "form": {
+                "title": "Разрешение",
+                "name": "Название",
+                "description": "Описание",
+                "folder": "Группа",
+                "method": "Метод (необязательно)",
+                "methodFilter": "Фильтровать по названию"
+            },
+            "form-swagger": {
+                "title": "Импорт из Swagger",
+                "name": "URL"
+            },
+            "actions": {
+                "import": "Импортировать из Swagger",
+                "save-permission": "Сохранить разрешения роли",
+                "add-permission": "Добавить разрешение",
+                "delete-group": "Удалить группу",
+                "edit-permission": "Изменить разрешение",
+                "delete-permission": "Удалить разрешение"
+            }
+        },
+
+        "clients": {
+            "title": "OAuth-клиенты",
+            "form": {
+                "title": "Клиент",
+                "name": "Название",
+                "redirect_uris": "URI перенаправления (через запятую)",
+                "grants": "Grants",
+                "scopes": "Scopes",
+                "type": "Тип",
+                "postLogoutRedirectUris": "URI перенаправления после выхода (через запятую)",
+                "access_token_include_permissions": "Включить разрешения в ACCESS_TOKEN",
+                "openid_include_permissions": "Включить разрешения в ID_TOKEN"
+            },
+            "actions": {
+                "import": "Импортировать из Swagger",
+                "save-permission": "Сохранить разрешения роли"
+            }
+        },
+        "scopes": {
+            "title": "OAuth Scopes",
+            "form": {
+                "title": "Новый Scope",
+                "title-update": "Редактировать Scope",
+                "name": "Название",
+                "displayName": "Отображаемое имя",
+                "description": "Описание"
+            },
+            "actions": {
+                "import": "Импортировать из Swagger",
+                "save-permission": "Сохранить разрешения роли"
+            }
+        },
+
+        "dashboard": {
+            "greeting": "Здравствуйте!",
+            "hits": "Запросы",
+            "summary": "Сводка",
+            "load-error": "Ошибка при загрузке панели",
+            "total": "Итого",
+            "total-with": "Итого: {{total}}",
+            "map-events": "{{value}} событий",
+            "unsupported-type": "Неподдерживаемый тип: {{type}}",
+            "filters": {
+                "business": "Компания",
+                "granularity": "Гранулярность",
+                "from": "От",
+                "to": "До",
+                "select-business": "Выберите компанию"
+            },
+            "granularity": {
+                "hour": "Час",
+                "day": "День",
+                "week": "Неделя",
+                "month": "Месяц"
+            },
+            "sections": {
+                "auth": "Аутентификация",
+                "users": "Пользователи",
+                "rbac": "RBAC",
+                "invitations": "Приглашения",
+                "geo": "Гео",
+                "risk": "Риск"
+            }
+        }
+    },
+
+    "agencia": {
+        "hero": {
+            "description": "Создавайте поездки, продавайте билеты и продвигайте своё транспортное агентство",
+            "title": "Создайте своё агентство",
+            "button": "Начать"
+        },
+        "stats": {
+            "title": "Наши сервисы продолжают",
+            "subtitle": "расти"
+        },
+        "servicios": {
+            "title": "УСЛУГИ",
+            "subtitle": "рост",
+            "subtitle-pasaje": "Позвольте вашей команде автоматизировать продажу билетов",
+            "descripcion-pasaje": "Управляйте запросами на перевозку ваших клиентов из любого места, назначайте билеты и автоматически отправляйте билет на поездку"
+        }
+    },
+
+    "accion": {
+        "aceptar": "Принять",
+        "adicionar": "Добавить",
+        "salvar": "Сохранить",
+        "cancelar": "Отмена",
+        "editar": "Редактировать",
+        "eliminar": "Удалить",
+        "preguntaEliminar": "Вы уверены, что хотите удалить этот элемент?",
+        "confirmacion": "Подтверждение",
+        "titulo": "Действия",
+        "atras": "Назад",
+        "adelante": "Далее",
+        "abrir": "Открыть",
+        "continuar": "Продолжить",
+        "iniciar": "Начать",
+        "terminado": "Завершено",
+        "de": "из",
+        "buscar": "Поиск...",
+        "registrar": "Зарегистрировать",
+        "confirmar": "Подтвердить",
+        "copiar": "Копировать",
+        "pagar": "Оплатить",
+        "exportar": "Экспортировать",
+        "invitar": "Пригласить",
+        "importar": "Импортировать",
+        "subir": "Загрузить",
+        "salir": "Выйти",
+        "guardar": "Сохранить",
+        "reintentar": "Повторить попытку",
+        "seleccione": "Выберите...",
+        "opciones": "Параметры",
+        "sin-rol": "Роль не назначена"
+    },
+
+    "settings": {
+        "title": "Настройки",
+        "dialog": {
+            "new-option": "Новый параметр",
+            "type": "Тип",
+            "name": "Название",
+            "label": "Метка",
+            "placeholder": "Плейсхолдер",
+            "group": "Группа",
+            "visibility": "Видимость",
+            "options": "Параметры",
+            "url": "URL",
+            "map-result-url": "Map Result URL",
+            "type-placeholder": "Тип поля"
+        },
+        "types": {
+            "input": "Input",
+            "boolean": "Boolean",
+            "radio": "Radio",
+            "select": "Select",
+            "multiselect": "Multi-Select",
+            "text": "Text",
+            "autogen": "Autogen",
+            "apigen": "API"
+        },
+        "menu": {
+            "add-option": "Добавить параметр",
+            "reset-defaults": "Параметры по умолчанию (Сброс)"
+        },
+        "confirm": {
+            "delete-message": "Вы уверены, что хотите удалить этот элемент?",
+            "reset-message": "Вы уверены, что хотите загрузить конфигурацию по умолчанию? Эта операция удалит текущие элементы."
+        },
+        "save-options": "Сохранить параметры",
+        "default-options": "Параметры по умолчанию"
+    },
+
+    "menu": {
+        "home": "Главная",
+        "profile": "Мой профиль",
+        "darkmode": "Тёмная тема",
+        "lightmode": "Светлая тема",
+        "logout": "Выйти",
+        "language": "Язык",
+        "pin": "Закрепить",
+        "unpin": "Открепить",
+        "section": {
+            "appearance": "Внешний вид",
+            "rbac": "RBAC",
+            "settings": "Управление"
+        },
+        "polisafe": {
+            "user": "Пользователи",
+            "role": "Роли",
+            "permission": "Разрешения",
+            "workspace": "Рабочие пространства",
+            "oauth2": "OAuth2",
+            "clients": "Клиенты",
+            "scopes": "Scopes",
+            "members": "Участники",
+            "settings": "Настройки"
+        }
+    },
+
+    "crumb": {
+        "security": "Безопасность",
+        "demo": "Демо",
+        "error": "Ошибка",
+        "profile": "Мой профиль",
+        "polisafe": "Polisafe",
+        "invoices": "Счета"
+    },
+
+    "topbar": {
+        "search": "Поиск...",
+        "switch-workspace": "Переключить рабочее пространство"
+    },
+
+    "splash": {
+        "loading": "Загрузка окружения..."
+    },
+
+    "common": {
+        "error-title": "Ошибка",
+        "conflict-title": "Конфликт",
+        "notfound-detail": "Указанная запись не существует.",
+        "save-title": "Сохранить",
+        "delete-title": "Удалить",
+        "copy-title": "Копировать",
+        "copied": "Скопировано в буфер обмена.",
+        "upload-title": "Загрузить файл",
+        "uploaded": "Файл загружен.",
+        "upload-error": "Не удалось загрузить файл.",
+        "upload-errors": {
+            "request-failed": "Ошибка обработки запроса",
+            "invalid-or-large": "Файл недействителен или слишком большой",
+            "exceeds-max-size": "Файл превышает максимально допустимый размер",
+            "connection-error": "Ошибка соединения с сервером",
+            "max-size-template": "Файл превышает максимальный размер {{maxSizeMB}} МБ",
+            "type-not-allowed": "Тип файла не разрешён"
+        },
+        "saved-detail": "Операция выполнена успешно.",
+        "error-detail": "При выполнении операции произошла ошибка. Обратитесь к администратору.",
+        "conflict-detail": "Указанная запись уже существует.",
+        "no-data": "Нет данных",
+        "records": "{totalRecords} элементов",
+        "delete-confirm": {
+            "message": "После удаления восстановление будет невозможно",
+            "header": "Удалить элемент?"
+        },
+        "confirm-logout": {
+            "message": "Вы уверены, что хотите завершить этот сеанс?"
+        },
+        "no-results": "Результаты не найдены"
+    },
+
+    "error": {
+        "offline": {
+            "title": "Нет соединения",
+            "description": "Произошла ошибка связи. Проверьте подключение и повторите попытку."
+        },
+        "unauthorized": {
+            "title": "Не авторизован",
+            "description": "Для доступа к этому ресурсу требуется аутентификация."
+        },
+        "notfound": {
+            "title": "Не найдено",
+            "description": "Не удалось найти ресурс, к которому вы пытаетесь обратиться.",
+            "message": "Запрошенный ресурс недоступен."
+        },
+        "internal": {
+            "title": "Внутренняя ошибка",
+            "description": "Произошла внутренняя ошибка приложения; информация о ней передана в систему."
+        },
+        "unknown": {
+            "title": "Неизвестная ошибка",
+            "description": "Произошла непредвиденная ошибка. Повторите попытку позже."
+        },
+        "go-dashboard": "Перейти на панель управления"
+    },
+
+    "oauth2": {
+        "loading": "Выполняется вход...",
+        "waiting": "Пожалуйста, подождите, пока завершится ваша аутентификация",
+        "welcome": "Добро пожаловать!",
+        "welcome-message": "Вы успешно вошли в систему",
+        "auth-error-title": "Ошибка аутентификации",
+        "auth-error-message": "Ошибка при входе в систему",
+        "go-dashboard": "Перейти на панель управления"
+    },
+
+    "sso": {
+        "loading": "Загрузка",
+        "loading-center": "Загрузка центра учётных записей...",
+        "loading-account": "Загрузка менеджера учётных записей...",
+        "error-config": "Ошибка: не удалось определить стартовую конфигурацию для менеджера учётных записей"
+    },
+
+    "theme": {
+        "primary": "Основной",
+        "surface": "Поверхность",
+        "presets": "Пресеты",
+        "menu-mode": "Режим меню",
+        "static": "Статический",
+        "overlay": "Наложение"
+    },
+
+    "oauth": {
+        "clients": {
+            "client-id": "Идентификатор клиента:",
+            "client-secret": "Секрет клиента",
+            "redirect-uris": "URI перенаправления:",
+            "grants": "Grants:",
+            "settings": "Настройки"
+        },
+        "type": {
+            "confidential": "Конфиденциальный",
+            "public": "Публичный"
+        },
+        "grants": {
+            "authorization-code": "Authorization Code",
+            "client-credentials": "Client Credentials",
+            "password": "Password",
+            "refresh-token": "Refresh Token"
+        }
+    },
+
+    "members": {
+        "title": "Участники",
+        "subtitle": "Подключайте и управляйте своей командой в одном месте",
+        "invitations": "Приглашения",
+        "invitations-subtitle": "Безопасно управляйте подключением новых участников",
+        "copy-link": "Скопировать ссылку-приглашение",
+        "organization": "Организация: {{name}}",
+        "created": "создана: {{date}}",
+        "updated": "изменена: {{date}}",
+        "no-roles": "Нет ролей для назначения",
+        "assign-role-title": "Назначить роль",
+        "assign-role-detail": "Роль успешно назначена.",
+        "link-copied": "Ссылка-приглашение скопирована в буфер обмена: {{link}}",
+        "copy-error": "Ошибка копирования в буфер обмена",
+        "state": {
+            "pending": "В ОЖИДАНИИ",
+            "open": "ОТКРЫТО"
+        },
+        "confirm-scope": {
+            "message": "Это действие удалит выбранного пользователя из текущей организации",
+            "header": "Удалить из организации?"
+        },
+        "confirm-invitation": {
+            "message": "Приглашение будет удалено и станет недействительным",
+            "header": "Удалить приглашение?"
+        },
+        "invitation": {
+            "title": "Новое приглашение",
+            "saved": "Приглашение зарегистрировано и отправлено.",
+            "not-found": "Приглашение, на которое вы ссылаетесь, не найдено!",
+            "email": "Электронная почта",
+            "role": "Роль",
+            "description": "Описание"
+        }
+    },
+
+    "factura": {
+        "title": "Мои счета — Лицензии",
+        "subtitle": "Просмотр счетов за использование приложения",
+        "state": {
+            "paid": "ОПЛАЧЕНО",
+            "pending": "НЕ ОПЛАЧЕНО"
+        },
+        "created": "Создан: {{date}}",
+        "updated": "Обновлён: {{date}}"
+    },
+
+    "widget-license": {
+        "unknown": "Лицензия: неизвестна",
+        "license": "Лицензия: {{days}} дн."
+    }
+}

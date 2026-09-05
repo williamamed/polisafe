@@ -1,124 +1,486 @@
 {
-    "title":"Hola",
-    "hi":"Ahhhh",
-    "panel":{
-        "user":{
-            "titulo":"Panel",
-            "examen":"Take exam",
-            "hey":"Hey!",
-            "info":"Start with an exam and learn with us",
-            "puntuacion":"Score evolution",
-            "rango":"Range...",
-            "semana":"Week",
-            "mes":"Month",
-            "infopanel":"User information",
-            "certificaciones":"Available Certifications"
+    "info-global": "Welcome to Polisafe, security management platform",
+
+    "polisafe": {
+        "user": {
+            "title": "User",
+            "form": {
+                "title": "User",
+                "name": "Name",
+                "username": "Username",
+                "email": "Email",
+                "phone": "Phone",
+                "state": "State",
+                "placeholder-state": "Select..."
+            },
+            "change-password": {
+                "title": "Change password",
+                "password": "New password",
+                "repassword": "Repeat password"
+            },
+            "active": "Active",
+            "disable": "Disabled",
+            "created": "Created",
+            "updated": "Updated",
+            "delete-scope": "Remove from Tenant",
+            "password": "Change password",
+            "roles": "Assign roles",
+            "add-scope": "Add existing to Tenant",
+            "roles-select": {
+                "placeholder": "Select roles...",
+                "header": "Available Roles",
+                "remove-all": "Remove All",
+                "context-role": "Context Role"
+            }
         },
-        "admin":{
-            "info":"Create certifications and exams to your clients",
-            "action":"",
-            "activos":"Active",
-            "examenes":"Completed Exams",
-            "infopanel":"Business Panel",
-            "certificados":"Certificates",
-            "estados":"User States",
-            "dia":"Day",
-            "semana":"Week",
-            "mes":"Month",
-            "agrupar":"Group..."
-        }
-    },
-    "tema":{
-        "titulo":"Topic",
-        "form":{
-            "titulo":"Title",
-            "descripcion":"Description"
+
+        "profile": {
+            "title": "My profile",
+            "name": "Name",
+            "username": "Username",
+            "email": "Email",
+            "phone": "Phone",
+            "change-password": "Change password",
+            "password": "New password",
+            "repassword": "Repeat password",
+            "password-mismatch": "Passwords do not match",
+            "saved": "Profile data updated successfully.",
+            "password-changed": "Password changed successfully.",
+            "validation": "Validation",
+            "password-invalid": "The current password is incorrect.",
+            "current": "Current password"
         },
-        "bienvenido":"Welcome to ProDrive Mentor Courses"
-    },
 
-    "examen":{
-        "titulo":"Exams",
-        "form":{
-            "titulo":"Title",
-            "descripcion":"Description",
-            "publico":"Public",
-            "windowtitle":"Exam"
+        "invitation": {
+            "title": "Invitation",
+            "subtitle": "You have been invited to join the organization",
+            "email": "Email",
+            "password": "New password",
+            "name": "Full name",
+            "already-registered": "Already registered? Do you want to accept the invitation?",
+            "to": "to",
+            "register": "Register",
+            "confirm": "Confirm",
+            "not-found": "The invitation you are referring to was not found!",
+            "saved": "You can now start using your account.",
+            "login": "Sign in to the platform.",
+            "registro": "Registration"
         },
-        "bienvenido":"Select an exam to start",
-        "completado":"Completed exams"
-    },
 
-    "pregunta":{
-        "titulo":"Questions",
-        "form":{
-            "titulo":"Question",
-            "encabezado":"Entitle"
+        "role": {
+            "title": "Roles",
+            "form": {
+                "title": "Role",
+                "name": "Name",
+                "description": "Description"
+            },
+
+            "permission": "Permissions"
+        },
+
+        "scope": {
+            "title": "Workspaces",
+            "id-prefix": "Id:",
+            "form": {
+                "title": "Workspace",
+                "name": "Name",
+                "description": "Description"
+            },
+            "menu": {
+                "role": "Roles",
+                "permission": "Permissions",
+                "meta": "Metadata",
+                "image": "Upload image",
+                "users": "Users"
+            },
+            "form-meta": {
+                "gen-key": "Generate key",
+                "text-gen-key": "A new key will be generated and will replace the current one.",
+                "question-gen-key": "Generate a new key?"
+            },
+            "meta": {
+                "title": "Metadata"
+            }
+        },
+
+        "permission": {
+            "title": "Permissions",
+            "form": {
+                "title": "Permission",
+                "name": "Name",
+                "description": "Description",
+                "folder": "Folder",
+                "method": "Method (Optional)",
+                "methodFilter": "Filter by name"
+            },
+            "form-swagger": {
+                "title": "Import from swagger",
+                "name": "Url"
+            },
+            "actions": {
+                "import": "Import from swagger",
+                "save-permission": "Save role permissions",
+                "add-permission": "Add permission",
+                "delete-group": "Delete group",
+                "edit-permission": "Edit permission",
+                "delete-permission": "Delete permission"
+            }
+        },
+
+        "clients": {
+            "title": "OAuth clients",
+            "form": {
+                "title": "Client",
+                "name": "Name",
+                "redirect_uris": "Redirect URIs (comma separated)",
+                "grants": "Grants",
+                "scopes": "Scopes",
+                "type": "Type",
+                "postLogoutRedirectUris": "Logout redirect URIs (comma separated)",
+                "access_token_include_permissions": "Enable ACCESS_TOKEN permissions",
+                "openid_include_permissions": "Enable ID_TOKEN permissions"
+            },
+            "actions": {
+                "import": "Import from swagger",
+                "save-permission": "Save role permissions"
+            }
+        },
+        "scopes": {
+            "title": "OAuth scopes",
+            "form": {
+                "title": "New Scope",
+                "title-update": "Edit Scope",
+                "name": "Name",
+                "displayName": "Display name",
+                "description": "Description"
+            },
+            "actions": {
+                "import": "Import from swagger",
+                "save-permission": "Save role permissions"
+            }
+        },
+
+        "dashboard": {
+            "greeting": "Hello!",
+            "hits": "Hits",
+            "summary": "Summary",
+            "load-error": "Error loading the dashboard",
+            "total": "Total",
+            "total-with": "Total: {{total}}",
+            "map-events": "{{value}} events",
+            "unsupported-type": "Unsupported type: {{type}}",
+            "filters": {
+                "business": "Business",
+                "granularity": "Granularity",
+                "from": "From",
+                "to": "To",
+                "select-business": "Select business"
+            },
+            "granularity": {
+                "hour": "Hour",
+                "day": "Day",
+                "week": "Week",
+                "month": "Month"
+            },
+            "sections": {
+                "auth": "Authentication",
+                "users": "Users",
+                "rbac": "RBAC",
+                "invitations": "Invitations",
+                "geo": "Geo",
+                "risk": "Risk"
+            }
         }
     },
 
-    "certificacion":{
-        "titulo":"Certifications",
-        "form":{
-            "titulo":"Certification",
-            "nombre":"Name",
-            "canthoras":"Hours quantity",
-            "imagen":"Image",
-            "upload":"Upload images"
-        }
-    },
-    "titulacion":{
-        "titulo":"Certifications",
-        "exportar":"Export",
-        "puntos":"points",
-        "empresa":"Company"
-    },
-
-    "polisafe":{
-        "profile":{
-            "title":"My profile",
-            "name":"Name",
-            "username":"Username",
-            "email":"Email",
-            "phone":"Phone",
-            "change-password":"Change password",
-            "password":"New password",
-            "repassword":"Repeat password",
-            "password-mismatch":"Passwords do not match",
-            "saved":"Profile data updated successfully.",
-            "password-changed":"Password changed successfully."
+    "agencia": {
+        "hero": {
+            "description": "Create trips, sell tickets and promote your transportation agency",
+            "title": "Start your agency",
+            "button": "Get started"
+        },
+        "stats": {
+            "title": "Our services keep",
+            "subtitle": "growing"
+        },
+        "servicios": {
+            "title": "SERVICES",
+            "subtitle": "growing",
+            "subtitle-pasaje": "Let your team automate tickets",
+            "descripcion-pasaje": "Manage your customers' transportation requests from anywhere, assign tickets and send the travel ticket automatically"
         }
     },
 
-    "accion":{
-        "aceptar":"Accept",
-        "adicionar":"Add",
-        "salvar":"Save",
-        "cancelar":"Cancel",
-        "editar":"Edit",
-        "eliminar":"Delete",
-        "preguntaEliminar":"Are you shure you want to delete this element?",
-        "confirmacion":"Confirmation",
-        "titulo":"Actions",
+    "accion": {
+        "aceptar": "Accept",
+        "adicionar": "Add",
+        "salvar": "Save",
+        "cancelar": "Cancel",
+        "editar": "Edit",
+        "eliminar": "Delete",
+        "preguntaEliminar": "Are you sure you want to delete this element?",
+        "confirmacion": "Confirmation",
+        "titulo": "Actions",
         "atras": "Back",
         "adelante": "Next",
-        "abrir":"Open",
-        "continuar":"Continue",
-        "iniciar":"Start",
-        "terminado":"Finished",
-        "de":"of"
+        "abrir": "Open",
+        "continuar": "Continue",
+        "iniciar": "Start",
+        "terminado": "Finished",
+        "de": "of",
+        "buscar": "Search...",
+        "registrar": "Register",
+        "confirmar": "Confirm",
+        "copiar": "Copy",
+        "pagar": "Pay",
+        "exportar": "Export",
+        "invitar": "Invite",
+        "importar": "Import",
+        "subir": "Upload",
+        "salir": "Sign out",
+        "guardar": "Save",
+        "reintentar": "Retry",
+        "seleccione": "Select...",
+        "opciones": "Options",
+        "sin-rol": "No role assigned"
     },
-    "menu":{
-        "topics":"Topics",
-        "mentor":"Mentor",
-        "certificate":"Certification",
-        "clients":"Clients",
-        "course":"Course",
-        "exams":"Exams",
-        "graduation":"Entitle",
-        "home":"Home",
-        "profile":"My profile",
-        "darkmode":"Dark Mode",
-        "lightmode":"Light Mode"
+
+    "settings": {
+        "title": "Settings",
+        "dialog": {
+            "new-option": "New option",
+            "type": "Type",
+            "name": "Name",
+            "label": "Label",
+            "placeholder": "Placeholder",
+            "group": "Group",
+            "visibility": "Visibility",
+            "options": "Options",
+            "url": "URL",
+            "map-result-url": "Map Result URL",
+            "type-placeholder": "Field type"
+        },
+        "types": {
+            "input": "Input",
+            "boolean": "Boolean",
+            "radio": "Radio",
+            "select": "Select",
+            "multiselect": "Multi-Select",
+            "text": "Text",
+            "autogen": "Autogen",
+            "apigen": "API"
+        },
+        "menu": {
+            "add-option": "Add option",
+            "reset-defaults": "Default options (Reset)"
+        },
+        "confirm": {
+            "delete-message": "Are you sure you want to delete this element?",
+            "reset-message": "Are you sure you want to load the default configuration? This operation will remove the current elements."
+        },
+        "save-options": "Save options",
+        "default-options": "Default options"
+    },
+
+    "menu": {
+        "home": "Home",
+        "profile": "My profile",
+        "darkmode": "Dark mode",
+        "lightmode": "Light mode",
+        "logout": "Sign out",
+        "language": "Language",
+        "pin": "Pin",
+        "unpin": "Unpin",
+        "section": {
+            "appearance": "Appearance",
+            "rbac": "RBAC",
+            "settings": "Management"
+        },
+        "polisafe": {
+            "user": "Users",
+            "role": "Roles",
+            "permission": "Permissions",
+            "workspace": "Workspaces",
+            "oauth2": "OAuth2",
+            "clients": "Clients",
+            "scopes": "Scopes",
+            "members": "Members",
+            "settings": "Settings"
+        }
+    },
+
+    "crumb": {
+        "security": "Security",
+        "demo": "Demo",
+        "error": "Error",
+        "profile": "My profile",
+        "polisafe": "Polisafe",
+        "invoices": "Invoices"
+    },
+
+    "topbar": {
+        "search": "Search...",
+        "switch-workspace": "Switch workspace"
+    },
+
+    "splash": {
+        "loading": "Loading environment..."
+    },
+
+    "common": {
+        "error-title": "Error",
+        "conflict-title": "Conflict",
+        "notfound-detail": "The specified record does not exist.",
+        "save-title": "Save",
+        "delete-title": "Delete",
+        "copy-title": "Copy",
+        "copied": "Copied to clipboard.",
+        "upload-title": "Upload file",
+        "uploaded": "The file was uploaded.",
+        "upload-error": "The file could not be uploaded.",
+        "upload-errors": {
+            "request-failed": "Error processing the request",
+            "invalid-or-large": "Invalid file or too large",
+            "exceeds-max-size": "The file exceeds the maximum allowed size",
+            "connection-error": "Connection error with the server",
+            "max-size-template": "The file exceeds the maximum size of {{maxSizeMB}}MB",
+            "type-not-allowed": "File type not allowed"
+        },
+        "saved-detail": "The operation was completed successfully.",
+        "error-detail": "An error occurred during the operation, please contact the administrator.",
+        "conflict-detail": "The specified record already exists.",
+        "no-data": "No data",
+        "records": "{totalRecords} elements",
+        "delete-confirm": {
+            "message": "Once deleted it cannot be recovered",
+            "header": "Delete item?"
+        },
+        "confirm-logout": {
+            "message": "Are you sure you want to sign out?"
+        },
+        "no-results": "No results found"
+    },
+
+    "error": {
+        "offline": {
+            "title": "No connection",
+            "description": "A communication error occurred. Check your connection and try again."
+        },
+        "unauthorized": {
+            "title": "Unauthorized",
+            "description": "Authentication is required to access this resource."
+        },
+        "notfound": {
+            "title": "Not Found",
+            "description": "The resource you are trying to access could not be found.",
+            "message": "The requested resource is not available."
+        },
+        "internal": {
+            "title": "Internal error",
+            "description": "An internal error occurred in the application and has been reported to the system."
+        },
+        "unknown": {
+            "title": "Unknown error",
+            "description": "An unexpected error has occurred. Please try again later."
+        },
+        "go-dashboard": "Go to Dashboard"
+    },
+
+    "oauth2": {
+        "loading": "Signing in...",
+        "waiting": "Please wait while we complete your authentication",
+        "welcome": "Welcome!",
+        "welcome-message": "You have signed in successfully",
+        "auth-error-title": "Authentication Error",
+        "auth-error-message": "Error signing in",
+        "go-dashboard": "Go to Dashboard"
+    },
+
+    "sso": {
+        "loading": "Loading",
+        "loading-center": "Loading account center...",
+        "loading-account": "Loading account manager...",
+        "error-config": "Error: Could not determine a startup configuration for the account manager"
+    },
+
+    "theme": {
+        "primary": "Primary",
+        "surface": "Surface",
+        "presets": "Presets",
+        "menu-mode": "Menu Mode",
+        "static": "Static",
+        "overlay": "Overlay"
+    },
+
+    "oauth": {
+        "clients": {
+            "client-id": "Client Id:",
+            "client-secret": "Client Secret",
+            "redirect-uris": "Redirect URIs:",
+            "grants": "Grants:",
+            "settings": "Settings"
+        },
+        "type": {
+            "confidential": "Confidential",
+            "public": "Public"
+        },
+        "grants": {
+            "authorization-code": "Authorization Code",
+            "client-credentials": "Client Credentials",
+            "password": "Password",
+            "refresh-token": "Refresh Token"
+        }
+    },
+
+    "members": {
+        "title": "Members",
+        "subtitle": "Connect and manage your team in one place",
+        "invitations": "Invitations",
+        "invitations-subtitle": "Securely manage the onboarding of new members",
+        "copy-link": "Copy invitation link",
+        "organization": "Organization: {{name}}",
+        "created": "created: {{date}}",
+        "updated": "updated: {{date}}",
+        "no-roles": "No roles to assign",
+        "assign-role-title": "Assign role",
+        "assign-role-detail": "Role assignment completed successfully.",
+        "link-copied": "Invitation link copied to clipboard: {{link}}",
+        "copy-error": "Error copying to the clipboard",
+        "state": {
+            "pending": "PENDING",
+            "open": "OPEN"
+        },
+        "confirm-scope": {
+            "message": "This action will remove the selected user from the current organization",
+            "header": "Remove from organization?"
+        },
+        "confirm-invitation": {
+            "message": "The invitation will be deleted and will become invalid",
+            "header": "Delete invitation?"
+        },
+        "invitation": {
+            "title": "New invitation",
+            "saved": "The invitation was registered and sent.",
+            "not-found": "The invitation you are referring to was not found!",
+            "email": "Email",
+            "role": "Role",
+            "description": "Description"
+        }
+    },
+
+    "factura": {
+        "title": "My Invoices - Licenses",
+        "subtitle": "View the invoices for your application subscription",
+        "state": {
+            "paid": "PAID",
+            "pending": "UNPAID"
+        },
+        "created": "Created: {{date}}",
+        "updated": "Updated: {{date}}"
+    },
+
+    "widget-license": {
+        "unknown": "License: Unknown",
+        "license": "License: {{days}} days"
     }
 }

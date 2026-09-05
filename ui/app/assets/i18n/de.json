@@ -1,0 +1,486 @@
+{
+    "info-global": "Willkommen bei Polisafe, der Plattform für Sicherheitsverwaltung",
+
+    "polisafe": {
+        "user": {
+            "title": "Benutzer",
+            "form": {
+                "title": "Benutzer",
+                "name": "Name",
+                "username": "Benutzername",
+                "email": "E-Mail",
+                "phone": "Telefon",
+                "state": "Status",
+                "placeholder-state": "Auswählen..."
+            },
+            "change-password": {
+                "title": "Passwort ändern",
+                "password": "Neues Passwort",
+                "repassword": "Passwort wiederholen"
+            },
+            "active": "Aktiv",
+            "disable": "Deaktiviert",
+            "created": "Erstellt",
+            "updated": "Aktualisiert",
+            "delete-scope": "Aus dem Tenant entfernen",
+            "password": "Passwort ändern",
+            "roles": "Rollen zuweisen",
+            "add-scope": "Bestehenden zum Tenant hinzufügen",
+            "roles-select": {
+                "placeholder": "Rollen auswählen...",
+                "header": "Verfügbare Rollen",
+                "remove-all": "Alle entfernen",
+                "context-role": "Kontextrolle"
+            }
+        },
+
+        "profile": {
+            "title": "Mein Profil",
+            "name": "Name",
+            "username": "Benutzername",
+            "email": "E-Mail",
+            "phone": "Telefon",
+            "change-password": "Passwort ändern",
+            "password": "Neues Passwort",
+            "repassword": "Passwort wiederholen",
+            "password-mismatch": "Die Passwörter stimmen nicht überein",
+            "saved": "Die Daten wurden erfolgreich aktualisiert.",
+            "password-changed": "Das Passwort wurde erfolgreich geändert.",
+            "validation": "Validierung",
+            "password-invalid": "Das aktuelle Passwort ist falsch.",
+            "current": "Aktuelles Passwort"
+        },
+
+        "invitation": {
+            "title": "Einladung",
+            "subtitle": "Sie wurden eingeladen, der Organisation beizutreten",
+            "email": "E-Mail",
+            "password": "Neues Passwort",
+            "name": "Vor- und Nachname",
+            "already-registered": "Bereits registriert? Möchten Sie die Einladung annehmen?",
+            "to": "an",
+            "register": "Registrieren",
+            "confirm": "Bestätigen",
+            "not-found": "Die referenzierte Einladung wurde nicht gefunden!",
+            "saved": "Sie können Ihr Konto jetzt verwenden.",
+            "login": "Melden Sie sich auf der Plattform an.",
+            "registro": "Registrierung"
+        },
+
+        "role": {
+            "title": "Rollen",
+            "form": {
+                "title": "Rolle",
+                "name": "Name",
+                "description": "Beschreibung"
+            },
+
+            "permission": "Berechtigungen"
+        },
+
+        "scope": {
+            "title": "Arbeitsbereiche",
+            "id-prefix": "ID:",
+            "form": {
+                "title": "Arbeitsbereich",
+                "name": "Name",
+                "description": "Beschreibung"
+            },
+            "menu": {
+                "role": "Rollen",
+                "permission": "Berechtigungen",
+                "meta": "Metadaten",
+                "image": "Bild hochladen",
+                "users": "Benutzer"
+            },
+            "form-meta": {
+                "gen-key": "Schlüssel generieren",
+                "text-gen-key": "Es wird ein neuer Schlüssel generiert, der den aktuellen ersetzt.",
+                "question-gen-key": "Neuen Schlüssel generieren?"
+            },
+            "meta": {
+                "title": "Metadaten"
+            }
+        },
+
+        "permission": {
+            "title": "Berechtigungen",
+            "form": {
+                "title": "Berechtigung",
+                "name": "Name",
+                "description": "Beschreibung",
+                "folder": "Gruppierung",
+                "method": "Methode (optional)",
+                "methodFilter": "Nach Name filtern"
+            },
+            "form-swagger": {
+                "title": "Aus Swagger importieren",
+                "name": "URL"
+            },
+            "actions": {
+                "import": "Aus Swagger importieren",
+                "save-permission": "Rollenberechtigungen speichern",
+                "add-permission": "Berechtigung hinzufügen",
+                "delete-group": "Gruppe löschen",
+                "edit-permission": "Berechtigung bearbeiten",
+                "delete-permission": "Berechtigung löschen"
+            }
+        },
+
+        "clients": {
+            "title": "OAuth-Clients",
+            "form": {
+                "title": "Client",
+                "name": "Name",
+                "redirect_uris": "Redirect-URIs (durch Kommas getrennt)",
+                "grants": "Grants",
+                "scopes": "Scopes",
+                "type": "Typ",
+                "postLogoutRedirectUris": "Logout-Redirect-URIs (durch Kommas getrennt)",
+                "access_token_include_permissions": "ACCESS_TOKEN-Berechtigungen aktivieren",
+                "openid_include_permissions": "ID_TOKEN-Berechtigungen aktivieren"
+            },
+            "actions": {
+                "import": "Aus Swagger importieren",
+                "save-permission": "Rollenberechtigungen speichern"
+            }
+        },
+        "scopes": {
+            "title": "OAuth-Scopes",
+            "form": {
+                "title": "Neuer Scope",
+                "title-update": "Scope bearbeiten",
+                "name": "Name",
+                "displayName": "Anzeigename",
+                "description": "Beschreibung"
+            },
+            "actions": {
+                "import": "Aus Swagger importieren",
+                "save-permission": "Rollenberechtigungen speichern"
+            }
+        },
+
+        "dashboard": {
+            "greeting": "Hallo!",
+            "hits": "Hits",
+            "summary": "Zusammenfassung",
+            "load-error": "Fehler beim Laden des Dashboards",
+            "total": "Gesamt",
+            "total-with": "Gesamt: {{total}}",
+            "map-events": "{{value}} Ereignisse",
+            "unsupported-type": "Nicht unterstützter Typ: {{type}}",
+            "filters": {
+                "business": "Geschäftsbereich",
+                "granularity": "Granularität",
+                "from": "Von",
+                "to": "Bis",
+                "select-business": "Geschäftsbereich auswählen"
+            },
+            "granularity": {
+                "hour": "Stunde",
+                "day": "Tag",
+                "week": "Woche",
+                "month": "Monat"
+            },
+            "sections": {
+                "auth": "Authentifizierung",
+                "users": "Benutzer",
+                "rbac": "RBAC",
+                "invitations": "Einladungen",
+                "geo": "Geo",
+                "risk": "Risiko"
+            }
+        }
+    },
+
+    "agencia": {
+        "hero": {
+            "description": "Erstellen Sie Reisen, verkaufen Sie Tickets und bewerben Sie Ihre Transportagentur",
+            "title": "Starten Sie Ihre Agentur",
+            "button": "Loslegen"
+        },
+        "stats": {
+            "title": "Unsere Dienste wachsen",
+            "subtitle": "stetig"
+        },
+        "servicios": {
+            "title": "LEISTUNGEN",
+            "subtitle": "stetig",
+            "subtitle-pasaje": "Ermöglichen Sie Ihrem Team, die Ticketbuchungen zu automatisieren",
+            "descripcion-pasaje": "Verwalten Sie von überall die Transportanfragen Ihrer Kunden, weisen Sie Plätze zu und senden Sie das Reiseticket automatisch"
+        }
+    },
+
+    "accion": {
+        "aceptar": "Akzeptieren",
+        "adicionar": "Hinzufügen",
+        "salvar": "Speichern",
+        "cancelar": "Abbrechen",
+        "editar": "Bearbeiten",
+        "eliminar": "Löschen",
+        "preguntaEliminar": "Möchten Sie dieses Element wirklich löschen?",
+        "confirmacion": "Bestätigung",
+        "titulo": "Aktionen",
+        "atras": "Zurück",
+        "adelante": "Weiter",
+        "abrir": "Öffnen",
+        "continuar": "Fortfahren",
+        "iniciar": "Starten",
+        "terminado": "Abgeschlossen",
+        "de": "von",
+        "buscar": "Suchen...",
+        "registrar": "Registrieren",
+        "confirmar": "Bestätigen",
+        "copiar": "Kopieren",
+        "pagar": "Bezahlen",
+        "exportar": "Exportieren",
+        "invitar": "Einladen",
+        "importar": "Importieren",
+        "subir": "Hochladen",
+        "salir": "Abmelden",
+        "guardar": "Speichern",
+        "reintentar": "Erneut versuchen",
+        "seleccione": "Auswählen...",
+        "opciones": "Optionen",
+        "sin-rol": "Keine Rolle zugewiesen"
+    },
+
+    "settings": {
+        "title": "Einstellungen",
+        "dialog": {
+            "new-option": "Neue Option",
+            "type": "Typ",
+            "name": "Name",
+            "label": "Bezeichnung",
+            "placeholder": "Platzhalter",
+            "group": "Gruppe",
+            "visibility": "Sichtbarkeit",
+            "options": "Optionen",
+            "url": "URL",
+            "map-result-url": "Map Result URL",
+            "type-placeholder": "Feldtyp"
+        },
+        "types": {
+            "input": "Eingabe",
+            "boolean": "Boolean",
+            "radio": "Radio",
+            "select": "Auswahl",
+            "multiselect": "Mehrfachauswahl",
+            "text": "Text",
+            "autogen": "Autogen",
+            "apigen": "API"
+        },
+        "menu": {
+            "add-option": "Option hinzufügen",
+            "reset-defaults": "Standardoptionen (Zurücksetzen)"
+        },
+        "confirm": {
+            "delete-message": "Möchten Sie dieses Element wirklich löschen?",
+            "reset-message": "Möchten Sie wirklich die Standardkonfiguration laden? Dieser Vorgang entfernt die aktuellen Elemente."
+        },
+        "save-options": "Optionen speichern",
+        "default-options": "Standardoptionen"
+    },
+
+    "menu": {
+        "home": "Startseite",
+        "profile": "Mein Profil",
+        "darkmode": "Dunkelmodus",
+        "lightmode": "Hellmodus",
+        "logout": "Abmelden",
+        "language": "Sprache",
+        "pin": "Anheften",
+        "unpin": "Lösen",
+        "section": {
+            "appearance": "Darstellung",
+            "rbac": "RBAC",
+            "settings": "Verwaltung"
+        },
+        "polisafe": {
+            "user": "Benutzer",
+            "role": "Rollen",
+            "permission": "Berechtigungen",
+            "workspace": "Arbeitsbereiche",
+            "oauth2": "OAuth2",
+            "clients": "Clients",
+            "scopes": "Scopes",
+            "members": "Mitglieder",
+            "settings": "Einstellungen"
+        }
+    },
+
+    "crumb": {
+        "security": "Sicherheit",
+        "demo": "Demo",
+        "error": "Fehler",
+        "profile": "Mein Profil",
+        "polisafe": "Polisafe",
+        "invoices": "Rechnungen"
+    },
+
+    "topbar": {
+        "search": "Suchen...",
+        "switch-workspace": "Arbeitsbereich wechseln"
+    },
+
+    "splash": {
+        "loading": "Umgebung wird geladen..."
+    },
+
+    "common": {
+        "error-title": "Fehler",
+        "conflict-title": "Konflikt",
+        "notfound-detail": "Der angegebene Datensatz existiert nicht.",
+        "save-title": "Speichern",
+        "delete-title": "Löschen",
+        "copy-title": "Kopieren",
+        "copied": "In die Zwischenablage kopiert.",
+        "upload-title": "Datei hochladen",
+        "uploaded": "Die Datei wurde hochgeladen.",
+        "upload-error": "Die Datei konnte nicht hochgeladen werden.",
+        "upload-errors": {
+            "request-failed": "Fehler bei der Verarbeitung der Anfrage",
+            "invalid-or-large": "Ungültige oder zu große Datei",
+            "exceeds-max-size": "Die Datei überschreitet die maximal zulässige Größe",
+            "connection-error": "Verbindungsfehler mit dem Server",
+            "max-size-template": "Die Datei überschreitet die maximale Größe von {{maxSizeMB}} MB",
+            "type-not-allowed": "Dateityp nicht zulässig"
+        },
+        "saved-detail": "Der Vorgang wurde erfolgreich ausgeführt.",
+        "error-detail": "Bei dem Vorgang ist ein Fehler aufgetreten. Bitte kontaktieren Sie den Administrator.",
+        "conflict-detail": "Der angegebene Datensatz existiert bereits.",
+        "no-data": "Keine Daten",
+        "records": "{totalRecords} Elemente",
+        "delete-confirm": {
+            "message": "Nach dem Löschen kann der Eintrag nicht wiederhergestellt werden",
+            "header": "Element löschen?"
+        },
+        "confirm-logout": {
+            "message": "Möchten Sie diese Sitzung wirklich beenden?"
+        },
+        "no-results": "Keine Ergebnisse gefunden"
+    },
+
+    "error": {
+        "offline": {
+            "title": "Keine Verbindung",
+            "description": "Bei der Kommunikation ist ein Fehler aufgetreten. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut."
+        },
+        "unauthorized": {
+            "title": "Nicht autorisiert",
+            "description": "Für den Zugriff auf diese Ressource ist eine Authentifizierung erforderlich."
+        },
+        "notfound": {
+            "title": "Nicht gefunden",
+            "description": "Die Ressource, auf die Sie zugreifen möchten, konnte nicht gefunden werden.",
+            "message": "Die angeforderte Ressource ist nicht verfügbar."
+        },
+        "internal": {
+            "title": "Interner Fehler",
+            "description": "In der Anwendung ist ein interner Fehler aufgetreten, der an das System gemeldet wurde."
+        },
+        "unknown": {
+            "title": "Unbekannter Fehler",
+            "description": "Es ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es später erneut."
+        },
+        "go-dashboard": "Zum Dashboard"
+    },
+
+    "oauth2": {
+        "loading": "Anmeldung läuft...",
+        "waiting": "Bitte warten Sie, während Ihre Authentifizierung abgeschlossen wird",
+        "welcome": "Willkommen!",
+        "welcome-message": "Sie haben sich erfolgreich angemeldet",
+        "auth-error-title": "Authentifizierungsfehler",
+        "auth-error-message": "Fehler bei der Anmeldung",
+        "go-dashboard": "Zum Dashboard"
+    },
+
+    "sso": {
+        "loading": "Wird geladen",
+        "loading-center": "Kontozentrum wird geladen...",
+        "loading-account": "Kontoverwaltung wird geladen...",
+        "error-config": "Fehler: Für die Kontoverwaltung konnte keine Startkonfiguration ermittelt werden"
+    },
+
+    "theme": {
+        "primary": "Primär",
+        "surface": "Oberfläche",
+        "presets": "Voreinstellungen",
+        "menu-mode": "Menümodus",
+        "static": "Statisch",
+        "overlay": "Overlay"
+    },
+
+    "oauth": {
+        "clients": {
+            "client-id": "Client-ID:",
+            "client-secret": "Client-Secret",
+            "redirect-uris": "Redirect-URIs:",
+            "grants": "Grants:",
+            "settings": "Einstellungen"
+        },
+        "type": {
+            "confidential": "Vertraulich",
+            "public": "Öffentlich"
+        },
+        "grants": {
+            "authorization-code": "Authorization Code",
+            "client-credentials": "Client Credentials",
+            "password": "Password",
+            "refresh-token": "Refresh Token"
+        }
+    },
+
+    "members": {
+        "title": "Mitglieder",
+        "subtitle": "Verbinden und verwalten Sie Ihr Team an einem Ort",
+        "invitations": "Einladungen",
+        "invitations-subtitle": "Verwalten Sie die Aufnahme neuer Mitglieder sicher",
+        "copy-link": "Einladungslink kopieren",
+        "organization": "Organisation: {{name}}",
+        "created": "erstellt: {{date}}",
+        "updated": "aktualisiert: {{date}}",
+        "no-roles": "Keine Rollen zum Zuweisen",
+        "assign-role-title": "Rolle zuweisen",
+        "assign-role-detail": "Die Rollenzuweisung wurde erfolgreich durchgeführt.",
+        "link-copied": "Einladungslink in die Zwischenablage kopiert: {{link}}",
+        "copy-error": "Fehler beim Kopieren in die Zwischenablage",
+        "state": {
+            "pending": "AUSSTEHEND",
+            "open": "OFFEN"
+        },
+        "confirm-scope": {
+            "message": "Diese Aktion entfernt den ausgewählten Benutzer aus der aktuellen Organisation",
+            "header": "Aus der Organisation entfernen?"
+        },
+        "confirm-invitation": {
+            "message": "Die Einladung wird gelöscht und verliert ihre Gültigkeit",
+            "header": "Einladung löschen?"
+        },
+        "invitation": {
+            "title": "Neue Einladung",
+            "saved": "Die Einladung wurde registriert und gesendet.",
+            "not-found": "Die referenzierte Einladung wurde nicht gefunden!",
+            "email": "E-Mail",
+            "role": "Rolle",
+            "description": "Beschreibung"
+        }
+    },
+
+    "factura": {
+        "title": "Meine Rechnungen – Lizenzen",
+        "subtitle": "Sehen Sie sich die Rechnungen für den Vertrag der Anwendung an",
+        "state": {
+            "paid": "BEZAHLT",
+            "pending": "UNBEZAHLT"
+        },
+        "created": "Erstellt: {{date}}",
+        "updated": "Aktualisiert: {{date}}"
+    },
+
+    "widget-license": {
+        "unknown": "Lizenz: Unbekannt",
+        "license": "Lizenz: {{days}} Tage"
+    }
+}
