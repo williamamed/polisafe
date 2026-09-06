@@ -1,6 +1,5 @@
 {
     "info-global": "Welcome to Polisafe, security management platform",
-
     "polisafe": {
         "user": {
             "title": "User",
@@ -33,7 +32,6 @@
                 "context-role": "Context Role"
             }
         },
-
         "profile": {
             "title": "My profile",
             "name": "Name",
@@ -50,7 +48,6 @@
             "password-invalid": "The current password is incorrect.",
             "current": "Current password"
         },
-
         "invitation": {
             "title": "Invitation",
             "subtitle": "You have been invited to join the organization",
@@ -66,7 +63,6 @@
             "login": "Sign in to the platform.",
             "registro": "Registration"
         },
-
         "role": {
             "title": "Roles",
             "form": {
@@ -74,10 +70,8 @@
                 "name": "Name",
                 "description": "Description"
             },
-
             "permission": "Permissions"
         },
-
         "scope": {
             "title": "Workspaces",
             "id-prefix": "Id:",
@@ -102,7 +96,6 @@
                 "title": "Metadata"
             }
         },
-
         "permission": {
             "title": "Permissions",
             "form": {
@@ -126,7 +119,6 @@
                 "delete-permission": "Delete permission"
             }
         },
-
         "clients": {
             "title": "OAuth clients",
             "form": {
@@ -159,7 +151,6 @@
                 "save-permission": "Save role permissions"
             }
         },
-
         "dashboard": {
             "greeting": "Hello!",
             "hits": "Hits",
@@ -192,7 +183,6 @@
             }
         }
     },
-
     "agencia": {
         "hero": {
             "description": "Create trips, sell tickets and promote your transportation agency",
@@ -210,7 +200,6 @@
             "descripcion-pasaje": "Manage your customers' transportation requests from anywhere, assign tickets and send the travel ticket automatically"
         }
     },
-
     "accion": {
         "aceptar": "Accept",
         "adicionar": "Add",
@@ -244,7 +233,6 @@
         "opciones": "Options",
         "sin-rol": "No role assigned"
     },
-
     "settings": {
         "title": "Settings",
         "dialog": {
@@ -281,7 +269,6 @@
         "save-options": "Save options",
         "default-options": "Default options"
     },
-
     "menu": {
         "home": "Home",
         "profile": "My profile",
@@ -308,7 +295,6 @@
             "settings": "Settings"
         }
     },
-
     "crumb": {
         "security": "Security",
         "demo": "Demo",
@@ -317,16 +303,13 @@
         "polisafe": "Polisafe",
         "invoices": "Invoices"
     },
-
     "topbar": {
         "search": "Search...",
         "switch-workspace": "Switch workspace"
     },
-
     "splash": {
         "loading": "Loading environment..."
     },
-
     "common": {
         "error-title": "Error",
         "conflict-title": "Conflict",
@@ -360,7 +343,6 @@
         },
         "no-results": "No results found"
     },
-
     "error": {
         "offline": {
             "title": "No connection",
@@ -385,7 +367,6 @@
         },
         "go-dashboard": "Go to Dashboard"
     },
-
     "oauth2": {
         "loading": "Signing in...",
         "waiting": "Please wait while we complete your authentication",
@@ -393,16 +374,19 @@
         "welcome-message": "You have signed in successfully",
         "auth-error-title": "Authentication Error",
         "auth-error-message": "Error signing in",
-        "go-dashboard": "Go to Dashboard"
+        "go-dashboard": "Go to Dashboard",
+        "redirecting": "Redirecting to the authentication provider...",
+        "redirecting-message": "If the page does not change automatically, click the button to continue.",
+        "redirect-now": "Go to provider",
+        "redirect-error-title": "Could not start the redirect",
+        "redirect-error-message": "An error occurred while connecting to the authentication provider."
     },
-
     "sso": {
         "loading": "Loading",
         "loading-center": "Loading account center...",
         "loading-account": "Loading account manager...",
         "error-config": "Error: Could not determine a startup configuration for the account manager"
     },
-
     "theme": {
         "primary": "Primary",
         "surface": "Surface",
@@ -411,7 +395,6 @@
         "static": "Static",
         "overlay": "Overlay"
     },
-
     "oauth": {
         "clients": {
             "client-id": "Client Id:",
@@ -431,7 +414,6 @@
             "refresh-token": "Refresh Token"
         }
     },
-
     "members": {
         "title": "Members",
         "subtitle": "Connect and manage your team in one place",
@@ -467,7 +449,6 @@
             "description": "Description"
         }
     },
-
     "factura": {
         "title": "My Invoices - Licenses",
         "subtitle": "View the invoices for your application subscription",
@@ -478,7 +459,6 @@
         "created": "Created: {{date}}",
         "updated": "Updated: {{date}}"
     },
-
     "widget-license": {
         "unknown": "License: Unknown",
         "license": "License: {{days}} days"

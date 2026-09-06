@@ -1,6 +1,5 @@
 {
     "info-global": "Willkommen bei Polisafe, der Plattform für Sicherheitsverwaltung",
-
     "polisafe": {
         "user": {
             "title": "Benutzer",
@@ -33,7 +32,6 @@
                 "context-role": "Kontextrolle"
             }
         },
-
         "profile": {
             "title": "Mein Profil",
             "name": "Name",
@@ -50,7 +48,6 @@
             "password-invalid": "Das aktuelle Passwort ist falsch.",
             "current": "Aktuelles Passwort"
         },
-
         "invitation": {
             "title": "Einladung",
             "subtitle": "Sie wurden eingeladen, der Organisation beizutreten",
@@ -66,7 +63,6 @@
             "login": "Melden Sie sich auf der Plattform an.",
             "registro": "Registrierung"
         },
-
         "role": {
             "title": "Rollen",
             "form": {
@@ -74,10 +70,8 @@
                 "name": "Name",
                 "description": "Beschreibung"
             },
-
             "permission": "Berechtigungen"
         },
-
         "scope": {
             "title": "Arbeitsbereiche",
             "id-prefix": "ID:",
@@ -102,7 +96,6 @@
                 "title": "Metadaten"
             }
         },
-
         "permission": {
             "title": "Berechtigungen",
             "form": {
@@ -126,7 +119,6 @@
                 "delete-permission": "Berechtigung löschen"
             }
         },
-
         "clients": {
             "title": "OAuth-Clients",
             "form": {
@@ -159,7 +151,6 @@
                 "save-permission": "Rollenberechtigungen speichern"
             }
         },
-
         "dashboard": {
             "greeting": "Hallo!",
             "hits": "Hits",
@@ -192,7 +183,6 @@
             }
         }
     },
-
     "agencia": {
         "hero": {
             "description": "Erstellen Sie Reisen, verkaufen Sie Tickets und bewerben Sie Ihre Transportagentur",
@@ -210,7 +200,6 @@
             "descripcion-pasaje": "Verwalten Sie von überall die Transportanfragen Ihrer Kunden, weisen Sie Plätze zu und senden Sie das Reiseticket automatisch"
         }
     },
-
     "accion": {
         "aceptar": "Akzeptieren",
         "adicionar": "Hinzufügen",
@@ -244,7 +233,6 @@
         "opciones": "Optionen",
         "sin-rol": "Keine Rolle zugewiesen"
     },
-
     "settings": {
         "title": "Einstellungen",
         "dialog": {
@@ -281,7 +269,6 @@
         "save-options": "Optionen speichern",
         "default-options": "Standardoptionen"
     },
-
     "menu": {
         "home": "Startseite",
         "profile": "Mein Profil",
@@ -308,7 +295,6 @@
             "settings": "Einstellungen"
         }
     },
-
     "crumb": {
         "security": "Sicherheit",
         "demo": "Demo",
@@ -317,16 +303,13 @@
         "polisafe": "Polisafe",
         "invoices": "Rechnungen"
     },
-
     "topbar": {
         "search": "Suchen...",
         "switch-workspace": "Arbeitsbereich wechseln"
     },
-
     "splash": {
         "loading": "Umgebung wird geladen..."
     },
-
     "common": {
         "error-title": "Fehler",
         "conflict-title": "Konflikt",
@@ -360,7 +343,6 @@
         },
         "no-results": "Keine Ergebnisse gefunden"
     },
-
     "error": {
         "offline": {
             "title": "Keine Verbindung",
@@ -385,7 +367,6 @@
         },
         "go-dashboard": "Zum Dashboard"
     },
-
     "oauth2": {
         "loading": "Anmeldung läuft...",
         "waiting": "Bitte warten Sie, während Ihre Authentifizierung abgeschlossen wird",
@@ -393,16 +374,19 @@
         "welcome-message": "Sie haben sich erfolgreich angemeldet",
         "auth-error-title": "Authentifizierungsfehler",
         "auth-error-message": "Fehler bei der Anmeldung",
-        "go-dashboard": "Zum Dashboard"
+        "go-dashboard": "Zum Dashboard",
+        "redirecting": "Weiterleitung zum Authentifizierungsanbieter...",
+        "redirecting-message": "Wenn sich die Seite nicht automatisch ändert, klicken Sie auf die Schaltfläche, um fortzufahren.",
+        "redirect-now": "Zum Anbieter wechseln",
+        "redirect-error-title": "Die Weiterleitung konnte nicht gestartet werden",
+        "redirect-error-message": "Beim Verbinden mit dem Authentifizierungsanbieter ist ein Fehler aufgetreten."
     },
-
     "sso": {
         "loading": "Wird geladen",
         "loading-center": "Kontozentrum wird geladen...",
         "loading-account": "Kontoverwaltung wird geladen...",
         "error-config": "Fehler: Für die Kontoverwaltung konnte keine Startkonfiguration ermittelt werden"
     },
-
     "theme": {
         "primary": "Primär",
         "surface": "Oberfläche",
@@ -411,7 +395,6 @@
         "static": "Statisch",
         "overlay": "Overlay"
     },
-
     "oauth": {
         "clients": {
             "client-id": "Client-ID:",
@@ -431,7 +414,6 @@
             "refresh-token": "Refresh Token"
         }
     },
-
     "members": {
         "title": "Mitglieder",
         "subtitle": "Verbinden und verwalten Sie Ihr Team an einem Ort",
@@ -467,7 +449,6 @@
             "description": "Beschreibung"
         }
     },
-
     "factura": {
         "title": "Meine Rechnungen – Lizenzen",
         "subtitle": "Sehen Sie sich die Rechnungen für den Vertrag der Anwendung an",
@@ -478,7 +459,6 @@
         "created": "Erstellt: {{date}}",
         "updated": "Aktualisiert: {{date}}"
     },
-
     "widget-license": {
         "unknown": "Lizenz: Unbekannt",
         "license": "Lizenz: {{days}} Tage"

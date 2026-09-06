@@ -1,6 +1,5 @@
 {
     "info-global": "Bem-vindo ao Polisafe, plataforma de gestão de segurança",
-
     "polisafe": {
         "user": {
             "title": "Utilizador",
@@ -33,7 +32,6 @@
                 "context-role": "Função do contexto"
             }
         },
-
         "profile": {
             "title": "O meu perfil",
             "name": "Nome",
@@ -50,7 +48,6 @@
             "password-invalid": "A palavra-passe atual está incorreta.",
             "current": "Palavra-passe atual"
         },
-
         "invitation": {
             "title": "Convite",
             "subtitle": "Foi convidado a aderir à organização",
@@ -66,7 +63,6 @@
             "login": "Inicie sessão na plataforma.",
             "registro": "Registo"
         },
-
         "role": {
             "title": "Funções",
             "form": {
@@ -74,10 +70,8 @@
                 "name": "Nome",
                 "description": "Descrição"
             },
-
             "permission": "Permissões"
         },
-
         "scope": {
             "title": "Espaços de Trabalho",
             "id-prefix": "Id:",
@@ -102,7 +96,6 @@
                 "title": "Metadados"
             }
         },
-
         "permission": {
             "title": "Permissões",
             "form": {
@@ -126,7 +119,6 @@
                 "delete-permission": "Eliminar permissão"
             }
         },
-
         "clients": {
             "title": "Clientes OAuth",
             "form": {
@@ -159,7 +151,6 @@
                 "save-permission": "Guardar permissões da função"
             }
         },
-
         "dashboard": {
             "greeting": "Olá!",
             "hits": "Hits",
@@ -192,7 +183,6 @@
             }
         }
     },
-
     "agencia": {
         "hero": {
             "description": "Crie viagens, venda bilhetes e promova a sua agência de transportes",
@@ -210,7 +200,6 @@
             "descripcion-pasaje": "Faça a gestão dos pedidos de transporte dos seus clientes a partir de qualquer lugar, atribua bilhetes e envie o bilhete de viagem automaticamente"
         }
     },
-
     "accion": {
         "aceptar": "Aceitar",
         "adicionar": "Adicionar",
@@ -244,7 +233,6 @@
         "opciones": "Opções",
         "sin-rol": "Sem função atribuída"
     },
-
     "settings": {
         "title": "Definições",
         "dialog": {
@@ -281,7 +269,6 @@
         "save-options": "Guardar opções",
         "default-options": "Opções predefinidas"
     },
-
     "menu": {
         "home": "Início",
         "profile": "O meu perfil",
@@ -308,7 +295,6 @@
             "settings": "Definições"
         }
     },
-
     "crumb": {
         "security": "Segurança",
         "demo": "Demo",
@@ -317,16 +303,13 @@
         "polisafe": "Polisafe",
         "invoices": "Faturas"
     },
-
     "topbar": {
         "search": "Pesquisar...",
         "switch-workspace": "Mudar de espaço de trabalho"
     },
-
     "splash": {
         "loading": "A carregar o ambiente..."
     },
-
     "common": {
         "error-title": "Erro",
         "conflict-title": "Conflito",
@@ -360,7 +343,6 @@
         },
         "no-results": "Não foram encontrados resultados"
     },
-
     "error": {
         "offline": {
             "title": "Sem ligação",
@@ -385,7 +367,6 @@
         },
         "go-dashboard": "Ir para o painel de controlo"
     },
-
     "oauth2": {
         "loading": "A iniciar sessão...",
         "waiting": "Aguarde enquanto concluímos a sua autenticação",
@@ -393,16 +374,19 @@
         "welcome-message": "Iniciou sessão com sucesso",
         "auth-error-title": "Erro de Autenticação",
         "auth-error-message": "Erro ao iniciar sessão",
-        "go-dashboard": "Ir para o painel de controlo"
+        "go-dashboard": "Ir para o painel de controlo",
+        "redirecting": "A redirecionar para o fornecedor de autenticação...",
+        "redirecting-message": "Se a página não mudar automaticamente, clique no botão para continuar.",
+        "redirect-now": "Ir para o fornecedor",
+        "redirect-error-title": "Não foi possível iniciar o redirecionamento",
+        "redirect-error-message": "Ocorreu um erro ao ligar ao fornecedor de autenticação."
     },
-
     "sso": {
         "loading": "A carregar",
         "loading-center": "A carregar o centro de contas...",
         "loading-account": "A carregar o gestor de contas...",
         "error-config": "Erro: Não foi possível determinar uma configuração de arranque para o gestor de contas"
     },
-
     "theme": {
         "primary": "Primário",
         "surface": "Superfície",
@@ -411,7 +395,6 @@
         "static": "Estático",
         "overlay": "Sobreposição"
     },
-
     "oauth": {
         "clients": {
             "client-id": "Client Id:",
@@ -431,7 +414,6 @@
             "refresh-token": "Refresh Token"
         }
     },
-
     "members": {
         "title": "Membros",
         "subtitle": "Ligue e faça a gestão da sua equipa num único lugar",
@@ -467,7 +449,6 @@
             "description": "Descrição"
         }
     },
-
     "factura": {
         "title": "As Minhas Faturas - Licenças",
         "subtitle": "Consulte as faturas de contratação da aplicação",
@@ -478,7 +459,6 @@
         "created": "Criado: {{date}}",
         "updated": "Atualizado: {{date}}"
     },
-
     "widget-license": {
         "unknown": "Licença: Desconhecida",
         "license": "Licença: {{days}} dias"

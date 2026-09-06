@@ -241,6 +241,7 @@ let CreatorService = class CreatorService {
             }
             config.configDefaults = this.getDefaultSettings().configApps.polisafe;
             (0, fs_1.writeFileSync)((0, path_1.join)(process.cwd(), 'ui', 'app', 'assets', 'config', 'prod.json'), JSON.stringify(config, null, '    '));
+            (0, fs_1.writeFileSync)((0, path_1.join)(process.cwd(), 'ui', 'app', 'assets', 'config', 'dev.json'), "{}");
             common_1.Logger.log("UI config updated", "Creator");
         }
         catch (error) {

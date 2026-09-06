@@ -1,6 +1,5 @@
 {
     "info-global": "Bienvenido a Polisafe, plataforma de gestión de seguridad",
-
     "polisafe": {
         "user": {
             "title": "Usuario",
@@ -33,7 +32,6 @@
                 "context-role": "Rol del contexto"
             }
         },
-
         "profile": {
             "title": "Mi perfil",
             "name": "Nombre",
@@ -50,7 +48,6 @@
             "password-invalid": "La contraseña actual es incorrecta.",
             "current": "Contraseña actual"
         },
-
         "invitation": {
             "title": "Invitación",
             "subtitle": "Usted ha sido invitado a unirse a la organización",
@@ -66,7 +63,6 @@
             "login": "Inicie sesión en la plataforma.",
             "registro": "Registro"
         },
-
         "role": {
             "title": "Roles",
             "form": {
@@ -74,10 +70,8 @@
                 "name": "Nombre",
                 "description": "Descripción"
             },
-
             "permission": "Permisos"
         },
-
         "scope": {
             "title": "Espacios de Trabajo",
             "id-prefix": "Id:",
@@ -102,7 +96,6 @@
                 "title": "Metadatos"
             }
         },
-
         "permission": {
             "title": "Permisos",
             "form": {
@@ -126,7 +119,6 @@
                 "delete-permission": "Eliminar permiso"
             }
         },
-
         "clients": {
             "title": "Clientes oauth",
             "form": {
@@ -159,7 +151,6 @@
                 "save-permission": "Guardar permisos del rol"
             }
         },
-
         "dashboard": {
             "greeting": "Hola!",
             "hits": "Hits",
@@ -192,7 +183,6 @@
             }
         }
     },
-
     "agencia": {
         "hero": {
             "description": "Crea viajes, vende pasajes y promociona tu agencia de transportación",
@@ -210,7 +200,6 @@
             "descripcion-pasaje": "Gestiona desde cualquier lugar las solicitudes de transportación de tus clientes, asigna pasajes y envía el ticket de viaje de forma automática"
         }
     },
-
     "accion": {
         "aceptar": "Aceptar",
         "adicionar": "Adicionar",
@@ -244,7 +233,6 @@
         "opciones": "Opciones",
         "sin-rol": "Sin rol asignado"
     },
-
     "settings": {
         "title": "Ajustes",
         "dialog": {
@@ -281,7 +269,6 @@
         "save-options": "Salvar opciones",
         "default-options": "Opciones por defecto"
     },
-
     "menu": {
         "home": "Inicio",
         "profile": "Mi perfil",
@@ -308,7 +295,6 @@
             "settings": "Ajustes"
         }
     },
-
     "crumb": {
         "security": "Seguridad",
         "demo": "Demo",
@@ -317,16 +303,13 @@
         "polisafe": "Polisafe",
         "invoices": "Facturas"
     },
-
     "topbar": {
         "search": "Buscar...",
         "switch-workspace": "Cambiar de espacio de trabajo"
     },
-
     "splash": {
         "loading": "Cargando entorno..."
     },
-
     "common": {
         "error-title": "Error",
         "conflict-title": "Conflicto",
@@ -360,7 +343,6 @@
         },
         "no-results": "No se encontraron resultados"
     },
-
     "error": {
         "offline": {
             "title": "Sin conexión",
@@ -385,7 +367,6 @@
         },
         "go-dashboard": "Ir al panel"
     },
-
     "oauth2": {
         "loading": "Iniciando sesión...",
         "waiting": "Por favor espera mientras completamos tu autenticación",
@@ -393,16 +374,19 @@
         "welcome-message": "Has iniciado sesión correctamente",
         "auth-error-title": "Error de Autenticación",
         "auth-error-message": "Error al iniciar sesión",
-        "go-dashboard": "Ir al Dashboard"
+        "go-dashboard": "Ir al Dashboard",
+        "redirecting": "Redirigiendo al proveedor de autenticación...",
+        "redirecting-message": "Si la página no cambia automáticamente, presiona el botón para continuar.",
+        "redirect-now": "Ir al proveedor",
+        "redirect-error-title": "No se pudo iniciar la redirección",
+        "redirect-error-message": "Ocurrió un error al conectar con el proveedor de autenticación."
     },
-
     "sso": {
         "loading": "Cargando",
         "loading-center": "Cargando centro de cuentas...",
         "loading-account": "Cargando gestor de cuentas...",
         "error-config": "Error: No se pudo determinar una configuración de inicio para el gestor de cuentas"
     },
-
     "theme": {
         "primary": "Primario",
         "surface": "Superficie",
@@ -411,7 +395,6 @@
         "static": "Estático",
         "overlay": "Superpuesto"
     },
-
     "oauth": {
         "clients": {
             "client-id": "Client Id:",
@@ -431,7 +414,6 @@
             "refresh-token": "Refresh Token"
         }
     },
-
     "members": {
         "title": "Miembros",
         "subtitle": "Conecta y gestiona a tu equipo en un solo lugar",
@@ -467,7 +449,6 @@
             "description": "Descripción"
         }
     },
-
     "factura": {
         "title": "Mis Facturas - Licencias",
         "subtitle": "Visualiza las facturas de contratación de la aplicación",
@@ -478,7 +459,6 @@
         "created": "Creado: {{date}}",
         "updated": "Actualizado: {{date}}"
     },
-
     "widget-license": {
         "unknown": "Licencia: Desconocida",
         "license": "Licencia: {{days}} días"
