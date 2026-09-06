@@ -27,11 +27,13 @@ const log_enum_1 = require("../../../polisafe-iam/log.enum");
 let IoController = class IoController {
     async verifyAuthorization(data, root) {
         let access = await this.permissionService.isAuthorizedBySub(data.sub, data.url, data.method, Number(root.tid));
-        this.traceService.register(`${data.sub}`, root.id, `Acceso ${access ? 'Permitido' : 'Denegado'}: ${data.url}`, access ? log_enum_1.LogType.AUTHORIZATION_API : log_enum_1.LogType.AUTHORIZATION_API_DENIED, {
+        this.traceService.register(`${data.sub}`, Number(root.tid) || null, `Acceso ${access ? 'Permitido' : 'Denegado'}: ${data.url}`, access ? log_enum_1.LogType.AUTHORIZATION_API : log_enum_1.LogType.AUTHORIZATION_API_DENIED, {
             user: data.sub,
             url: data.sub,
             method: data.method,
             client: root
+        }).catch(error => {
+            console.error('Error al registrar trace:', error);
         });
         if (!access)
             throw new common_1.NotFoundException();
