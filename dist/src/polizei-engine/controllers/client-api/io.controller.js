@@ -42,6 +42,11 @@ let IoController = class IoController {
     async getTenants(data, root) {
         return await this.scopeService.getAllUserScopes(Number(root.tid));
     }
+    async getAppSettings(app, root) {
+        if (!app)
+            throw new common_1.BadRequestException("No se encontro el atributo `app` en la query de esta peticion");
+        return await this.scopeService.getAppSettings(Number(root.tid), app);
+    }
 };
 exports.IoController = IoController;
 __decorate([
@@ -88,6 +93,16 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], IoController.prototype, "getTenants", null);
+__decorate([
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, common_1.Get)('app-settings'),
+    (0, permission_decorator_1.Scope)('security:io:app-settings', 'client'),
+    __param(0, (0, common_1.Query)('app')),
+    __param(1, (0, permission_decorator_1.UserToken)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], IoController.prototype, "getAppSettings", null);
 exports.IoController = IoController = __decorate([
     (0, common_1.Controller)('polizei/io'),
     (0, swagger_1.ApiTags)("Polizei IO-Api"),

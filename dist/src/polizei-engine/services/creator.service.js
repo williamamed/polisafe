@@ -144,6 +144,11 @@ let CreatorService = class CreatorService {
                 "name": "security:io:tenants",
                 "displayName": "Ver los tenants hijos",
                 "description": "Permite a la aplicación listar los tenants hijos."
+            },
+            {
+                "name": "security:io:app-settings",
+                "displayName": "Ver la configuracion de una app",
+                "description": "Permite a la aplicación consultar la configuracion (app settings) de una app para el tenant del token."
             }
         ]);
         let client = await this.clientService.create({
