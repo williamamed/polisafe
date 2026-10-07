@@ -29,6 +29,7 @@ export declare class ScopeService {
     removeUser(data: any): Promise<any>;
     getScopesEditable(id: number): Promise<SecurityScope[]>;
     isIn(id: number, requestedScope: number | number[]): Promise<SecurityScope>;
+    isSameOrSubScope(base: number, id: number): Promise<boolean>;
     getUserScopes(id: number): Promise<SecurityScope[]>;
     getNegociosScope(): Promise<SecurityScope>;
     getScopeUserRegister(): Promise<SecurityScope>;

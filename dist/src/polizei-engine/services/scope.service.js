@@ -220,6 +220,23 @@ let ScopeService = class ScopeService {
             new common_1.PreconditionFailedException("out of scope");
         return scope;
     }
+    async isSameOrSubScope(base, id) {
+        if (!Number.isFinite(base) || !Number.isFinite(id))
+            return false;
+        if (base == id)
+            return true;
+        let visited = [];
+        let scope = await this.scopeModel.findByPk(id, { attributes: ['id', 'idScope'] });
+        while (scope && scope.idScope) {
+            if (visited.includes(scope.id))
+                return false;
+            visited.push(scope.id);
+            if (scope.idScope == base)
+                return true;
+            scope = await this.scopeModel.findByPk(scope.idScope, { attributes: ['id', 'idScope'] });
+        }
+        return false;
+    }
     async getUserScopes(id) {
         let scopes = await this.scopeModel.findAll({
             include: [{

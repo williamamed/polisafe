@@ -10,5 +10,5 @@ export declare class IoController {
     private userService;
     verifyAuthorization(data: AuthorizeIoDto, root: TokenPayload): Promise<import("../../models/security.permission").SecurityPermission>;
     getTenants(data: Record<string, any>, root: TokenPayload): Promise<import("../../models/security.scope").SecurityScope[]>;
-    getAppSettings(app: string, root: TokenPayload): Promise<IAppSettings[]>;
+    getAppSettings(app: string, tid: string, root: TokenPayload): Promise<IAppSettings[]>;
 }

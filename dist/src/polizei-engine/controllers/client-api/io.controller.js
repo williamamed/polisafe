@@ -42,10 +42,18 @@ let IoController = class IoController {
     async getTenants(data, root) {
         return await this.scopeService.getAllUserScopes(Number(root.tid));
     }
-    async getAppSettings(app, root) {
+    async getAppSettings(app, tid, root) {
         if (!app)
             throw new common_1.BadRequestException("No se encontro el atributo `app` en la query de esta peticion");
-        return await this.scopeService.getAppSettings(Number(root.tid), app);
+        let tenant = Number(root.tid);
+        if (tid) {
+            if (!Number.isFinite(Number(tid)))
+                throw new common_1.BadRequestException("El atributo `tid` de la query no es un tenant valido");
+            tenant = Number(tid);
+        }
+        if (!await this.scopeService.isSameOrSubScope(Number(root.tid), tenant))
+            throw new common_1.ForbiddenException(`Out of bound, tenant ${tenant} is not part of ${root.tid}`);
+        return await this.scopeService.getAppSettings(tenant, app);
     }
 };
 exports.IoController = IoController;
@@ -98,9 +106,10 @@ __decorate([
     (0, common_1.Get)('app-settings'),
     (0, permission_decorator_1.Scope)('security:io:app-settings', 'client'),
     __param(0, (0, common_1.Query)('app')),
-    __param(1, (0, permission_decorator_1.UserToken)()),
+    __param(1, (0, common_1.Query)('tid')),
+    __param(2, (0, permission_decorator_1.UserToken)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String, String, Object]),
     __metadata("design:returntype", Promise)
 ], IoController.prototype, "getAppSettings", null);
 exports.IoController = IoController = __decorate([
